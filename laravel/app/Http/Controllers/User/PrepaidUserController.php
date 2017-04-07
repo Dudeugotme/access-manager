@@ -10,7 +10,7 @@ class PrepaidUserController extends UserBaseController
         $subscriber = Subscriber::find(Auth::id());
         $plan = Subscriber::getActiveServices($subscriber);
 
-        return View::make('user.prepaid.dashboard')
+        return view('user.prepaid.dashboard')
                     ->with('profile', Auth::user())
                     ->with('plan', $plan);
     }
@@ -18,7 +18,7 @@ class PrepaidUserController extends UserBaseController
     public function getRecharge()
     {
         $plans = Plan::with('limit')->paginate(10);
-        return View::make('user.prepaid.recharge')
+        return view('user.prepaid.recharge')
                     ->with('plans', $plans);
     }
 
@@ -54,7 +54,7 @@ class PrepaidUserController extends UserBaseController
 
     public function getRefill()
     {
-        return View::make('user.prepaid.refill');
+        return view('user.prepaid.refill');
     }
 
     public function getRechargeHistory()
@@ -65,7 +65,7 @@ class PrepaidUserController extends UserBaseController
                                 ->orderby('updated_at', 'desc')
                                 ->paginate(10);
 
-        return View::make('user.prepaid.recharge_history')
+        return view('user.prepaid.recharge_history')
                     ->with('rc_history', $rc_history);
     }
 
@@ -75,7 +75,7 @@ class PrepaidUserController extends UserBaseController
                                     ->sessionHistory()
                                     ->orderby('acctstarttime', 'desc')
                                     ->paginate(10);
-        return View::make('user.prepaid.session_history')
+        return view('user.prepaid.session_history')
                     ->with('sess_history', $sess_history);
     }
 }

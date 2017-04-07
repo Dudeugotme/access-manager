@@ -37,7 +37,7 @@ abstract class Controller extends BaseController
     protected function setupLayout()
     {
         if (! is_null($this->layout)) {
-            $this->layout = View::make($this->layout);
+            $this->layout = view($this->layout);
         }
     }
 
@@ -45,7 +45,7 @@ abstract class Controller extends BaseController
     {
         Cache::flush();
         $config = Theme::first();
-        $themes = Config::get('themes');
+        $themes = config('themes');
 
         $admin_theme = $themes[$config->admin_theme];
         $user_theme = $themes[$config->user_theme];

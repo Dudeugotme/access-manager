@@ -9,14 +9,14 @@ class FreeUserController extends UserBaseController
     {
         $plan = Freebalance::where('user_id', Auth::id())->first();
         // pr($plan->toArray());
-        return View::make('user.frinternet.dashboard')
+        return view('user.frinternet.dashboard')
                 ->with('profile', Auth::user())
                 ->with('plan', $plan);
     }
 
     public function getRefill()
     {
-        return View::make('user.frinternet.refill');
+        return view('user.frinternet.refill');
     }
 
     public function postRefill()
@@ -38,7 +38,7 @@ class FreeUserController extends UserBaseController
                                     ->sessionHistory()
                                     ->orderby('acctstarttime', 'desc')
                                     ->paginate(10);
-        return View::make('user.frinternet.session_history')
+        return view('user.frinternet.session_history')
                     ->with('sess_history', $sess_history);
     }
 }

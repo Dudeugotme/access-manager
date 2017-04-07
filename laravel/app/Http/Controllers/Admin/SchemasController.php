@@ -6,20 +6,20 @@ class SchemasController extends AdminBaseController
     public function getIndex()
     {
         $t = PolicySchema::paginate(10);
-        return View::make('admin.schemas.index', ['schemas'=>$t]);
+        return view('admin.schemas.index', ['schemas'=>$t]);
     }
 
     public function getAdd()
     {
         $t = SchemaTemplate::lists('name', 'id');
-        return View::make('admin.schemas.add-edit', ['templates'=>$t]);
+        return view('admin.schemas.add-edit', ['templates'=>$t]);
     }
 
     public function postAdd()
     {
         $input = Input::all();
 
-        $rules = Config::get('validations.policy_schemas');
+        $rules = config('validations.policy_schemas');
         $rules['name'][] = 'unique:policy_schemas';
 
         $v = Validator::make($input, $rules);
@@ -36,9 +36,9 @@ class SchemasController extends AdminBaseController
         try {
             $schema = PolicySchema::findOrFail($id);
             $t = SchemaTemplate::lists('name', 'id');
-            return View::make('admin.schemas.add-edit', ['templates'=>$t])->with('schema', $schema);
+            return view('admin.schemas.add-edit', ['templates'=>$t])->with('schema', $schema);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -46,7 +46,7 @@ class SchemasController extends AdminBaseController
     {
         try {
             $input = Input::all();
-            $rules = Config::get('validations.policy_schemas');
+            $rules = config('validations.policy_schemas');
             $rules['name'][] = 'unique:policy_schemas,name,' . $input['id'];
 
             $v = Validator::make($input, $rules);
@@ -60,7 +60,7 @@ class SchemasController extends AdminBaseController
             $this->flash($schema->save());
             return Redirect::route('schema.index');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -73,19 +73,19 @@ class SchemasController extends AdminBaseController
     public function getTemplateIndex()
     {
         $temps = SchemaTemplate::paginate(10);
-        return View::make('admin.schematemplates.index', ['templates'=>$temps]);
+        return view('admin.schematemplates.index', ['templates'=>$temps]);
     }
 
     public function getAddTemplate()
     {
-        $times = Config::get('times', null);
+        $times = config('times', null);
         $policies = Policy::lists('name', 'id');
-        return View::make('admin.schematemplates.add-edit', ['times'=>$times,'policies'=>$policies]);
+        return view('admin.schematemplates.add-edit', ['times'=>$times,'policies'=>$policies]);
     }
 
     public function postAddTemplate()
     {
-        $rules = Config::get('validations.schema_templates');
+        $rules = config('validations.schema_templates');
         $input = Input::all();
         
         $v = Validator::make($input, $rules);
@@ -107,11 +107,11 @@ class SchemasController extends AdminBaseController
         try {
             $template = SchemaTemplate::findOrFail($id);
 
-            $times = Config::get('times', null);
+            $times = config('times', null);
             $policies = Policy::lists('name', 'id');
-            return View::make('admin.schematemplates.add-edit', ['template'=>$template,'times'=>$times,'policies'=>$policies]);
+            return view('admin.schematemplates.add-edit', ['template'=>$template,'times'=>$times,'policies'=>$policies]);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -126,7 +126,7 @@ class SchemasController extends AdminBaseController
 
             return Redirect::route('schematemplate.index');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -136,7 +136,7 @@ class SchemasController extends AdminBaseController
             $this->flash(SchemaTemplate::destroy($id));
             return Redirect::route('schematemplate.index');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 

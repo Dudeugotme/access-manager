@@ -11,7 +11,7 @@ class OnlineRechargeController extends UserBaseController
         $planType = Auth::user()->plan_type == PREPAID_PLAN ? 'prepaid' : 'frinternet';
         $activeGateways = OnlinePayment::getActivePaymentGateways();
 
-        return View::make('user.select_pg')
+        return view('user.select_pg')
                     ->with('activeGateways', $activeGateways)
                     ->with('planType', $planType)
                     ;

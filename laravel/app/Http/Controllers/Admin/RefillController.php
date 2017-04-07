@@ -8,13 +8,13 @@ class RefillController extends AdminBaseController
 
     public function getIndex()
     {
-        return View::make('admin.refill_coupons.index')
+        return view('admin.refill_coupons.index')
                     ->with('vouchers', Refillcoupons::getAll());
     }
 
     public function getGenerate()
     {
-        return View::make('admin.refill_coupons.generate');
+        return view('admin.refill_coupons.generate');
     }
 
     public function postGenerate()
@@ -37,7 +37,7 @@ class RefillController extends AdminBaseController
                         })
                         ->orderby('uname')
                         ->lists('uname', 'id');
-        return View::make('admin.refill_coupons.recharge')
+        return view('admin.refill_coupons.recharge')
                         ->with('accounts', $accounts);
     }
 

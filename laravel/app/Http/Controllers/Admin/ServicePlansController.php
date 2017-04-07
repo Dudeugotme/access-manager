@@ -9,20 +9,20 @@ class ServicePlansController extends AdminBaseController
     public function getIndex()
     {
         $plans = Plan::with('limit')->paginate(10);
-        return View::make('admin.plans.index', ['plans'=>$plans]);
+        return view('admin.plans.index', ['plans'=>$plans]);
     }
 
     public function getAdd()
     {
         $policies = Policy::lists('name', 'id');
         $schemas = PolicySchema::lists('name', 'id');
-        return View::make('admin.plans.add-edit', ['policies'=>$policies,'schemas'=>$schemas]);
+        return view('admin.plans.add-edit', ['policies'=>$policies,'schemas'=>$schemas]);
     }
 
     public function postAdd()
     {
         $input = Input::all();
-        $rules = Config::get('validations.service_plan');
+        $rules = config('validations.service_plan');
         $rules['name'][] = 'unique:service_plans';
         $v = Validator::make(
             $input,
@@ -77,17 +77,17 @@ class ServicePlansController extends AdminBaseController
             }
             $policies = Policy::lists('name', 'id');
             $schemas = PolicySchema::lists('name', 'id');
-            return View::make('admin.plans.add-edit', ['policies'=>$policies,'schemas'=>$schemas])
+            return view('admin.plans.add-edit', ['policies'=>$policies,'schemas'=>$schemas])
                                 ->with('plan', $plan);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function postEdit()
     {
         $input = Input::all();
-        $rules = Config::get('validations.service_plan');
+        $rules = config('validations.service_plan');
         $rules['name'][] = 'unique:service_plans,name,' . $input['id'];
 
         $v = Validator::make($input, $rules);
@@ -161,7 +161,7 @@ class ServicePlansController extends AdminBaseController
     {
         $plan = FRINTERNET::find(1);
         $policies = Policy::lists('name', 'id');
-        return View::make('admin.plans.free')
+        return view('admin.plans.free')
                     ->with('policies', $policies)
                     ->with('plan', $plan);
     }

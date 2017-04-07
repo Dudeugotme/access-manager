@@ -5,7 +5,7 @@ class LoginController extends AdminBaseController
 
     public function getIndex()
     {
-        return View::make('user.login');
+        return view('user.login');
     }
 
     public function postLogin()
@@ -35,7 +35,7 @@ class LoginController extends AdminBaseController
 
     public function getAdmin()
     {
-        return View::make('admin.login');
+        return view('admin.login');
     }
 
     public function postAdmin()
@@ -60,7 +60,7 @@ class LoginController extends AdminBaseController
             $this->notifyError("Self Signup Not Allowed.");
             return Redirect::route('user-panel');
         }
-        return View::make('user.self-registration');
+        return view('user.self-registration');
     }
 
     public function postSelfRegister()
@@ -76,12 +76,12 @@ class LoginController extends AdminBaseController
             'address',
             'contact'
         );
-        $rules = Config::get('validations.accounts');
+        $rules = config('validations.accounts');
         $rules['uname'][] = 'unique:user_accounts';
         $rules['pword'][] = 'confirmed';
 
         $v = Validator::make($input, $rules);
-        $v->setAttributeNames(Config::get('attributes.accounts'));
+        $v->setAttributeNames(config('attributes.accounts'));
 
         if ($v->fails()) {
             return Redirect::back()
@@ -116,7 +116,7 @@ class LoginController extends AdminBaseController
         Session::flash('macesc', Input::get('mac-esc', null));
 
         $error = Input::get('error', null);
-        return View::make('login-template')
+        return view('login-template')
                     ->with('error', $error);
     }
 
@@ -138,7 +138,7 @@ class LoginController extends AdminBaseController
 
         //Do All Authorization stuff here.
 
-        return View::make('internet-authorized')
+        return view('internet-authorized')
                         ->with('data', $data);
     }
 }

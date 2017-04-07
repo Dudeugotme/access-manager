@@ -36,7 +36,7 @@ Route::get('/', [
 Route::get('admin', [
     'as'    =>      'welcome.admin',
     function () {
-        return Redirect::to('admin-panel');
+        return redirect('admin-panel');
     }]);
 
 Route::get('admin/login', [

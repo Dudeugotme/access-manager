@@ -8,7 +8,7 @@ class SettingsController extends AdminBaseController
         $general = GeneralSettings::first();
         
         
-        return View::make('admin.settings.general.general')
+        return view('admin.settings.general.general')
                         ->with('general', $general);
     }
 
@@ -25,15 +25,15 @@ class SettingsController extends AdminBaseController
             $this->flash($setting->save());
             return Redirect::route('setting.general');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function getThemes()
     {
-        $themes = Config::get('themes');
+        $themes = config('themes');
         $theme = Theme::first();
-        return View::make('admin.settings.general.theme')
+        return view('admin.settings.general.theme')
                         ->with('themes', $themes)
                         ->with('theme', $theme);
     }
@@ -51,7 +51,7 @@ class SettingsController extends AdminBaseController
             $this->flash($setting->save());
             return Redirect::route('setting.themes.form');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -59,7 +59,7 @@ class SettingsController extends AdminBaseController
     {
         $email = EmailSetting::first();
         $tpls = EmailTemplate::lists('name', 'id');
-        return View::make('admin.settings.email.notifications')
+        return view('admin.settings.email.notifications')
                     ->with('email', $email)
                     ->with('tpls', $tpls);
     }
@@ -71,7 +71,7 @@ class SettingsController extends AdminBaseController
     public function getSmtp()
     {
         $smtp = SmtpSettings::first();
-        return View::make('admin.settings.email.smtp')
+        return view('admin.settings.email.smtp')
                         ->with('smtp', $smtp);
     }
 
@@ -88,15 +88,15 @@ class SettingsController extends AdminBaseController
             $this->flash($setting->save());
             return Redirect::route('setting.smtp');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function getPaypal()
     {
-        $currencies = Config::get('paypal_currencies');
+        $currencies = config('paypal_currencies');
         $pp = PaypalSettings::first();
-        return View::make('admin.settings.payment_gateway.paypal')
+        return view('admin.settings.payment_gateway.paypal')
                         ->with('paypal', $pp)
                         ->with('currencies', $currencies);
     }
@@ -114,14 +114,14 @@ class SettingsController extends AdminBaseController
             $this->flash($setting->save());
             return Redirect::route('setting.paypal');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function getDirecpay()
     {
         $direcpay = DirecpaySetting::first();
-        return View::make('admin.settings.payment_gateway.direcpay')
+        return view('admin.settings.payment_gateway.direcpay')
                     ->with('direcpay', $direcpay);
     }
 
@@ -141,7 +141,7 @@ class SettingsController extends AdminBaseController
     public function getAdvancepaid()
     {
         $ap = APSetting::first();
-        return View::make('admin.settings.ap_settings', ['ap'=>$ap]);
+        return view('admin.settings.ap_settings', ['ap'=>$ap]);
     }
 
     public function postAdvancepaid()

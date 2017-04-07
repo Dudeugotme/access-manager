@@ -8,13 +8,13 @@ class SubnetController extends AdminBaseController
     public function getIndex()
     {
 
-        return View::make("admin.subnet.index")
+        return view("admin.subnet.index")
                     ->with('subnets', Subnet::paginate(10));
     }
 
     public function getAddSubnet()
     {
-        return View::make('admin.subnet.add-edit');
+        return view('admin.subnet.add-edit');
     }
 
     public function postAddSubnet()
@@ -57,7 +57,7 @@ class SubnetController extends AdminBaseController
         $subnets = Subnet::lists('subnet', 'id');
         $subnets[0] = 'Select';
         // pr($subnets);
-        return View::make('admin.subnet.assign-ip')
+        return view('admin.subnet.assign-ip')
                     ->with('profile', $profile)
                     ->with('subnets', $subnets);
     }
@@ -86,7 +86,7 @@ class SubnetController extends AdminBaseController
     public function getAssignRoute($user_id)
     {
         $user = Subscriber::findOrFail($user_id);
-        return View::make("admin.subnet.assign-route")
+        return view("admin.subnet.assign-route")
                     ->with('profile', $user);
     }
 
@@ -123,7 +123,7 @@ class SubnetController extends AdminBaseController
                     ->select("u.uname", 'i.ip')
                     ->paginate(100);
 
-        return View::make('admin.subnet.subnet-usage')
+        return view('admin.subnet.subnet-usage')
                     ->with('ips', $ips);
     }
 }

@@ -8,14 +8,14 @@ class VouchersController extends AdminBaseController
     public function getIndex()
     {
         $vouchers = Voucher::index();
-        return View::make('admin.vouchers.index')
+        return view('admin.vouchers.index')
                         ->with('vouchers', $vouchers);
     }
 
     public function getGenerate()
     {
         $plans = Plan::lists('name', 'id');
-            return View::make('admin.vouchers.generate')
+            return view('admin.vouchers.generate')
                             ->with('plans', $plans);
     }
 
@@ -23,9 +23,9 @@ class VouchersController extends AdminBaseController
     {
         $input = Input::all();
         //validate input
-        $rules = Config::get('validations.generate_vouchers');
+        $rules = config('validations.generate_vouchers');
         $v = Validator::make($input, $rules);
-        $v->setAttributeNames(Config::get('attributes.generate_vouchers'));
+        $v->setAttributeNames(config('attributes.generate_vouchers'));
         if ($v->fails()) {
             return Redirect::back()
                             ->withInput()
@@ -50,7 +50,7 @@ class VouchersController extends AdminBaseController
         $accounts = Subscriber::where('is_admin', 0)
                                 ->where('plan_type', PREPAID_PLAN)
                                 ->lists('uname', 'id');
-        return View::make('admin.vouchers.recharge')
+        return view('admin.vouchers.recharge')
                         ->with('plans', Plan::lists('name', 'id'))
                         ->with('accounts', $accounts);
     }
@@ -61,9 +61,9 @@ class VouchersController extends AdminBaseController
 
         $v = Validator::make(
             $input,
-            Config::get('validations.recharge_account')
+            config('validations.recharge_account')
         );
-        $v->setAttributeNames(Config::get('attributes.recharge_account'));
+        $v->setAttributeNames(config('attributes.recharge_account'));
 
         if ($v->fails()) {
             return Redirect::back()     ->withInput()   ->withErrors($v);
@@ -126,7 +126,7 @@ class VouchersController extends AdminBaseController
             $result = "Please select atleast one voucher";
         }
         
-        return View::make('admin.vouchers.print')
+        return view('admin.vouchers.print')
                         ->with('vouchers', $result);
     }
 
@@ -139,7 +139,7 @@ class VouchersController extends AdminBaseController
     {
         Session::flash('vouchers', $input['vouchers']);
         $tpls = VoucherTemplate::lists('name', 'id');
-        return View::make('admin.vouchers.selectTemplate')
+        return view('admin.vouchers.selectTemplate')
                     ->with('templates', $tpls);
     }
 }

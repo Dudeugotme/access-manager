@@ -9,12 +9,12 @@ class OrganisationsController extends AdminBaseController
     {
         $organisations = Organisation::paginate(10);
 
-        return View::make('admin.orgs.index', ['organisations'=>$organisations]);
+        return view('admin.orgs.index', ['organisations'=>$organisations]);
     }
 
     public function getAdd()
     {
-        return View::make('admin.orgs.add-edit');
+        return view('admin.orgs.add-edit');
     }
 
     public function postAdd()
@@ -32,7 +32,7 @@ class OrganisationsController extends AdminBaseController
     public function getEdit($id)
     {
         $org = Organisation::findOrFail($id);
-        return View::make('admin.orgs.add-edit', ['org'=>$org]);
+        return view('admin.orgs.add-edit', ['org'=>$org]);
     }
 
     public function postEdit()

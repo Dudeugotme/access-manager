@@ -7,7 +7,7 @@ class UserController extends UserBaseController
     
     public function getIndex()
     {
-        return View::make('user.dashboard')
+        return view('user.dashboard')
                     ->with('profile', Auth::user());
     }
 
@@ -25,7 +25,7 @@ class UserController extends UserBaseController
                 $plan_type = 'advancepaid';
                 break;
         }
-        return View::make('user.prepaid.change_password', ['plan_type'=>$plan_type]);
+        return view('user.prepaid.change_password', ['plan_type'=>$plan_type]);
     }
 
     public function postChangePassword()

@@ -9,13 +9,13 @@ class TemplatesController extends AdminBaseController
     public function getVoucherTemplates()
     {
         $tpls = VoucherTemplate::paginate(10);
-        return View::make('admin.templates.vouchers.index')
+        return view('admin.templates.vouchers.index')
                             ->with('templates', $tpls);
     }
 
     public function getAddVoucherTemplate()
     {
-        return View::make('admin.templates/vouchers/add-edit');
+        return view('admin.templates/vouchers/add-edit');
     }
 
     public function postAddVoucherTemplate()
@@ -36,10 +36,10 @@ class TemplatesController extends AdminBaseController
     {
         try {
             $tpl = VoucherTemplate::findOrFail($id);
-            return View::make('admin.templates/vouchers/add-edit')
+            return view('admin.templates/vouchers/add-edit')
                         ->with('template', $tpl);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -59,7 +59,7 @@ class TemplatesController extends AdminBaseController
             }
             return Redirect::route(self::VoucherHome);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -72,13 +72,13 @@ class TemplatesController extends AdminBaseController
     public function getEmailTemplates()
     {
         $tpls = EmailTemplate::paginate(10);
-        return View::make('admin.templates.email.index')
+        return view('admin.templates.email.index')
                         ->with('templates', $tpls);
     }
 
     public function getAddEmailTemplate()
     {
-        return View::make('admin.templates.email.add-edit');
+        return view('admin.templates.email.add-edit');
     }
 
     public function postAddEmailTemplate()
@@ -93,10 +93,10 @@ class TemplatesController extends AdminBaseController
     {
         try {
             $tpl = EmailTemplate::findOrFail($id);
-            return View::make('admin.templates/email/add-edit')
+            return view('admin.templates/email/add-edit')
                         ->with('template', $tpl);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -112,7 +112,7 @@ class TemplatesController extends AdminBaseController
             $this->flash($tpl->save());
             return Redirect::route(self::EmailHome);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 

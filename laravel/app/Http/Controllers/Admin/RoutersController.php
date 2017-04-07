@@ -8,13 +8,13 @@ class RoutersController extends AdminBaseController
     public function getIndex()
     {
                 $routers = Router::paginate(10);
-            return View::make('admin.routers.index')
+            return view('admin.routers.index')
                             ->with('routers', $routers);
     }
 
     public function getAdd()
     {
-        return View::make('admin.routers.add-edit');
+        return view('admin.routers.add-edit');
     }
 
     public function postAdd()
@@ -29,10 +29,10 @@ class RoutersController extends AdminBaseController
     {
         try {
             $router = Router::findOrFail($id);
-            return View::make('admin.routers.add-edit')
+            return view('admin.routers.add-edit')
                             ->with('router', $router);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -49,7 +49,7 @@ class RoutersController extends AdminBaseController
             $this->flash($router->save());
             return Redirect::route(self::HOME);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 

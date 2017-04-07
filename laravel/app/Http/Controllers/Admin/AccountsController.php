@@ -31,7 +31,7 @@ class AccountsController extends AdminBaseController
         
         $plans = Subscriber::getActiveSessionPlans($sessions);
 
-        return View::make('admin.accounts.dashboard')
+        return view('admin.accounts.dashboard')
                     ->with('active', $sessions)
                     ->with('plans', $plans);
     }
@@ -90,7 +90,7 @@ class AccountsController extends AdminBaseController
         if (! is_null($alphabet)) {
             $q->where('uname', 'LIKE', "$alphabet%");
         }
-        return View::make('admin.accounts.index')
+        return view('admin.accounts.index')
                             ->with('accounts', $q->paginate(10));
     }
 
@@ -101,13 +101,13 @@ class AccountsController extends AdminBaseController
                             ->where('uname', 'LIKE', "%$keyword%")
                             ->orderby('uname');
                             
-        return View::make("admin.accounts.search-result")
+        return view("admin.accounts.search-result")
                         ->with('accounts', $q->paginate(10));
     }
 
     public function getAdd()
     {
-        return View::make('admin.accounts.add-edit');
+        return view('admin.accounts.add-edit');
     }
 
     public function postAdd()
@@ -115,11 +115,11 @@ class AccountsController extends AdminBaseController
         try {
             $input = Input::all();
         
-            $rules = Config::get('validations.accounts');
+            $rules = config('validations.accounts');
             $rules['uname'][] = 'unique:user_accounts';
             
             $v = Validator::make($input, $rules);
-            $v->setAttributeNames(Config::get('attributes.accounts'));
+            $v->setAttributeNames(config('attributes.accounts'));
             if ($v->fails()) {
                 return Redirect::back()
                                 ->withInput()
@@ -144,21 +144,21 @@ class AccountsController extends AdminBaseController
     {
         try {
             $account = Subscriber::findOrFail($id);
-            return View::make('admin.accounts.add-edit')
+            return view('admin.accounts.add-edit')
                                     ->with('account', $account);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function postEdit()
     {
         $input = Input::all();
-        $rules = Config::get('validations.accounts');
+        $rules = config('validations.accounts');
         $rules['uname'][] = 'unique:user_accounts,uname,' . $input['id'];
 
         $v = Validator::make($input, $rules);
-        $v->setAttributeNames(Config::get('attributes.accounts'));
+        $v->setAttributeNames(config('attributes.accounts'));
         if ($v->fails()) {
             return Redirect::back()
                             ->withInput()
@@ -218,11 +218,11 @@ class AccountsController extends AdminBaseController
                                     ->orderby('acctstarttime', 'DESC')
                                     ->paginate(5);
 
-            return View::make('admin.accounts.profile')
+            return view('admin.accounts.profile')
                         ->with('profile', $profile)
                         ->with('sess_history', $sess_history);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
@@ -231,7 +231,7 @@ class AccountsController extends AdminBaseController
         $profile = Subscriber::findOrFail($user_id);
         $plans = Plan::lists('name', 'id')
                     ->orderby('name');
-        return View::make("admin.accounts.assign-plan")
+        return view("admin.accounts.assign-plan")
                     ->with('profile', $profile)
                     ->with('plans', $plans);
     }
@@ -263,7 +263,7 @@ class AccountsController extends AdminBaseController
                 $rc_history = Voucher::where('user_id', $user_id)
                             ->leftJoin('voucher_limits as l', 'l.id', '=', 'limit_id')
                             ->paginate(5);
-                return View::make("admin.accounts.services")
+                return view("admin.accounts.services")
                     ->with('profile', $profile)
                     ->with('rc_history', $rc_history)
                     ->with('plan', $plan)
@@ -274,7 +274,7 @@ class AccountsController extends AdminBaseController
                 $rproducts = APRecurringProduct::where('user_id', $profile->id)->get();
                 $nrproducts = APNonRecurringProduct::where('user_id', $profile->id)->get();
 
-                return View::make('admin.accounts.services-ap2')
+                return view('admin.accounts.services-ap2')
                     ->with('profile', $profile)
                     ->with('plan', $plan)
                     ->with('framedIP', $framedIP)
@@ -293,7 +293,7 @@ class AccountsController extends AdminBaseController
                                 ->orderby('created_at', 'DESC')
                                 ->paginate(10);
 
-        $view = View::make('admin.accounts.ap-transactions', ['txns'=>$txns,'profile'=>$profile]);
+        $view = view('admin.accounts.ap-transactions', ['txns'=>$txns,'profile'=>$profile]);
 
         $ap_settings = APUserSetting::where('user_id', $user_id)->first();
         if ($ap_settings != null) {
@@ -349,7 +349,7 @@ class AccountsController extends AdminBaseController
     {
         $profile = Subscriber::findOrFail($user_id);
         $orgs = Organisation::lists('name', 'id');
-        return View::make("admin.accounts.change-service-type")
+        return view("admin.accounts.change-service-type")
                     ->with('profile', $profile)
                     ->with('orgs', $orgs);
     }

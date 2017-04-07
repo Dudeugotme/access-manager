@@ -8,21 +8,21 @@ class PoliciesController extends AdminBaseController
     public function getIndex()
     {
         $policies = Policy::paginate(10);
-        return View::make('admin.policies.index', ['policies'=>$policies]);
+        return view('admin.policies.index', ['policies'=>$policies]);
     }
 
     public function getAdd()
     {
-        return View::make('admin.policies.add-edit');
+        return view('admin.policies.add-edit');
     }
 
     public function postAdd()
     {
         $input = Input::all();  //pr($input);
-        $rules = Config::get('validations.policies');
+        $rules = config('validations.policies');
         
         $v = Validator::make($input, $rules);
-        $v->setAttributeNames(Config::get('attributes.policies'));
+        $v->setAttributeNames(config('attributes.policies'));
         if ($v->fails()) {
             return Redirect::back()
                             ->withErrors($v)
@@ -44,19 +44,19 @@ class PoliciesController extends AdminBaseController
     {
         try {
             $policy = Policy::findOrFail($id);
-            return View::make('admin.policies.add-edit')->with('policy', $policy);
+            return view('admin.policies.add-edit')->with('policy', $policy);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            App::abort(404);
+            abort(404);
         }
     }
 
     public function postEdit()
     {
         $input = Input::all();
-        $rules = Config::get('validations.policies');
+        $rules = config('validations.policies');
         
         $v = Validator::make($input, $rules);
-        $v->setAttributeNames(Config::get('attributes.policies'));
+        $v->setAttributeNames(config('attributes.policies'));
         
         if ($v->fails()) {
             return Redirect::back()

@@ -5,6 +5,6 @@ class SystemController extends AdminBaseController
 
     public function about()
     {
-        return View::make('about');
+        return view('about');
     }
 }
