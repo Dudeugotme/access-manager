@@ -24,45 +24,45 @@
                               <br>
                                   <div class="row">
                                     <div class="col-lg-7 col-lg-offset-1">
-                                        {{Form::open(['route'=>'subscriber.product.add.nonrecurring','class'=>'form-horizontal','role'=>'form'])}}
-                                        {{Form::hidden('user_id', $profile->id)}}
-                                        {{Form::hidden('taxable', 0)}}
+                                        {!!Form::open(['route'=>'subscriber.product.add.nonrecurring','class'=>'form-horizontal','role'=>'form'])!!}
+                                        {!!Form::hidden('user_id', $profile->id)!!}
+                                        {!!Form::hidden('taxable', 0)!!}
                                         <fieldset>
-                                          <div class="form-group {{Form::error($errors, 'name')}}">
+                                          <div class="form-group {!!Form::error($errors, 'name')!!}">
                                               <label for="inputEmail" class="col-lg-3 control-label">Name</label>
                                               <div class="col-lg-8  ">
-                                                {{Form::text('name',NULL,['class'=>'form-control','placeholder'=>'product name'])}}
-                                                  {{$errors->first('name',"<span class='help-block'>:message</span>")}}
+                                                {!!Form::text('name',NULL,['class'=>'form-control','placeholder'=>'product name'])!!}
+                                                  {!!$errors->first('name',"<span class='help-block'>:message</span>")!!}
                                               </div>
                                           </div>
-                                            <div class="form-group {{Form::error($errors, 'price')}}">
+                                            <div class="form-group {!!Form::error($errors, 'price')!!}">
                                               <label for="inputEmail" class="col-lg-3 control-label">Product Price</label>
                                               <div class="col-lg-8">
-                                                {{Form::text('price', NULL, ['class'=>'form-control','placeholder'=>"product price"])}}
-                                                {{$errors->first('price',"<span class='help-block'>:message</span>")}}
+                                                {!!Form::text('price', NULL, ['class'=>'form-control','placeholder'=>"product price"])!!}
+                                                {!!$errors->first('price',"<span class='help-block'>:message</span>")!!}
                                               </div>
                                           </div>
                                             
-                                          <div class="form-group  {{Form::error($errors, 'taxable')}}">
+                                          <div class="form-group  {!!Form::error($errors, 'taxable')!!}">
                                               <label for="taxable" class="col-lg-3 control-label">Taxable</label>
                                               <div class="col-lg-1">
-                                                {{Form::checkbox('taxable', 1)}}
-                                                {{$errors->first('taxable',"<span class='help-block'>:message</span>")}}
+                                                {!!Form::checkbox('taxable', 1)!!}
+                                                {!!$errors->first('taxable',"<span class='help-block'>:message</span>")!!}
                                               </div>
                                               <label for="tax_rate" class="col-lg-2 control-label">Tax Percent</label>
                                               <div class="col-lg-5">
-                                                {{Form::text('tax_rate', NULL, ['class'=>'form-control','placeholder'=>"tax percentage"])}}
-                                                {{$errors->first('tax_rate',"<span class='help-block'>:message</span>")}}
+                                                {!!Form::text('tax_rate', NULL, ['class'=>'form-control','placeholder'=>"tax percentage"])!!}
+                                                {!!$errors->first('tax_rate',"<span class='help-block'>:message</span>")!!}
                                               </div>
                                           </div>
                                             
                                         <div class="form-group">
                                               <div class="col-lg-10 col-lg-offset-4">
-                                                {{Form::buttons()}}
+                                                {!!Form::buttons()!!}
                                               </div>
                                             </div>
                                         </fieldset>
-                                        {{Form::close()}}
+                                        {!!Form::close()!!}
                                     </div>
                                 </div>
                               </div>
@@ -70,59 +70,59 @@
                               <br>
                                   <div class="row">
                                 <div class="col-lg-7 col-lg-offset-1">
-                                    {{Form::open(['route'=>'subscriber.product.add.recurring','class'=>'form-horizontal','role'=>'form'])}}
-                                    {{Form::hidden('user_id', $profile->id)}}
-                                    {{Form::hidden('taxable', 0)}}
+                                    {!!Form::open(['route'=>'subscriber.product.add.recurring','class'=>'form-horizontal','role'=>'form'])!!}
+                                    {!!Form::hidden('user_id', $profile->id)!!}
+                                    {!!Form::hidden('taxable', 0)!!}
                                     <fieldset>
-                                      <div class="form-group {{Form::error($errors, 'name')}}">
+                                      <div class="form-group {!!Form::error($errors, 'name')!!}">
                                           <label for="inputEmail" class="col-lg-3 control-label">Name</label>
                                           <div class="col-lg-8  ">
-                                            {{Form::text('name',NULL,['class'=>'form-control','placeholder'=>'product name'])}}
-                                              {{$errors->first('name',"<span class='help-block'>:message</span>")}}
+                                            {!!Form::text('name',NULL,['class'=>'form-control','placeholder'=>'product name'])!!}
+                                              {!!$errors->first('name',"<span class='help-block'>:message</span>")!!}
                                           </div>
                                       </div>
-                                        <div class="form-group {{Form::error($errors, 'price')}}">
+                                        <div class="form-group {!!Form::error($errors, 'price')!!}">
                                           <label for="inputEmail" class="col-lg-3 control-label">Product Price</label>
                                           <div class="col-lg-8">
-                                            {{Form::text('price', NULL, ['class'=>'form-control','placeholder'=>"product price"])}}
-                                            {{$errors->first('price',"<span class='help-block'>:message</span>")}}
+                                            {!!Form::text('price', NULL, ['class'=>'form-control','placeholder'=>"product price"])!!}
+                                            {!!$errors->first('price',"<span class='help-block'>:message</span>")!!}
                                           </div>
                                       </div>
                                         <div class="form-group">
                                           <label for="billing_cycle" class="col-lg-3 control-label">Recur Every</label>
                                           <div class="col-lg-4">
-                                              {{Form::text('billing_cycle',NULL,['class'=>'form-control','placeholder'=>'billing cycle'])}}
+                                              {!!Form::text('billing_cycle',NULL,['class'=>'form-control','placeholder'=>'billing cycle'])!!}
                                           </div>
                                           <div class="col-lg-4">
-                                              {{Form::select('billing_unit',['Months'=>'Months'],NULL,['class'=>'form-control'])}}
+                                              {!!Form::select('billing_unit',['Months'=>'Months'],NULL,['class'=>'form-control'])!!}
                                           </div>
                                       </div>
-                                      <div class="form-group  {{Form::error($errors, 'taxable')}}">
+                                      <div class="form-group  {!!Form::error($errors, 'taxable')!!}">
                                           <label for="expiry" class="col-lg-3 control-label">Expires On</label>
                                           <div class="col-lg-8">
-                                            {{Form::text('expiry', NULL, ['class'=>'form-control','placeholder'=>"product expiration date",'id'=>'expiry'])}}
-                                            {{$errors->first('expiry',"<span class='help-block'>:message</span>")}}
+                                            {!!Form::text('expiry', NULL, ['class'=>'form-control','placeholder'=>"product expiration date",'id'=>'expiry'])!!}
+                                            {!!$errors->first('expiry',"<span class='help-block'>:message</span>")!!}
                                           </div>
                                       </div>
-                                      <div class="form-group  {{Form::error($errors, 'taxable')}}">
+                                      <div class="form-group  {!!Form::error($errors, 'taxable')!!}">
                                           <label for="taxable" class="col-lg-3 control-label">Taxable</label>
                                           <div class="col-lg-1">
-                                            {{Form::checkbox('taxable', 1)}}
-                                            {{$errors->first('taxable',"<span class='help-block'>:message</span>")}}
+                                            {!!Form::checkbox('taxable', 1)!!}
+                                            {!!$errors->first('taxable',"<span class='help-block'>:message</span>")!!}
                                           </div>
                                           <label for="tax_rate" class="col-lg-3 control-label">Tax Percent</label>
                                           <div class="col-lg-4">
-                                            {{Form::text('tax_rate', NULL, ['class'=>'form-control','placeholder'=>"tax percentage"])}}
-                                            {{$errors->first('tax_rate',"<span class='help-block'>:message</span>")}}
+                                            {!!Form::text('tax_rate', NULL, ['class'=>'form-control','placeholder'=>"tax percentage"])!!}
+                                            {!!$errors->first('tax_rate',"<span class='help-block'>:message</span>")!!}
                                           </div>
                                       </div>
                                     <div class="form-group">
                                           <div class="col-lg-10 col-lg-offset-4">
-                                            {{Form::buttons()}}
+                                            {!!Form::buttons()!!}
                                           </div>
                                         </div>
                                     </fieldset>
-                                    {{Form::close()}}
+                                    {!!Form::close()!!}
                                 </div>
                             </div>
                               </div>

@@ -3,7 +3,7 @@
 	<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>Policy Schemas
-                            {{link_to_route('schema.add.form', 'New Policy Schema', NULL, ['class'=>'btn btn-primary navbar-right',])}}
+                            {!!link_to_route('schema.add.form', 'New Policy Schema', NULL, ['class'=>'btn btn-primary navbar-right',])!!}
                     </h2>
                 </div>
             </div>
@@ -24,14 +24,14 @@
                             <?php $i = $schemas->getFrom(); ?>
                                 @foreach($schemas as $schema)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$schema->name}}</td>
-                                <td>{{$schema->description}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!$schema->name!!}</td>
+                                <td>{!!$schema->description!!}</td>
                                 <td>
-                                    {{Form::actions(
+                                    {!!Form::actions(
                                         route('schema.edit.form',$schema->id),
                                         route('schema.delete',$schema->id)
-                                        )}}
+                                        )!!}
                                 </td>
                         </tr>
                         <? $i++; ?>
@@ -39,7 +39,7 @@
                         @else
                         <tr>
                             <td colspan='4'>
-                            {{"No Records Found"}}
+                            {!!"No Records Found"!!}
                                 
                             </td>
                         </tr>
@@ -51,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$schemas->links()}}
+                    {!!$schemas->links()!!}
                 </div>
             </div>
 

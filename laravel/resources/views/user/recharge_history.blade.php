@@ -23,21 +23,21 @@ Recharge History
                             <?php $i = $rc_history->getFrom(); ?>
                             @foreach($rc_history as $voucher)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$voucher->plan_name}}</td>
-                                <td>{{$voucher->plan_type == 1 ? 'Limited' : 'Unlimited'}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!$voucher->plan_name!!}</td>
+                                <td>{!!$voucher->plan_type == 1 ? 'Limited' : 'Unlimited'!!}</td>
                                 <td>
                                     @if(isset($voucher->limits))
-                                    {{$voucher->limits->time_limit}} {{$voucher->limits->time_unit}}
+                                    {!!$voucher->limits->time_limit!!} {!!$voucher->limits->time_unit!!}
                                     @endif
                                 </td>
                                 <td>
                                     @if(isset($voucher->limits))
-                                    {{$voucher->limits->data_limit}} {{$voucher->limits->data_unit}}
+                                    {!!$voucher->limits->data_limit!!} {!!$voucher->limits->data_unit!!}
                                     @endif
                                 </td>
-                                <td>{{date("d M'y H:i", strtotime($voucher->updated_at))}}</td>
-                                <td>{{$voucher->method}}</td>
+                                <td>{!!date("d M'y H:i", strtotime($voucher->updated_at))!!}</td>
+                                <td>{!!$voucher->method!!}</td>
                             </tr>
                             <?php $i++; ?>
                             @endforeach
@@ -52,7 +52,7 @@ Recharge History
 
 <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$rc_history->links()}}
+                    {!!$rc_history->links()!!}
                 </div>
             </div>
 @stop

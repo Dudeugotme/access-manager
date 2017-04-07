@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<base href="{{Request::root().'/'}}" />
+<base href="{!!Request::root().'/'!!}" />
 <html ng-app='amAdmin'>
     <head>
         <meta charset="UTF-8">
         <title>Access Manager</title>
-        {{HTML::style("public/css/themes/$admin_theme.css")}}
-        {{HTML::style('public/css/font-awesome.min.css')}}
-        {{HTML::style('public/css/custom.css')}}
+        {!!HTML::style("public/css/themes/$admin_theme.css")!!}
+        {!!HTML::style('public/css/font-awesome.min.css')!!}
+        {!!HTML::style('public/css/custom.css')!!}
         <style>
             body {
                 padding-top: 8%;
@@ -54,16 +54,16 @@
                         <i class="fa fa-lock"></i>
                         Login Here</legend>
                     <div class="well">
-                        {{Form::open(['route'=>'admin.login'])}}
+                        {!!Form::open(['route'=>'admin.login'])!!}
                             <fieldset>
                                 <div class="form-group">
                                     <label for="" class="control-label">User Name:  </label>
-                                    {{Form::text('uname', NULL, ['class'=>'col-lg-2 form-control',
-                                    'placeholder'=>'username'])}}
+                                    {!!Form::text('uname', NULL, ['class'=>'col-lg-2 form-control',
+                                    'placeholder'=>'username'])!!}
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="control-label">Password:  </label>
-                                    {{Form::password('pword', ['class'=>'form-control','placeholder'=>'password'])}}
+                                    {!!Form::password('pword', ['class'=>'form-control','placeholder'=>'password'])!!}
                                     <div class="checkbox">
                                         <label for="remember-me"> 
                                             <input type="checkbox" id='remember-me'>
@@ -83,9 +83,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-danger">{{Session::get('error', NULL)}}</p>
+                                <p class="text-danger">{!!Session::get('error', NULL)!!}</p>
                             </fieldset>
-                        {{Form::close()}}
+                        {!!Form::close()!!}
                     </div>
                 </div>
             </div>
@@ -101,24 +101,24 @@
                 </div>
             </div>
         </footer>
-{{HTML::script('pubilc/js/jquery.2.1.min.js')}}
-{{HTML::script('pubilc/js/boostrap.min.js')}}
-<!-- {{HTML::script('js/typeahead.js')}} -->
-<!-- {{HTML::script('js/alertify.js')}} -->
+{!!HTML::script('pubilc/js/jquery.2.1.min.js')!!}
+{!!HTML::script('pubilc/js/boostrap.min.js')!!}
+<!-- {!!HTML::script('js/typeahead.js')!!} -->
+<!-- {!!HTML::script('js/alertify.js')!!} -->
 
 <!-- Show Notifications via alertify.js -->
 <script type="text/javascript">
-    // {{ Notification::showError('
+    // {!! Notification::showError('
     //     alertify.error(":message");
-    // ') }}
+    // ') !!}
  
-    // {{ Notification::showInfo('
+    // {!! Notification::showInfo('
     //     alertify.log(":message");
-    // ') }}
+    // ') !!}
  
-    // {{ Notification::showSuccess('
+    // {!! Notification::showSuccess('
     //     alertify.success(":message");
-    // ') }}
+    // ') !!}
 </script>
 
 

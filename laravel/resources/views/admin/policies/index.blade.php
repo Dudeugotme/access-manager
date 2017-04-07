@@ -3,7 +3,7 @@
 	<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>All Policies
-                            {{link_to_route('policy.add.form', 'New Bandwidth Policy', NULL, ['class'=>'btn btn-primary navbar-right',])}}
+                            {!!link_to_route('policy.add.form', 'New Bandwidth Policy', NULL, ['class'=>'btn btn-primary navbar-right',])!!}
                     </h2>
                 </div>
             </div>
@@ -29,17 +29,17 @@
                             <?php $i = $policies->getFrom();?>
                             @foreach($policies as $policy)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$policy->name}}</td>
-                                <td>{{$policy->max_down}} {{$policy->max_down_unit}}</td>
-                                <td>{{$policy->min_down}} {{$policy->min_down_unit}}</td>
-                                <td>{{$policy->max_up}} {{$policy->max_up_unit}}</td>
-                                <td>{{$policy->min_up}} {{$policy->min_up_unit}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!$policy->name!!}</td>
+                                <td>{!!$policy->max_down!!} {!!$policy->max_down_unit!!}</td>
+                                <td>{!!$policy->min_down!!} {!!$policy->min_down_unit!!}</td>
+                                <td>{!!$policy->max_up!!} {!!$policy->max_up_unit!!}</td>
+                                <td>{!!$policy->min_up!!} {!!$policy->min_up_unit!!}</td>
                                 <td>
-                                    {{Form::actions(
+                                    {!!Form::actions(
                                         route('policy.edit.form',$policy->id),
                                         route('policy.delete',$policy->id)
-                                        )}}
+                                        )!!}
                                 </td>
                         </tr>
                         <?php  $i++;  ?>
@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$policies->links()}}
+                    {!!$policies->links()!!}
                 </div>
             </div>
 

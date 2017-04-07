@@ -2,15 +2,15 @@
 @section('admin_container')
 <div class="row">
 	<div class="col-lg-6">
-		<h2>{{{$profile->uname}}}</h2>
+		<h2>{{ $profile->uname }}</h2>
 	</div>
 </div>
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
   <li>
-    {{link_to_route('subscriber.profile','User Profile', $profile->id)}}
+    {!!link_to_route('subscriber.profile','User Profile', $profile->id)!!}
 </li>
   <li>
-	{{link_to_route('subscriber.services','Active Services', $profile->id)}}
+	{!!link_to_route('subscriber.services','Active Services', $profile->id)!!}
   </li>
   <li class="active">
   	<a>Transactions</a>
@@ -59,22 +59,22 @@
 										<?php $i = $txns->getFrom(); ?>
 										@foreach($txns as $txn)
 										<tr>
-											<td>{{$i}}</td>
+											<td>{!!$i!!}</td>
 											<td>
-												{{$txn->created_at->format('d M y H:i:s')	}}
+												{!!$txn->created_at->format('d M y H:i:s')	!!}
 											</td>
 											<td>
 												@if( $txn->type == 'cr')
-													{{$txn->amount}}
+													{!!$txn->amount!!}
 												@endif
 											</td>
 											<td>
 												@if($txn->type == 'dr')
-													{{$txn->amount}}
+													{!!$txn->amount!!}
 												@endif
 											</td>
 											<td>
-												{{$txn->description}}
+												{!!$txn->description!!}
 											</td>
 										</tr>
 										<?php $i++; ?>
@@ -90,7 +90,7 @@
 					</div>
 					<div class="row">
 						<div class="col-lg-10">
-							{{$txns->links()}}
+							{!!$txns->links()!!}
 						</div>
 					</div>
 				</div>
@@ -101,35 +101,35 @@
 								Add Transaction
 							</h1>
 							<hr>
-							{{Form::open(['class'=>'form-horizontal','role'=>'form','route'=>'subscriber.ap.addTransaction'])}}
-							{{Form::hidden('user_id',$profile->id)}}
+							{!!Form::open(['class'=>'form-horizontal','role'=>'form','route'=>'subscriber.ap.addTransaction'])!!}
+							{!!Form::hidden('user_id',$profile->id)!!}
 								<fieldset>
 									<div class="form-group">
-										{{Form::label('type','Transaction Type',['class'=>'col-lg-4 control-label'])}}
+										{!!Form::label('type','Transaction Type',['class'=>'col-lg-4 control-label'])!!}
 										<div class="col-lg-4">
-											{{Form::select('type',['cr'=>'Credit','dr'=>'Debit'],'cr',['class'=>'form-control'])}}
+											{!!Form::select('type',['cr'=>'Credit','dr'=>'Debit'],'cr',['class'=>'form-control'])!!}
 										</div>
 									</div>
 									<div class="form-group">
-										{{Form::label('amount','Amount',['class'=>'col-lg-4 control-label'])}}
+										{!!Form::label('amount','Amount',['class'=>'col-lg-4 control-label'])!!}
 										<div class="col-lg-4">
-											{{Form::text('amount',NULL,['class'=>'form-control','placeholder'=>'Amount'])}}
+											{!!Form::text('amount',NULL,['class'=>'form-control','placeholder'=>'Amount'])!!}
 										</div>
 									</div>
 									<div class="form-group">
-										{{Form::label('description','Description',['class'=>'col-lg-4 control-label'])}}
+										{!!Form::label('description','Description',['class'=>'col-lg-4 control-label'])!!}
 										<div class="col-lg-4">
-											{{Form::textarea('description',NULL,['class'=>'form-control','placeholder'=>'friendly description','rows'=>3])}}
+											{!!Form::textarea('description',NULL,['class'=>'form-control','placeholder'=>'friendly description','rows'=>3])!!}
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-lg-offset-5">
-											{{Form::buttons('Submit')}}
+											{!!Form::buttons('Submit')!!}
 										</div>
 									</div>
 			
 								</fieldset>
-							{{Form::close()}}
+							{!!Form::close()!!}
 						</div>
 					</div>
 				</div>
@@ -138,12 +138,12 @@
 					<h1>Payment Settings</h1>
 					<hr>
                     @if(isset($ap_settings))
-                    {{Form::model( $ap_settings,['route'=>'subscriber.ap.settings','class'=>'form-horizontal'])}}
+                    {!!Form::model( $ap_settings,['route'=>'subscriber.ap.settings','class'=>'form-horizontal'])!!}
                     @else
-                    {{Form::open(['route'=>'subscriber.ap.settings','class'=>'form-horizontal'])}}
+                    {!!Form::open(['route'=>'subscriber.ap.settings','class'=>'form-horizontal'])!!}
                     @endif
-                    {{Form::hidden('percent_check', 0)}}
-                    {{Form::hidden('user_id', $profile->id)}}
+                    {!!Form::hidden('percent_check', 0)!!}
+                    {!!Form::hidden('user_id', $profile->id)!!}
                     <fieldset>
                         <div class="form-group">
                             <label for="" class="col-lg-4 control-label">
@@ -151,7 +151,7 @@
                             </label>
 
                             <div class="col-lg-4">
-                                {{Form::checkbox('percent_check',1,FALSE,['class'=>'checkbox'])}}
+                                {!!Form::checkbox('percent_check',1,FALSE,['class'=>'checkbox'])!!}
                             </div>
 
                         </div>
@@ -160,17 +160,17 @@
                                 Percentage
                             </label>
                             <div class="col-lg-4">
-                                {{Form::text('percent', NULL, ['class'=>'form-control'])}}
+                                {!!Form::text('percent', NULL, ['class'=>'form-control'])!!}
                             </div>
                         </div>
                         <div class="form-group">
                           <div class="col-lg-offset-5">
-                                {{Form::buttons()}}
+                                {!!Form::buttons()!!}
                           </div>
                         </div>
                     </fieldset>
                     
-                    {{Form::close()}}
+                    {!!Form::close()!!}
                 </div>
 				</div>
 			</div>

@@ -36,14 +36,14 @@ if( $segment == 'settings' ) {
     <head>
         <meta charset="UTF-8">
         <title>Access Manager</title>
-        <base href="{{URL::to('/')}}">
-        {{HTML::style("public/css/themes/$admin_theme.css")}}
-        {{HTML::style('public/css/font-awesome.min.css')}}
-        {{HTML::style('public/css/bootstrap-clockpicker.min.css')}}
-        {{HTML::style('public/css/alertify.core.css')}}
-        {{HTML::style('public/css/alertify-bootstrap3.css')}}
-        {{HTML::style('public/css/custom.css')}}
-        {{HTML::style('public/css/bootstrap-datetimepicker.min.css')}}
+        <base href="{!!URL::to('/')!!}">
+        {!!HTML::style("public/css/themes/$admin_theme.css")!!}
+        {!!HTML::style('public/css/font-awesome.min.css')!!}
+        {!!HTML::style('public/css/bootstrap-clockpicker.min.css')!!}
+        {!!HTML::style('public/css/alertify.core.css')!!}
+        {!!HTML::style('public/css/alertify-bootstrap3.css')!!}
+        {!!HTML::style('public/css/custom.css')!!}
+        {!!HTML::style('public/css/bootstrap-datetimepicker.min.css')!!}
     </head>
     <body>
         <header>
@@ -54,7 +54,7 @@ if( $segment == 'settings' ) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{route('subscriber.active')}}"><b>Access Manager</b></a>
+                    <a class="navbar-brand" href="{!!route('subscriber.active')!!}"><b>Access Manager</b></a>
                 </div>
                 
                 <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -63,20 +63,20 @@ if( $segment == 'settings' ) {
                             <li>
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                    <i class="fa fa-user"></i> 
-                                   {{Auth::user()->fname}} {{Auth::user()->lname}}
+                                   {!!Auth::user()->fname!!} {!!Auth::user()->lname!!}
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{route('admin.changepassword.form')}}">
+                                        <a href="{!!route('admin.changepassword.form')!!}">
                                         <i class="fa fa-key"></i>
                                         Change Password</a></li>
-                                    <li><a href="{{route('admin.profile.edit')}}">
+                                    <li><a href="{!!route('admin.profile.edit')!!}">
                                         <i class="fa fa-user"></i>
                                         My Profile</a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="{{route('admin.logout')}}">
+                                        <a href="{!!route('admin.logout')!!}">
                                             <i class="fa fa-sign-out"></i>
                                             Sign Out
                                         </a>
@@ -92,87 +92,87 @@ if( $segment == 'settings' ) {
                 <div class="navbar-collapse collapse navbar-responsive-collapse">
                     <div class="container-fluid">
                     <ul class="nav navbar-nav">
-                        <li class="{{$dashboard}}">
-                            <a href="{{route('subscriber.active')}}">
+                        <li class="{!!$dashboard!!}">
+                            <a href="{!!route('subscriber.active')!!}">
                                 <i class="fa fa-bullseye"></i>
                                 Dashboard
                             </a>
                             </li>
-                        <li class="{{$subscribers}}">
-                            <a href="{{route('subscriber.index')}}">
+                        <li class="{!!$subscribers!!}">
+                            <a href="{!!route('subscriber.index')!!}">
                                 <i class='fa fa-users'></i>
                                 Subscribers
                             </a>
                         </li>
-                        <li class="dropdown {{$prepaid}}">
+                        <li class="dropdown {!!$prepaid!!}">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-tags"></i>
                                 Prepaid<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                {{HTML::link(route('voucher.index'), 'Recharge Vouchers')}}
+                                {!!HTML::link(route('voucher.index'), 'Recharge Vouchers')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('refill.index','Refill Coupons')}}
+                                    {!!link_to_route('refill.index','Refill Coupons')!!}
                                 </li>
-                                <li>{{link_to_route('refill.recharge.form','Refill Account')}}</li>
+                                <li>{!!link_to_route('refill.recharge.form','Refill Account')!!}</li>
                                 <li>
-                                    {{link_to_route('voucher.recharge.form','Recharge Account')}}
+                                    {!!link_to_route('voucher.recharge.form','Recharge Account')!!}
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown {{$services}}">
+                        <li class="dropdown {!!$services!!}">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-codepen"></i>
 
                                 Services<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                {{link_to_route('plan.index','Service Plans')}}
+                                {!!link_to_route('plan.index','Service Plans')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('plan.free.form','FRiNTERNET')}}
+                                    {!!link_to_route('plan.free.form','FRiNTERNET')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('policies.index','Bandwidth Policies')}}
+                                    {!!link_to_route('policies.index','Bandwidth Policies')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('schema.index','Policy Schemas')}}
+                                    {!!link_to_route('schema.index','Policy Schemas')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('schematemplate.index','Schema Templates')}}
+                                    {!!link_to_route('schematemplate.index','Schema Templates')!!}
                                 </li>
 
                             </ul>
                         </li>
-                        <li class="dropdown {{$customize}}">
+                        <li class="dropdown {!!$customize!!}">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-cubes"></i>
                                 Customize<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    {{link_to_route('tpl.email.index','Email Templates')}}
+                                    {!!link_to_route('tpl.email.index','Email Templates')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('tpl.voucher.index','Voucher Templates')}}
+                                    {!!link_to_route('tpl.voucher.index','Voucher Templates')!!}
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown {{$network}}">
+                        <li class="dropdown {!!$network!!}">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-sitemap"></i>
 
                                 Network<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    {{link_to_route('router.index','Routers')}}
+                                    {!!link_to_route('router.index','Routers')!!}
                                 </li>
                                 <li>
-                                    {{link_to_route('subnet.index','IP Subnets')}}
+                                    {!!link_to_route('subnet.index','IP Subnets')!!}
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown {{$system}}">
+                        <li class="dropdown {!!$system!!}">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-sliders"></i>
                                 System<b class="caret"></b>
@@ -189,36 +189,36 @@ if( $segment == 'settings' ) {
                                     <a href="">Groups & Permissions</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('setting.general')}}">
+                                    <a href="{!!route('setting.general')!!}">
                                     <!-- <i class="fa fa-cogs"></i> -->
                                     Settings</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('setting.general')}}">
+                                    <a href="{!!route('setting.general')!!}">
                                     Reports</a>
                                 </li>
                                 <li>
-                                    {{link_to_route('org.index','Organisations')}}
+                                    {!!link_to_route('org.index','Organisations')!!}
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    {{link_to_route('system.about','About')}}
+                                    {!!link_to_route('system.about','About')!!}
                                 </li>
                             </ul>
                         </li>
                     </ul> 
                     <!-- <div class=""> -->
-                    {{Form::open(['route'=>'subscriber.search'])}}
+                    {!!Form::open(['route'=>'subscriber.search'])!!}
 <div class="input-group" style="margin-top: 5px;">
-    {{Form::text('keyword', NULL, ['data-i-search-input'=>'true','class'=>'form-control col-lg-1',
-                                    'placeholder'=>'Search by UserName'])}}
+    {!!Form::text('keyword', NULL, ['data-i-search-input'=>'true','class'=>'form-control col-lg-1',
+                                    'placeholder'=>'Search by UserName'])!!}
     <!-- <input type="text" data-i-search-input="true" class="form-control col-lg-1" name="word" data-autocomplete="true" data-autocomplete-url="" placeholder="search accounts..."> -->
     <span class="input-group-btn">
         <button class="btn btn-default" type="submit">
         <i class="fa fa-search"></i>
         </button></span>
 </div>
-{{Form::close()}}
+{!!Form::close()!!}
 <!-- </div> -->
                     </div>
                 </div>
@@ -230,12 +230,12 @@ if( $segment == 'settings' ) {
             @if(Session::has('success'))
             <div class="alert alert-dismissable alert-success in fade">
   <button type="button" class="close" data-dismiss="alert">×</button>
-  {{Session::get('success')}}
+  {!!Session::get('success')!!}
 </div>
 @elseif(Session::has('error'))
 <div class="alert alert-dismissable alert-danger in fade">
   <button type="button" class="close" data-dismiss="alert">×</button>
-{{Session::get('error')}}
+{!!Session::get('error')!!}
 </div>
 @endif
             @yield('admin_container')
@@ -269,30 +269,30 @@ if( $segment == 'settings' ) {
                 </div>
             </div>
         </footer>
-{{HTML::script('public/js/jquery.2.1.min.js')}}
-{{HTML::script('public/js/boostrap.min.js')}}
-{{HTML::script('public/js/schema_template_show_hide.js')}}
-{{HTML::script('public/js/plan_show_hide.js')}}
+{!!HTML::script('public/js/jquery.2.1.min.js')!!}
+{!!HTML::script('public/js/boostrap.min.js')!!}
+{!!HTML::script('public/js/schema_template_show_hide.js')!!}
+{!!HTML::script('public/js/plan_show_hide.js')!!}
 
-{{HTML::script('public/js/bootstrap-clockpicker.min.js')}}
+{!!HTML::script('public/js/bootstrap-clockpicker.min.js')!!}
 
-{{HTML::script('public/js/moment.js')}}
-{{HTML::script('public/js/bootstrap-datetimepicker.min.js')}}
+{!!HTML::script('public/js/moment.js')!!}
+{!!HTML::script('public/js/bootstrap-datetimepicker.min.js')!!}
 
-{{HTML::script('public/js/alertify.js')}}
+{!!HTML::script('public/js/alertify.js')!!}
 <!-- Show Notifications via alertify.js -->
 <script type="text/javascript">
-    {{ Notification::showError('
+    {!! Notification::showError('
         alertify.error(":message");
-    ') }}
+    ') !!}
  
-    {{ Notification::showInfo('
+    {!! Notification::showInfo('
         alertify.log(":message");
-    ') }}
+    ') !!}
  
-    {{ Notification::showSuccess('
+    {!! Notification::showSuccess('
         alertify.success(":message");
-    ') }}
+    ') !!}
 </script>
 <!-- below is the script to check/uncheck vouchers. -->
 <script>

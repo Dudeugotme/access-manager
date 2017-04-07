@@ -25,31 +25,31 @@ Sessions History
                             <?php $i = $sess_history->getFrom(); ?>
                             @foreach($sess_history as $session)
                             <tr>
-                                <td>{{$i}}</td>
+                                <td>{!!$i!!}</td>
                                 <td>
-                                    {{date("d M y - H:i:s", strtotime($session->acctstarttime))}}
+                                    {!!date("d M y - H:i:s", strtotime($session->acctstarttime))!!}
                                 </td>
                                 <td>
                                     @if( ! is_null($session->acctstoptime) )
-                                    {{date("d M y - H:i:s", strtotime($session->acctstoptime))}}
+                                    {!!date("d M y - H:i:s", strtotime($session->acctstoptime))!!}
                                     @else
                                     ---
                                     @endif
                                 </td>
                                 <td>
-                                    {{formatTime($session->acctsessiontime)}}
+                                    {!!formatTime($session->acctsessiontime)!!}
                                 </td>
                                 <td>
-                                    {{formatBytes($session->acctoutputoctets)}}
+                                    {!!formatBytes($session->acctoutputoctets)!!}
                                 </td>
                                 <td>
-                                    {{formatBytes($session->acctinputoctets)}}
+                                    {!!formatBytes($session->acctinputoctets)!!}
                                 </td>
                                 <td>
-                                    {{formatBytes($session->acctinputoctets + $session->acctoutputoctets)}}
+                                    {!!formatBytes($session->acctinputoctets + $session->acctoutputoctets)!!}
                                 </td>
-                                <td>{{$session->framedipaddress}}</td>
-                                <td>{{$session->callingstationid}}</td>
+                                <td>{!!$session->framedipaddress!!}</td>
+                                <td>{!!$session->callingstationid!!}</td>
                             </tr>
                             <?php $i++; ?>
                             @endforeach
@@ -63,7 +63,7 @@ Sessions History
                     </table>
                     <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$sess_history->links()}}
+                    {!!$sess_history->links()!!}
                 </div>
             </div>
 

@@ -13,14 +13,14 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <ul class="nav nav-pills">
-                        <li class="{{$all_acct_class}}"><a href="{{route('subscriber.active')}}">All Accounts</a></li>
+                        <li class="{!!$all_acct_class!!}"><a href="{!!route('subscriber.active')!!}">All Accounts</a></li>
 
                         @foreach(range('a','z') as $a)
                         <?php 
                             $class = Input::get('alphabet', NULL) == $a ? 'active' : NULL ;
                         ?>
-                            <li class ="{{$class}}">
-                                <a href="{{route('subscriber.active') . '?' . http_build_query(array_merge(Input::except('alphabet'),['alphabet'=>$a]))}}">{{$a}}</a>
+                            <li class ="{!!$class!!}">
+                                <a href="{!!route('subscriber.active') . '?' . http_build_query(array_merge(Input::except('alphabet'),['alphabet'=>$a]))!!}">{!!$a!!}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -48,21 +48,21 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
                             @foreach($active as $account)
                             <?php $plan = $plans[$account->session_id]; ?>
                             <tr>
-                                <td>{{$i}}</td>
+                                <td>{!!$i!!}</td>
                                 <td>
-                                    {{link_to_route('subscriber.profile',$account->uname,$account->id)}}
+                                    {!!link_to_route('subscriber.profile',$account->uname,$account->id)!!}
                                 </td>
-                                <td>{{$account->fname}} {{$account->lname}}</td>
-                                <td>{{$account->contact}}</td>
-                                <td>{{$plan->plan_name}}</td>
-                                <td>{{$account->acctstarttime}}</td>
-                                <td>{{$plan->expiration}}</td>
+                                <td>{!!$account->fname!!} {!!$account->lname!!}</td>
+                                <td>{!!$account->contact!!}</td>
+                                <td>{!!$plan->plan_name!!}</td>
+                                <td>{!!$account->acctstarttime!!}</td>
+                                <td>{!!$plan->expiration!!}</td>
                                 <td>
-                                {{Form::open(['route'=>'subscriber.disconnect'])}}
-                                    {{Form::hidden('session_id',$account->session_id)}}
+                                {!!Form::open(['route'=>'subscriber.disconnect'])!!}
+                                    {!!Form::hidden('session_id',$account->session_id)!!}
                                     <button type="submit" class="btn btn-danger btn-xs">
                                     <i class="fa fa-unlink"></i> disconnect</button>    
-                                {{Form::close()}}
+                                {!!Form::close()!!}
                                 
                                     </td>
                             </tr>
@@ -79,10 +79,10 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <button href="{{route('clear-stale-sessions')}}" class='btn btn-sm btn-danger'>Clear Stale Sessions</button>
+                    <button href="{!!route('clear-stale-sessions')!!}" class='btn btn-sm btn-danger'>Clear Stale Sessions</button>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8">
-                    {{$active->appends(Input::except('page'))->links()}}
+                    {!!$active->appends(Input::except('page'))->links()!!}
                 </div>
             </div>
         <!-- </div> -->

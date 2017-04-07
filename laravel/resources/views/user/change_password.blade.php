@@ -8,35 +8,35 @@ Change Password
 	<div class="row">
 	<div class="col-lg-7 col-lg-offset-1">
 
-{{Form::open(['route'=>['user.change.password'],'class'=>'form-horizontal','role'=>'form'])}}
-{{Form::hidden('user_id', Auth::id())}}
+{!!Form::open(['route'=>['user.change.password'],'class'=>'form-horizontal','role'=>'form'])!!}
+{!!Form::hidden('user_id', Auth::id())!!}
 <fieldset>
   
   <div class="form-group">
-      {{Form::label('current', 'Current Password', ['class'=>'col-lg-4 control-label'])}}
+      {!!Form::label('current', 'Current Password', ['class'=>'col-lg-4 control-label'])!!}
       <div class="col-lg-8">
-        {{Form::password('current', ['class'=>'form-control','id'=>'current','placeholder'=>'your current password'])}}
+        {!!Form::password('current', ['class'=>'form-control','id'=>'current','placeholder'=>'your current password'])!!}
       </div>
   </div>
   <div class="form-group">
-      {{Form::label('new', 'New Password', ['class'=>'col-lg-4 control-label'])}}
+      {!!Form::label('new', 'New Password', ['class'=>'col-lg-4 control-label'])!!}
       <div class="col-lg-8">
-      	{{Form::password('password', ['class'=>'form-control','id'=>'new','placeholder'=>'choose a new password'])}}
+      	{!!Form::password('password', ['class'=>'form-control','id'=>'new','placeholder'=>'choose a new password'])!!}
       </div>
   </div>
   <div class="form-group">
-      {{Form::label('confirm', 'Confirm Password', ['class'=>'col-lg-4 control-label'])}}
+      {!!Form::label('confirm', 'Confirm Password', ['class'=>'col-lg-4 control-label'])!!}
       <div class="col-lg-8">
-      	{{Form::password('confirm_password', ['class'=>'form-control','id'=>'confirm','placeholder'=>'confirm new password'])}}
+      	{!!Form::password('confirm_password', ['class'=>'form-control','id'=>'confirm','placeholder'=>'confirm new password'])!!}
       </div>
   </div>
     
 <div class="form-group">
       <div class="col-lg-10 col-lg-offset-6">
-        {{Form::buttons()}}
+        {!!Form::buttons()!!}
       </div>
     </div>
-    {{Form::close()}}
+    {!!Form::close()!!}
 </fieldset>
 </div>
 </div>

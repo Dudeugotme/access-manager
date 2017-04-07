@@ -29,20 +29,20 @@
 ?>
 <div class="container">
 		<ul class="nav nav-pills navbar-right">
-		  <li class="{{$home}}">
-		  	{{link_to_route('user.panel', 'Home')}}
+		  <li class="{!!$home!!}">
+		  	{!!link_to_route('user.panel', 'Home')!!}
 		  </li>
-		  <li class="{{$recharge}}">
-		  	{{link_to_route('prepaid.recharge.form','Recharge')}}
+		  <li class="{!!$recharge!!}">
+		  	{!!link_to_route('prepaid.recharge.form','Recharge')!!}
 		  </li>
-		  <li class="{{$refill}}">
-		  	{{link_to_route('prepaid.refill.form','Refill Account')}}
+		  <li class="{!!$refill!!}">
+		  	{!!link_to_route('prepaid.refill.form','Refill Account')!!}
 		  </li>
-		  <li class="{{$r_history}}">
-		  	{{link_to_route('prepaid.recharge.history', 'Recharge History')}}
+		  <li class="{!!$r_history!!}">
+		  	{!!link_to_route('prepaid.recharge.history', 'Recharge History')!!}
 		  </li>
-		  <li class="{{$s_history}}">
-			{{link_to_route('prepaid.session.history', 'Session History')}}
+		  <li class="{!!$s_history!!}">
+			{!!link_to_route('prepaid.session.history', 'Session History')!!}
 		  </li>
 		</ul>
 	<h2>

@@ -7,8 +7,8 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>
                         <i class="fa fa-users"></i>
-                        Search Results : [{{Input::get('keyword', NULL)}}]
-                        <!-- <a href="{{route('subscriber.add.form')}}" class="btn btn-primary pull-right"><i class="fa fa-user"></i> New Subscriber</a> -->
+                        Search Results : [{!!Input::get('keyword', NULL)!!}]
+                        <!-- <a href="{!!route('subscriber.add.form')!!}" class="btn btn-primary pull-right"><i class="fa fa-user"></i> New Subscriber</a> -->
                     </h2>
                     
                     
@@ -38,11 +38,11 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
                             @if( count($accounts) )
                           @foreach ($accounts as $a)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{link_to_route('subscriber.profile',$a->uname,$a->id)}}</td>
-                                <td>{{$a->fname}} {{$a->lname}}</td>
-                                <td>{{$a->contact}}</td>
-                                <td>{{date("d-M-Y", strtotime($a->created_at))}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!link_to_route('subscriber.profile',$a->uname,$a->id)!!}</td>
+                                <td>{!!$a->fname!!} {!!$a->lname!!}</td>
+                                <td>{!!$a->contact!!}</td>
+                                <td>{!!date("d-M-Y", strtotime($a->created_at))!!}</td>
                                 <td>
                                     @if($a->plan_type == FREE_PLAN)
                                     FRiNTERNET
@@ -52,12 +52,12 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
                                     Advance Paid
                                     @endif
                                 </td>
-                                <td>{{($a->status) ? 'Active' : 'Deactive'}}</td>
+                                <td>{!!($a->status) ? 'Active' : 'Deactive'!!}</td>
                                 <!-- <td>
-                                    {{Form::actions(
+                                    {!!Form::actions(
                                         route('subscriber.edit',$a->id),
                                         route('subscriber.delete',$a->id)
-                                        )}}
+                                        )!!}
                                     
                                 </td> -->
                         </tr>
@@ -75,7 +75,7 @@ $all_acct_class = Input::get('alphabet', NULL) == NULL ? 'active' : NULL;
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                  {{$accounts->links()}}
+                  {!!$accounts->links()!!}
                 </div>
             </div>
         <!-- </div> -->

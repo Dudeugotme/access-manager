@@ -3,7 +3,7 @@
 	<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>All Subnets
-                            {{link_to_route('subnet.add.form', 'New Subnet', NULL, ['class'=>'btn btn-primary navbar-right',])}}
+                            {!!link_to_route('subnet.add.form', 'New Subnet', NULL, ['class'=>'btn btn-primary navbar-right',])!!}
                     </h2>
                 </div>
             </div>
@@ -25,10 +25,10 @@
                             <?php $i = $ips->getFrom();?>
                             @foreach($ips as $ip)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{long2ip($ip->ip)}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!long2ip($ip->ip)!!}</td>
                                 <td>
-                                    {{$ip->uname}}
+                                    {!!$ip->uname!!}
                                 </td>
                         </tr>
                         <?php  $i++;  ?>
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$ips->links()}}
+                    {!!$ips->links()!!}
                 </div>
             </div>
 

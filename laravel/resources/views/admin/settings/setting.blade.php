@@ -34,17 +34,17 @@ switch($segment) {
 	</div>
 	<div class="col-lg-6">
 		<ul class="nav nav-pills pull-right" style='margin-top: 25px;'>
-  <li class="{{$general}}">
-  	{{link_to_route('setting.general','General')}}
+  <li class="{!!$general!!}">
+  	{!!link_to_route('setting.general','General')!!}
   </li>
-  <li class="{{$smtp}}">
-  	{{link_to_route('setting.email','Email')}}
+  <li class="{!!$smtp!!}">
+  	{!!link_to_route('setting.email','Email')!!}
   </li>
-  <li class="{{$paypal}}">
-  	{{link_to_route('setting.paypal','Payment Gateways')}}
+  <li class="{!!$paypal!!}">
+  	{!!link_to_route('setting.paypal','Payment Gateways')!!}
   </li>
-  <li class="{{$advancepaid}}">
-  	{{link_to_route('setting.advancepaid.form','AdvancePaid Settings')}}
+  <li class="{!!$advancepaid!!}">
+  	{!!link_to_route('setting.advancepaid.form','AdvancePaid Settings')!!}
   </li>
   </ul>
 	</div>

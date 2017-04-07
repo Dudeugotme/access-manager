@@ -3,7 +3,7 @@
 	<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>All Subnets
-                            {{link_to_route('subnet.add.form', 'New Subnet', NULL, ['class'=>'btn btn-primary navbar-right',])}}
+                            {!!link_to_route('subnet.add.form', 'New Subnet', NULL, ['class'=>'btn btn-primary navbar-right',])!!}
                     </h2>
                 </div>
             </div>
@@ -25,15 +25,15 @@
                             <?php $i = $subnets->getFrom();?>
                             @foreach($subnets as $subnet)
                             <tr>
-                                <td>{{$i}}</td>
+                                <td>{!!$i!!}</td>
                                 <td>
-                                    {{link_to_route('subnet.usage',$subnet->subnet, $subnet->id)}}
+                                    {!!link_to_route('subnet.usage',$subnet->subnet, $subnet->id)!!}
                                 </td>
                                 <td>
-                                    {{Form::actions(
+                                    {!!Form::actions(
                                         route('subnet.edit.form',$subnet->id),
                                         route('subnet.delete',$subnet->id)
-                                        )}}
+                                        )!!}
                                 </td>
                         </tr>
                         <?php  $i++;  ?>
@@ -52,7 +52,7 @@
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$subnets->links()}}
+                    {!!$subnets->links()!!}
                 </div>
             </div>
 

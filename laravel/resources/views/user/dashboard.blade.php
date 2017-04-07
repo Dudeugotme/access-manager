@@ -1,26 +1,26 @@
 @extends('user.header_footer')
 
 @section('user_title')
-	Welcome {{$profile->fname}} {{$profile->lname}}!
+	Welcome {!!$profile->fname!!} {!!$profile->lname!!}!
 @stop
 
 @section('user_container')
 <div class="row">
 	<div class="col-lg-8">
 		<blockquote class="">
-	  <p class="text-danger">{{$profile->uname}}</p>
+	  <p class="text-danger">{!!$profile->uname!!}</p>
 	  <h5>
 	  	<i class="fa fa-home"></i>
-	  	{{$profile->address}}
+	  	{!!$profile->address!!}
 	  </h5>	
 	  <h5>
 	  	<i class="fa fa-envelope"></i>
-	  	{{$profile->email}}
+	  	{!!$profile->email!!}
 	  </h5>
 	  <h5>
 	  	<i class="fa fa-phone"></i>
-	  	<a href="tel:{{$profile->contact}}">
-	  		{{$profile->contact}}
+	  	<a href="tel:{!!$profile->contact!!}">
+	  		{!!$profile->contact!!}
 	  	</a>
 	  	
 	  </h5>

@@ -18,11 +18,11 @@
 ?>
 <div class="container">
 		<ul class="nav nav-pills navbar-right">
-		  <li class="{{$home}}">
-		  	{{link_to_route('user.panel', 'Home')}}
+		  <li class="{!!$home!!}">
+		  	{!!link_to_route('user.panel', 'Home')!!}
 		  </li>
-		  <li class="{{$s_history}}">
-			{{link_to_route('advancepaid.session.history', 'Session History')}}
+		  <li class="{!!$s_history!!}">
+			{!!link_to_route('advancepaid.session.history', 'Session History')!!}
 		  </li>
 		</ul>
 	<h2>

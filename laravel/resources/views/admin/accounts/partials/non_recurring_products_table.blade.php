@@ -13,16 +13,16 @@
     	<?php $i =1; ?>
 			@foreach($nrproducts as $nrproduct)
     			<tr>
-    				<td>{{$i}}</td>
-    				<td>{{$nrproduct->name}}</td>
-    				<td>{{$nrproduct->price}}</td>
-    				<td>{{date('d M y',strtotime($nrproduct->assigned_on))}}</td>
+    				<td>{!!$i!!}</td>
+    				<td>{!!$nrproduct->name!!}</td>
+    				<td>{!!$nrproduct->price!!}</td>
+    				<td>{!!date('d M y',strtotime($nrproduct->assigned_on))!!}</td>
     				<td>
-    					{{Form::open(['route'=>['product.delete.nonrecurring']])}}
-                {{Form::hidden('id',$nrproduct->id)}}
-                    {{Form::button('modify',['class'=>'btn btn-default btn-xs','data-target'=>'#nrproduct'.$nrproduct->id,'data-toggle'=>'modal'])}}
-                    {{Form::delete()}}
-                    {{Form::close()}}
+    					{!!Form::open(['route'=>['product.delete.nonrecurring']])!!}
+                {!!Form::hidden('id',$nrproduct->id)!!}
+                    {!!Form::button('modify',['class'=>'btn btn-default btn-xs','data-target'=>'#nrproduct'.$nrproduct->id,'data-toggle'=>'modal'])!!}
+                    {!!Form::delete()!!}
+                    {!!Form::close()!!}
     				</td>
     			</tr>
     		@endforeach

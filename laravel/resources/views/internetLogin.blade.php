@@ -70,7 +70,7 @@
 	width:35px;
 	height:37px;
 	float:left;
-	background:url({{public_path('public/img/internet-login/7800220454628.gif')}}) no-repeat;
+	background:url({!!public_path('public/img/internet-login/7800220454628.gif')!!}) no-repeat;
 }
 
 .user_text_box2
@@ -101,7 +101,7 @@
 	width:35px;
 	height:37px;
 	float:left;
-	background: url({{public_path('public/img/internet-login/7490565956853.gif')}}) no-repeat;
+	background: url({!!public_path('public/img/internet-login/7490565956853.gif')!!}) no-repeat;
 }
 .user_login_button_left
 {
@@ -318,7 +318,7 @@ h1
 	width:62%;
     margin-top: 13px;
 	float:right;
-	background:url({{public_path('public/img/internet-login/7879475497465.gif')}}) repeat-x;
+	background:url({!!public_path('public/img/internet-login/7879475497465.gif')!!}) repeat-x;
 	height:13px;
 }
 
@@ -365,7 +365,7 @@ h2
 
 .button_submit
 {
-	background:url(({{public_path('public/img/internet-login/7194102428693.gif')}}) no-repeat;
+	background:url(({!!public_path('public/img/internet-login/7194102428693.gif')!!}) no-repeat;
 	width:85px;
 	height:34px;
 	font-size:15px;
@@ -414,20 +414,20 @@ h2
 	</head>
 	<body><!-- Body Content -->
 		<!-- $(if chap-id) -->
-	<form name="sendin" action="{{$linkloginonly}}" method="post">
+	<form name="sendin" action="{!!$linkloginonly!!}" method="post">
 		<input type="hidden" name="username" />
 		<input type="hidden" name="password" />
-		<input type="hidden" name="dst" value="{{$linkorig}}" />
+		<input type="hidden" name="dst" value="{!!$linkorig!!}" />
 		<input type="hidden" name="popup" value="true" />
 	</form>
 	
-	{{HTML::script('public/js/md5.js')}}
+	{!!HTML::script('public/js/md5.js')!!}
 	<script type="text/javascript">
 	<!--
 	    function doLogin() {
 	    <?php if(strlen($chapid) < 1) echo "return true;\n"; ?>
 		document.sendin.username.value = document.login.username.value;
-		document.sendin.password.value = hexMD5('{{$chapid}}' + document.login.password.value + '{{$chapchallenge}}');
+		document.sendin.password.value = hexMD5('{!!$chapid!!}' + document.login.password.value + '{!!$chapchallenge!!}');
 		document.sendin.submit();
 		return false;
 	    }
@@ -439,7 +439,7 @@ h2
    <div id="main">
      <div id="header">
        <div class="logo">
-       {{HTML::image('public/img/internet-login/7691241172101.gif','0',['width'=>120,'height'=>112])}}
+       {!!HTML::image('public/img/internet-login/7691241172101.gif','0',['width'=>120,'height'=>112])!!}
         </div>
        <div id="header_right">
            <div class="customer">
@@ -450,7 +450,7 @@ h2
            </div>
            </div>
           <span style="float:left; padding-top:4px; padding-left:5px;"> 
-			{{HTML::image('public/img/internet-login/7620876516726.gif',NULL,['width'=>49,'height'=>37,'align'=>'absbottom'])}}
+			{!!HTML::image('public/img/internet-login/7620876516726.gif',NULL,['width'=>49,'height'=>37,'align'=>'absbottom'])!!}
           </span>
           </div>
           
@@ -471,7 +471,7 @@ h2
    <div id="banner_main">
      <div id="banner_main_div">
         <div id="banner">
-        {{HTML::image('public/img/internet-login/7134311728906.jpg',NULL,['width'=>989,'height'=>215])}}
+        {!!HTML::image('public/img/internet-login/7134311728906.jpg',NULL,['width'=>989,'height'=>215])!!}
        </div>
      </div>
    </div>
@@ -482,7 +482,7 @@ h2
        <div class="box_left">
          
          <h1>
-         {{HTML::image('public/img/internet-login/7384004613524.gif',NULL,['height'=>31,'width'=>'110%'])}}
+         {!!HTML::image('public/img/internet-login/7384004613524.gif',NULL,['height'=>31,'width'=>'110%'])!!}
          </h1>
          <div class="line_main">
          
@@ -492,7 +492,7 @@ h2
            <div class="box_left_div_bottom">
              
              <h2> 
-             {{HTML::image('public/img/internet-login/7210350249941.gif', NULL, ['width'=>47,'height'=>36,'align'=>'absmiddle'])}}
+             {!!HTML::image('public/img/internet-login/7210350249941.gif', NULL, ['width'=>47,'height'=>36,'align'=>'absmiddle'])!!}
              Higher Quality Service  </h2>
              <div class="text_bottom">
             The system?s proven technology means that whether you?re located in the city, the suburbs, or in a rural community, your service is always on and always available with voice and data communications of exceptional quality. 
@@ -505,8 +505,8 @@ h2
           <div class="box_left_div_bottom">
              
              <h2> 
-             {{HTML::image('public/img/internet-login/7602274059167.gif', NULL, ['width'=>47,'height'=>36,
-             'align'=>'absmiddle'])}}
+             {!!HTML::image('public/img/internet-login/7602274059167.gif', NULL, ['width'=>47,'height'=>36,
+             'align'=>'absmiddle'])!!}
               Faster Speed  </h2>
              <div class="text_bottom">
             Access Broadband can support upload and download speeds of up to 2 Mbps. That?s as fast or as faster than virtually every other broadband service available today, enabling you to exchange information in real-time with other branches or stores, and with corporate headquarters.
@@ -521,8 +521,8 @@ h2
            <div class="box_left_div_bottom">
              
              <h2> 
-			 {{HTML::image('public/img/internet-login/7929210368208.gif', NULL, ['width'=>47,'height'=>36,
-			 'align'=>'absmiddle'])}}
+			 {!!HTML::image('public/img/internet-login/7929210368208.gif', NULL, ['width'=>47,'height'=>36,
+			 'align'=>'absmiddle'])!!}
               Increased Security  </span></h2>
              <div class="text_bottom">
              Access Broadband offers enhanced security comparable to any corporate or government network, so there is no need to worry about sharing sensitive or proprietary data. Your data is encrypted with industry standard over-the-air DES (Data Encryption Standard) encryption.
@@ -535,8 +535,8 @@ h2
           <div class="box_left_div_bottom">
              
              <h2> 
-             {{HTML::image('public/img/internet-login/7412587426167.gif', NULL, ['width'=>47,'height'=>36,
-             'align'=>'absmiddle'])}}
+             {!!HTML::image('public/img/internet-login/7412587426167.gif', NULL, ['width'=>47,'height'=>36,
+             'align'=>'absmiddle'])!!}
              Superior Customer Service  </h2>
              <div class="text_bottom">
              As our customer, you are our most important asset. Our highly qualified trained to troubleshoot every issue relating wireless connectivity support team provides your small or mid-size business with the timely troubleshooting and support services you must have to keep your communications up to speed. 
@@ -548,14 +548,14 @@ h2
          
          </div>
        </div>
-             <form name="login" action="{{$linkloginonly}}" method="post" onSubmit="return doLogin()">
-     			<input type="hidden" name="dst" value="{{$linkorig}}" />
+             <form name="login" action="{!!$linkloginonly!!}" method="post" onSubmit="return doLogin()">
+     			<input type="hidden" name="dst" value="{!!$linkorig!!}" />
 				<input type="hidden" name="popup" value="true" />
    
 <div class="paper_recharge_main_div">
          
          <div class="login_form">
-         {{HTML::image('public/img/internet-login/7159876813350.gif', NULL, ['width'=>142,'height'=>38])}}
+         {!!HTML::image('public/img/internet-login/7159876813350.gif', NULL, ['width'=>142,'height'=>38])!!}
           </div>
          <div class="login_form_bottom">
          
@@ -584,7 +584,7 @@ h2
              </div>
              <div class="forget">
                   <span class="pin_heading_text" style="color:red">
-                  {{$error}}
+                  {!!$error!!}
                   </span>
                 </div>
          

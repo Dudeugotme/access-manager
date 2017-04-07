@@ -3,7 +3,7 @@
 	<div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h2>Voucher Templates
-                        {{link_to_route('tpl.voucher.add.form', 'New Voucher Template', NULL, ['class'=>'btn btn-primary navbar-right',])}}
+                        {!!link_to_route('tpl.voucher.add.form', 'New Voucher Template', NULL, ['class'=>'btn btn-primary navbar-right',])!!}
                     </h2>
                 </div>
                 
@@ -26,14 +26,14 @@
                             <?php $i = $templates->getFrom(); ?>
                                 @foreach($templates as $template)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$template->name}}</td>
-                                <td>{{{Str::limit($template->body,100)}}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!$template->name!!}</td>
+                                <td>{{ Str::limit($template->body,100) }}</td>
                                 <td>
-                                    {{Form::actions(
+                                    {!!Form::actions(
                                         route('tpl.voucher.edit.form',$template->id),
                                         route('tpl.voucher.delete',$template->id)
-                                        )}}
+                                        )!!}
                                 </td>
                         </tr>
                         <? $i++; ?>
@@ -41,7 +41,7 @@
                         @else
                         <tr>
                             <td colspan='4'>
-                            {{"No Records Found"}}
+                            {!!"No Records Found"!!}
                                 
                             </td>
                         </tr>
@@ -53,7 +53,7 @@
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$templates->links()}}
+                    {!!$templates->links()!!}
                 </div>
             </div>
 

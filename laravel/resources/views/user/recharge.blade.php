@@ -15,14 +15,14 @@ Recharge Account
     <div class="row">
 	<div class="col-lg-7 col-lg-offset-1">
 
-{{Form::open(['route'=>['prepaid.recharge'],'class'=>'form-horizontal','role'=>'form'])}}
+{!!Form::open(['route'=>['prepaid.recharge'],'class'=>'form-horizontal','role'=>'form'])!!}
 
 <fieldset>
 
   <div class="form-group">
-      {{Form::label('pin', 'PIN', ['class'=>'col-lg-4 control-label'])}}
+      {!!Form::label('pin', 'PIN', ['class'=>'col-lg-4 control-label'])!!}
       <div class="col-lg-8">
-      	{{Form::text('pin', NULL, ['class'=>'form-control','id'=>'pin'])}}
+      	{!!Form::text('pin', NULL, ['class'=>'form-control','id'=>'pin'])!!}
       </div>
   </div>
   <div class="form-group">
@@ -46,10 +46,10 @@ Recharge Account
     
 <div class="form-group">
       <div class="col-lg-10 col-lg-offset-6">
-        {{Form::buttons('Recharge')}}
+        {!!Form::buttons('Recharge')!!}
       </div>
     </div>
-    {{Form::close()}}
+    {!!Form::close()!!}
 </fieldset>
 </div>
 </div>
@@ -76,26 +76,26 @@ Recharge Account
                           <?php $i = $plans->getFrom(); ?>
                           @foreach($plans as $plan)
                             <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$plan->name}}</td>
-                                <td>{{$plan->policy->name}}</td>
-                                <td>{{$plan->plan_type == 1 ? 'Limited' : 'Unlimited'}}</td>
+                                <td>{!!$i!!}</td>
+                                <td>{!!$plan->name!!}</td>
+                                <td>{!!$plan->policy->name!!}</td>
+                                <td>{!!$plan->plan_type == 1 ? 'Limited' : 'Unlimited'!!}</td>
                                 <td>
                                   @if(isset($plan->limit))
-                                  {{$plan->limit->time_limit}} {{$plan->limit->time_unit}}
+                                  {!!$plan->limit->time_limit!!} {!!$plan->limit->time_unit!!}
                                   @endif
                                 </td>
                                 <td>
                                   @if(isset($plan->limit))
-                                  {{$plan->limit->data_limit}} {{$plan->limit->data_unit}}
+                                  {!!$plan->limit->data_limit!!} {!!$plan->limit->data_unit!!}
                                   @endif
                                 </td>
                                 <td>
                                   @if(isset($plan->limit))
-                                  {{$plan->limit->aq_access == 1 ? 'Allowed' : 'Not Allowed'}}
+                                  {!!$plan->limit->aq_access == 1 ? 'Allowed' : 'Not Allowed'!!}
                                   @endif
                                 </td>
-                                <td>{{$plan->validity}} {{$plan->validity_unit}}</td>
+                                <td>{!!$plan->validity!!} {!!$plan->validity_unit!!}</td>
                                 <td><button type="button" class="btn btn-danger btn-xs">
                                     <i class="fa fa-unlink"></i> Buy Now!</button></td>
                             </tr>
@@ -113,7 +113,7 @@ Recharge Account
             </div>
             <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$plans->links()}}
+                    {!!$plans->links()!!}
                 </div>
             </div>
   </div>

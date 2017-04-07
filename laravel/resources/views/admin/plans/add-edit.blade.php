@@ -36,7 +36,7 @@ if( isset($plan) ) {
           @else
           Add Service Plan
           @endif
-            {{link_to_route('plan.index', ' All Plans', NULL, ['class'=>'btn btn-default navbar-right'])}}
+            {!!link_to_route('plan.index', ' All Plans', NULL, ['class'=>'btn btn-default navbar-right'])!!}
         </h2>
     </div>
     
@@ -46,180 +46,180 @@ if( isset($plan) ) {
 	<div class="col-lg-7 col-lg-offset-2">
 
 @if(isset($plan))
-{{Form::model($plan,['route'=>['plan.edit'],'class'=>'form-horizontal','role'=>'form'])}}
-{{Form::hidden('id', $plan->id)}}
+{!!Form::model($plan,['route'=>['plan.edit'],'class'=>'form-horizontal','role'=>'form'])!!}
+{!!Form::hidden('id', $plan->id)!!}
   @if(isset($plan->limit_id))
-    {{Form::hidden('limit_id', $plan->limit_id)}}
+    {!!Form::hidden('limit_id', $plan->limit_id)!!}
   @endif
 @else
-{{Form::open(['route'=>'plan.add','class'=>'form-horizontal','role'=>'form'])}}
+{!!Form::open(['route'=>'plan.add','class'=>'form-horizontal','role'=>'form'])!!}
 @endif
-{{Form::hidden('aq_access', 0)}}
+{!!Form::hidden('aq_access', 0)!!}
 <fieldset>
-    <div class="form-group {{Form::error($errors,'name')}}">
-      {{Form::label('plan_name', 'Plan Name', ['class'=>'col-lg-4 control-label'])}}
+    <div class="form-group {!!Form::error($errors,'name')!!}">
+      {!!Form::label('plan_name', 'Plan Name', ['class'=>'col-lg-4 control-label'])!!}
       <div class="col-lg-8">
-        {{Form::text('name', NULL, ['class'=>'form-control','id'=>'plan_name','placeholder'=>'Service Plan Name'])}}
-        {{$errors->first('name',"<span class='help-block'>:message</span>")}}
+        {!!Form::text('name', NULL, ['class'=>'form-control','id'=>'plan_name','placeholder'=>'Service Plan Name'])!!}
+        {!!$errors->first('name',"<span class='help-block'>:message</span>")!!}
       </div>
   </div>
-  <div class="form-group form-inline {{Form::error($errors,'plan_type')}}">
+  <div class="form-group form-inline {!!Form::error($errors,'plan_type')!!}">
       <label class="col-lg-4 control-label">Plan Type</label>
       <div class="col-lg-8">
         <div class="radio">
           <label>
-            {{Form::radio('plan_type', 0, true)}}
+            {!!Form::radio('plan_type', 0, true)!!}
             Unlimited
           </label>
         </div>
         <div class="radio col-lg-offset-1">
           <label>
-            {{Form::radio('plan_type', 1, false)}}
+            {!!Form::radio('plan_type', 1, false)!!}
             Limited
           </label>
         </div>
       </div>
-      {{$errors->first('plan_type',"<span class='help-block'>:message</span>")}}
+      {!!$errors->first('plan_type',"<span class='help-block'>:message</span>")!!}
     </div>
     
-    <div class="form-group form-inline limited limit_type {{$limit_type}}" id="limit-type"  {{Form::error($errors,'limit_type')}}>
+    <div class="form-group form-inline limited limit_type {!!$limit_type!!}" id="limit-type"  {!!Form::error($errors,'limit_type')!!}>
       <label class="col-lg-4 control-label">Limit Type</label>
       <div class="col-lg-8">
         <div class="radio">
           <label>
-            {{Form::radio('limit_type', 0, False, [])}}
+            {!!Form::radio('limit_type', 0, False, [])!!}
             Time Limit
           </label>
         </div>
         
         <div class="radio col-lg-offset-1">
           <label>
-            {{Form::radio('limit_type', 1, False, [])}}
+            {!!Form::radio('limit_type', 1, False, [])!!}
             Data Limit
           </label>
         </div>
         <div class="radio col-lg-offset-1">
           <label>
-            {{Form::radio('limit_type', 2, False, [])}}
+            {!!Form::radio('limit_type', 2, False, [])!!}
             Both limit
           </label>
         </div>
-        {{$errors->first('limit_type',"<span class='help-block'>:message</span>")}}
+        {!!$errors->first('limit_type',"<span class='help-block'>:message</span>")!!}
       </div>
       
     </div><!-- ends limit type -->
    
-    <div class="form-group limited time_limit {{$time_limit}} {{Form::error($errors,'limit[time_limit]')}} {{Form::error($errors,'time_limit')}}">
+    <div class="form-group limited time_limit {!!$time_limit!!} {!!Form::error($errors,'limit[time_limit]')!!} {!!Form::error($errors,'time_limit')!!}">
       <label for="inputEmail" class="col-lg-4 control-label">Time Limit</label>
       <div class="col-lg-6">
-        {{Form::text("time_limit", NULL, ['class'=>'form-control','placeholder'=>'time limit'])}}
-        {{$errors->first('time_limit',"<span class='help-block'>:message</span>")}}
+        {!!Form::text("time_limit", NULL, ['class'=>'form-control','placeholder'=>'time limit'])!!}
+        {!!$errors->first('time_limit',"<span class='help-block'>:message</span>")!!}
       </div>
       <div class="col-lg-2">
-        {{Form::select("time_unit", ['Hrs'=>'Hrs','Mins'=>'Mins'], NULL, ['class'=>'form-control'])}}
+        {!!Form::select("time_unit", ['Hrs'=>'Hrs','Mins'=>'Mins'], NULL, ['class'=>'form-control'])!!}
       </div>
   </div>
-  <div class="form-group limited data_limit {{$data_limit}}  {{Form::error($errors,'data_limit')}}">
+  <div class="form-group limited data_limit {!!$data_limit!!}  {!!Form::error($errors,'data_limit')!!}">
       <label for="inputEmail" class="col-lg-4 control-label">Data Limit</label>
       <div class="col-lg-6">
-        {{Form::text("data_limit", NULL, ['class'=>'form-control','placeholder'=>'data limit'])}}
-        {{$errors->first('data_limit',"<span class='help-block'>:message</span>")}}
+        {!!Form::text("data_limit", NULL, ['class'=>'form-control','placeholder'=>'data limit'])!!}
+        {!!$errors->first('data_limit',"<span class='help-block'>:message</span>")!!}
       </div>
       <div class="col-lg-2">
-        {{Form::select("data_unit", ['MB'=>'MBs','GB'=>'GBs'], NULL, ['class'=>'form-control'])}}
+        {!!Form::select("data_unit", ['MB'=>'MBs','GB'=>'GBs'], NULL, ['class'=>'form-control'])!!}
       </div>
   </div>
-   <div class="form-group limited aq_access {{$aq_access}} {{Form::error($errors,'aq_access')}}">
-      {{Form::label('allow', 'After Quota Access', ['class'=>'control-label col-lg-4'])}}
+   <div class="form-group limited aq_access {!!$aq_access!!} {!!Form::error($errors,'aq_access')!!}">
+      {!!Form::label('allow', 'After Quota Access', ['class'=>'control-label col-lg-4'])!!}
       <div class="col-lg-8">
         <div class="checkbox col-lg-5">
           <label>
-            {{Form::checkbox('aq_access', 1, false, ['class'=>'checkbox','id'=>'aq-allowed'])}}
+            {!!Form::checkbox('aq_access', 1, false, ['class'=>'checkbox','id'=>'aq-allowed'])!!}
             Allowed?
           </label>
         </div>
       </div>
-      {{$errors->first('aq_access',"<span class='help-block'>:message</span>")}}
+      {!!$errors->first('aq_access',"<span class='help-block'>:message</span>")!!}
     </div>
-    <div class="form-group limited aq_policy {{$aq_policy}} {{Form::error($errors,'aq_policy')}}">
+    <div class="form-group limited aq_policy {!!$aq_policy!!} {!!Form::error($errors,'aq_policy')!!}">
       <label for="inputEmail" class="col-lg-4 control-label">Select AQ Policy</label>
         <div class="col-lg-8">
-        {{Form::select('aq_policy',$policies, NULL, ['class'=>'form-control'])}}
-        {{$errors->first('aq_policy',"<span class='help-block'>:message</span>")}}
+        {!!Form::select('aq_policy',$policies, NULL, ['class'=>'form-control'])!!}
+        {!!$errors->first('aq_policy',"<span class='help-block'>:message</span>")!!}
       </div>
   </div>
-  <div class="form-group form-inline {{Form::error($errors,'policy_type')}}">
+  <div class="form-group form-inline {!!Form::error($errors,'policy_type')!!}">
       <label class="col-lg-4 control-label">Bandwidth Policy</label>
       <div class="col-lg-8">
         <div class="radio">
           <label>
-            {{Form::radio('policy_type', 'Policy', true, [])}}
+            {!!Form::radio('policy_type', 'Policy', true, [])!!}
             Single Policy
           </label>
         </div>
         <div class="radio col-lg-offset-1">
           <label>
-            {{Form::radio('policy_type', 'PolicySchema', false, [])}}
+            {!!Form::radio('policy_type', 'PolicySchema', false, [])!!}
             Policy Schema
           </label>
         </div>
-        {{$errors->first('policy_type',"<span class='help-block'>:message</span>")}}
+        {!!$errors->first('policy_type',"<span class='help-block'>:message</span>")!!}
       </div>
     </div>
-    <div class="form-group single-policy  {{$single_policy}}">
+    <div class="form-group single-policy  {!!$single_policy!!}">
       <label for="inputEmail" class="col-lg-4 control-label">Select Policy</label>
         <div class="col-lg-8">
-        {{Form::select("policy_id", $policies, NULL, ['class'=>'form-control','id'=>'policy'])}}
+        {!!Form::select("policy_id", $policies, NULL, ['class'=>'form-control','id'=>'policy'])!!}
       </div>
   </div>
-  <div class="form-group policy-schema {{$policy_schema}}">
+  <div class="form-group policy-schema {!!$policy_schema!!}">
       <label for="schema" class="col-lg-4 control-label">Select Policy Schema</label>
         <div class="col-lg-8">
-        {{Form::select("schema_id", $schemas, NULL, ['class'=>'form-control','id'=>'schema'])}}
+        {!!Form::select("schema_id", $schemas, NULL, ['class'=>'form-control','id'=>'schema'])!!}
       </div>
   </div>
-    <div class="form-group {{Form::error($errors,'sim_sessions')}}">
+    <div class="form-group {!!Form::error($errors,'sim_sessions')!!}">
       <label for="sessions" class="col-lg-4 control-label">Simultaneous Sessions</label>
       <div class="col-lg-8">
-        {{Form::text('sim_sessions', NULL, ['class'=>'form-control','placeholder'=>'simultaneous sessions','id'=>'sessions'])}}
-        {{$errors->first('sim_sessions',"<span class='help-block'>:message</span>")}}
+        {!!Form::text('sim_sessions', NULL, ['class'=>'form-control','placeholder'=>'simultaneous sessions','id'=>'sessions'])!!}
+        {!!$errors->first('sim_sessions',"<span class='help-block'>:message</span>")!!}
       </div>
   </div>
-  <div class="form-group {{Form::error($errors, 'interim_updates')}}">
+  <div class="form-group {!!Form::error($errors, 'interim_updates')!!}">
       <label for="interim" class="col-lg-4 control-label">Interim Updates</label>
       <div class="col-lg-8">
-        {{Form::text('interim_updates', NULL, ['class'=>'form-control','placeholder'=>'interim updates','id'=>'interim'])}}
-        {{$errors->first('interim_updates',"<span class='help-block'>:message</span>")}}
+        {!!Form::text('interim_updates', NULL, ['class'=>'form-control','placeholder'=>'interim updates','id'=>'interim'])!!}
+        {!!$errors->first('interim_updates',"<span class='help-block'>:message</span>")!!}
       </div>
   </div>
-  <div class="form-group {{Form::error($errors, 'validity')}}">
+  <div class="form-group {!!Form::error($errors, 'validity')!!}">
       <label for="inputEmail" class="col-lg-4 control-label">Plan Validity</label>
       <div class="col-lg-6">
-        {{Form::text('validity', NULL, ['class'=>'form-control','placeholder'=>'plan validity'])}}
-        {{$errors->first('validity',"<span class='help-block'>:message</span>")}}
+        {!!Form::text('validity', NULL, ['class'=>'form-control','placeholder'=>'plan validity'])!!}
+        {!!$errors->first('validity',"<span class='help-block'>:message</span>")!!}
       </div>
       
       <div class="col-lg-2">
-        {{Form::select('validity_unit', ['Days'=>'Days','Months'=>'Months'], NULL, ['class'=>'form-control'])}}
+        {!!Form::select('validity_unit', ['Days'=>'Days','Months'=>'Months'], NULL, ['class'=>'form-control'])!!}
 
       </div>
 
   </div>
-    <div class="form-group {{Form::error($errors,'price')}}">
+    <div class="form-group {!!Form::error($errors,'price')!!}">
       
       <label for="price" class="col-lg-4 control-label">Plan Price</label>
       <div class="col-lg-8">
-        {{Form::text('price', NULL, ['class'=>'form-control','placeholder'=>'plan price','id'=>'price'])}}
-        {{$errors->first('price',"<span class='help-block'>:message</span>")}}
+        {!!Form::text('price', NULL, ['class'=>'form-control','placeholder'=>'plan price','id'=>'price'])!!}
+        {!!$errors->first('price',"<span class='help-block'>:message</span>")!!}
       </div>
   </div>
   
 <div class="form-group">
       <div class="col-lg-10 col-lg-offset-6">
-        {{Form::buttons()}}
+        {!!Form::buttons()!!}
       </div>
     </div>
-    {{Form::close()}}
+    {!!Form::close()!!}
 </fieldset>
 
 </div>

@@ -2,17 +2,17 @@
 @section('admin_container')
 <div class="row">
 	<div class="col-lg-6">
-		<h2>{{{$profile->uname}}}</h2>
+		<h2>{{ $profile->uname }}</h2>
 	</div>
 </div>
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
   <li class="active"><a>User Profile</a></li>
   <li>
-    {{link_to_route('subscriber.services','Active Services',$profile->id)}}
+    {!!link_to_route('subscriber.services','Active Services',$profile->id)!!}
   </li>
   @if( $profile->plan_type == ADVANCEPAID_PLAN)
     <li>
-        {{link_to_route('subscriber.ap.transactions','Transactions', $profile->id)}}
+        {!!link_to_route('subscriber.ap.transactions','Transactions', $profile->id)!!}
     </li>
   @endif
 </ul>
@@ -39,12 +39,12 @@
                         <div class="col-lg-10">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <h2>{{{$profile->fname}}} {{{$profile->lname}}}
+                                    <h2>{{ $profile->fname }} {{ $profile->lname }}
                                     </h2>
                                 </div>
                                 <div class="col-lg-6">
                                     <p class="pull-right">
-                                        {{link_to_route('subscriber.edit.form','Update Profile', $profile->id)}}
+                                        {!!link_to_route('subscriber.edit.form','Update Profile', $profile->id)!!}
                                     </p>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                 </h5>
                             </div>
                             <div class="col-lg-11">
-                                <h5>{{$profile->address}}
+                                <h5>{!!$profile->address!!}
                                 </h5>
                             </div>
                         </div>
@@ -70,8 +70,8 @@
                             </div>
                             <div class="col-lg-11">
                                 <h5>
-                                    <a href="mailto:{{$profile->email}}">
-                                        {{$profile->email}}
+                                    <a href="mailto:{!!$profile->email!!}">
+                                        {!!$profile->email!!}
                                     </a>
                                 </h5>
                             </div>
@@ -84,8 +84,8 @@
                             </div>
                             <div class="col-lg-11">
                                 <h5>
-                                    <a href="tel:{{$profile->contact}}">
-                                     {{$profile->contact}}
+                                    <a href="tel:{!!$profile->contact!!}">
+                                     {!!$profile->contact!!}
                                     </a>        
                                 </h5>
                             </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-lg-7">
                                 <h5>
-                                    {{$profile->status ? 'Active' : 'Deactive'}}
+                                    {!!$profile->status ? 'Active' : 'Deactive'!!}
                                 </h5>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-lg-2">
                                 <h5>
-                                    {{link_to_route("subscriber.servicetype.form",'Change',$profile->id)}}
+                                    {!!link_to_route("subscriber.servicetype.form",'Change',$profile->id)!!}
                                 </h5>
                             </div>
                         </div>
@@ -142,14 +142,14 @@
                                 <div class="col-lg-12">
                                     <h2>Change Password</h2>
                                     <hr>
-                                    {{Form::open(['route'=>'subscriber.reset.password','class'=>'form-horizontal'])}}
-                                    {{Form::hidden('id', $profile->id)}}
+                                    {!!Form::open(['route'=>'subscriber.reset.password','class'=>'form-horizontal'])!!}
+                                    {!!Form::hidden('id', $profile->id)!!}
                                     <div class="form-group">
                                         <label for="" class="col-lg-4 control-label">
                                             New Password
                                         </label>
                                         <div class="col-lg-4">
-                                            {{Form::password('npword', ['class'=>'form-control'])}}
+                                            {!!Form::password('npword', ['class'=>'form-control'])!!}
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -157,15 +157,15 @@
                                             Confirm Password
                                         </label>
                                         <div class="col-lg-4">
-                                            {{Form::password('cpword', ['class'=>'form-control'])}}
+                                            {!!Form::password('cpword', ['class'=>'form-control'])!!}
                                         </div>
                                     </div>
                                         <div class="form-group">
                                           <div class="col-lg-10 col-lg-offset-4">
-                                                {{Form::buttons()}}
+                                                {!!Form::buttons()!!}
                                           </div>
                                         </div>
-                                    {{Form::close()}}
+                                    {!!Form::close()!!}
                                 </div>
                             </div> <!-- ends reset password row inside panel body -->
                         </div>
@@ -204,21 +204,21 @@
                             <tr>
                                 <!-- <td>1</td> -->
                                 <td>
-                                    {{date("d M Y - H:i", strtotime($session->acctstarttime))}}
+                                    {!!date("d M Y - H:i", strtotime($session->acctstarttime))!!}
                                 </td>
                                 <td>
                                     @if( ! is_null($session->acctstoptime) )
-                                    {{date("d M Y - H:i", strtotime($session->acctstoptime))}}
+                                    {!!date("d M Y - H:i", strtotime($session->acctstoptime))!!}
                                     @else
                                     -
                                     @endif
                                 </td>
-                                <td>{{formatTime($session->acctsessiontime)}}</td>
-                                <td>{{formatBytes($session->acctoutputoctets)}}</td>
-                                <td>{{formatBytes($session->acctinputoctets)}}</td>
-                                <td>{{formatBytes($session->acctinputoctets + $session->acctoutputoctets)}}</td>
-                                <td>{{$session->framedipaddress}}</td>
-                                <td>{{$session->callingstationid}}</td>
+                                <td>{!!formatTime($session->acctsessiontime)!!}</td>
+                                <td>{!!formatBytes($session->acctoutputoctets)!!}</td>
+                                <td>{!!formatBytes($session->acctinputoctets)!!}</td>
+                                <td>{!!formatBytes($session->acctinputoctets + $session->acctoutputoctets)!!}</td>
+                                <td>{!!$session->framedipaddress!!}</td>
+                                <td>{!!$session->callingstationid!!}</td>
                             </tr>
                             @endforeach
                             @else
@@ -230,7 +230,7 @@
                     </table>
                     <div class="row">
                 <div class="col-lg12 col-md-12 col-sm-12">
-                    {{$sess_history->links()}}
+                    {!!$sess_history->links()!!}
                 </div>
             </div>
             <hr>

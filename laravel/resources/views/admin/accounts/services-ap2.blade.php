@@ -2,17 +2,17 @@
 @section('admin_container')
 <div class="row">
 	<div class="col-lg-6">
-		<h2>{{{$profile->uname}}}</h2>
+		<h2>{{ $profile->uname }}</h2>
 	</div>
 </div>
 <ul class="nav nav-tabs" style="margin-bottom: 15px;">
   <li>
-    {{link_to_route('subscriber.profile','User Profile', $profile->id)}}
+    {!!link_to_route('subscriber.profile','User Profile', $profile->id)!!}
 </li>
   <li class="active"><a>Active Services</a></li>
   @if( $profile->plan_type == ADVANCEPAID_PLAN)
     <li>
-        {{link_to_route('subscriber.ap.transactions','Transactions', $profile->id)}}
+        {!!link_to_route('subscriber.ap.transactions','Transactions', $profile->id)!!}
     </li>
   @endif
 </ul>
@@ -41,7 +41,7 @@
                                 <div class="col-lg-6">
                                     <h2>
                                         @if( isset($plan))
-                                            {{$plan->plan_name}}
+                                            {!!$plan->plan_name!!}
                                         @else
                                         No Service
                                         @endif
@@ -50,9 +50,9 @@
                                 <div class="col-lg-6">
                                         <p class="pull-right">
                                         @if( is_null($plan) )
-                                            {{link_to_route('subscriber.assign.form','Assign Service Plan', $profile->id)}}
+                                            {!!link_to_route('subscriber.assign.form','Assign Service Plan', $profile->id)!!}
                                         @else
-                                            {{link_to_route('subscriber.assign.form','Change Service Plan',$profile->id)}}
+                                            {!!link_to_route('subscriber.assign.form','Change Service Plan',$profile->id)!!}
                                         @endif
                                         </p>
                                 </div>
@@ -68,7 +68,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <h5>
-                                                        {{$plan->plan_type == LIMITED ? 'Limited' : 'Unlimited'}}
+                                                        {!!$plan->plan_type == LIMITED ? 'Limited' : 'Unlimited'!!}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -81,9 +81,9 @@
                                                 </div>
                                                 <div class="col-lg-7">
                                                     <h5>
-                                                            {{$plan->limit_type == TIME_LIMIT ? 'Time Limit' : NULL }}
-                                                            {{$plan->limit_type == DATA_LIMIT ? 'Data Limit' : NULL }}
-                                                            {{$plan->limit_type == BOTH_LIMITS ? 'Both Limits' : NULL}}
+                                                            {!!$plan->limit_type == TIME_LIMIT ? 'Time Limit' : NULL !!}
+                                                            {!!$plan->limit_type == DATA_LIMIT ? 'Data Limit' : NULL !!}
+                                                            {!!$plan->limit_type == BOTH_LIMITS ? 'Both Limits' : NULL!!}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <h5>
-                                                        {{formatTime($plan->time_limit)}}
+                                                        {!!formatTime($plan->time_limit)!!}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <h5>
-                                                        {{formatBytes($plan->data_limit)}}
+                                                        {!!formatBytes($plan->data_limit)!!}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="col-lg-5">
                                                     <h5>
-                                                        {{$plan->expiration}}
+                                                        {!!$plan->expiration!!}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -140,21 +140,21 @@
                                                 <div class="col-lg-5">
                                                     <h5>
                                                         @if( ! is_null($framedIP))
-                                                        {{long2ip($framedIP->ip)}}
+                                                        {!!long2ip($framedIP->ip)!!}
                                                         @else
-                                                        {{link_to_route('subnet.assignip.form','Assign IP',$profile->id)}}
+                                                        {!!link_to_route('subnet.assignip.form','Assign IP',$profile->id)!!}
                                                         @endif
                                                     </h5>
                                                 </div>
                                                 @if( ! is_null($framedIP) )
                                                 <div class="col-lg-2">
                                                     <h5>
-                                                        {{link_to_route('subnet.assignip.form','change',$profile->id)}}
+                                                        {!!link_to_route('subnet.assignip.form','change',$profile->id)!!}
                                                     </h5>
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <h5>
-                                                        {{link_to_route('subnet.delete.ip','Remove',$framedIP->id)}}
+                                                        {!!link_to_route('subnet.delete.ip','Remove',$framedIP->id)!!}
                                                     </h5>
                                                 </div>
                                                 @endif
@@ -168,21 +168,21 @@
                                                 <div class="col-lg-5">
                                                     <h5>
                                                         @if( ! is_null($framedRoute))
-                                                        {{$framedRoute->subnet}}
+                                                        {!!$framedRoute->subnet!!}
                                                         @else
-                                                        {{link_to_route('subnet.assignroute.form','Assign Route', $profile->id)}}
+                                                        {!!link_to_route('subnet.assignroute.form','Assign Route', $profile->id)!!}
                                                         @endif
                                                     </h5>
                                                 </div>
                                                 @if(! is_null($framedRoute) )
                                                 <div class="col-lg-2">
                                                     <h5>
-                                                        {{link_to_route('subnet.assignroute.form','Change',$profile->id)}}
+                                                        {!!link_to_route('subnet.assignroute.form','Change',$profile->id)!!}
                                                     </h5>
                                                 </div>
                                                 <div class="col-lg-2">
                                                     <h5>
-                                                        {{link_to_route('subnet.delete.route','Remove',$framedRoute->id)}}
+                                                        {!!link_to_route('subnet.delete.route','Remove',$framedRoute->id)!!}
                                                     </h5>
                                                 </div>
                                                 @endif
