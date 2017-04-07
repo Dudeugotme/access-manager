@@ -1,9 +1,11 @@
 <?php
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Auth\Authenticatable;
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface
+class User extends Eloquent implements AuthenticatableContract, CanResetPasswordContract
 {
 
     public $timestamps = false;
@@ -21,6 +23,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
      * @var array
      */
     protected $hidden = ['password'];
+
+    protected $fillable = ['name', 'email', 'password'];
 
     /**
      * Get the unique identifier for the user.
