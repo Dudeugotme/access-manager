@@ -1,9 +1,10 @@
 <?php
 
-Class SystemController extends AdminBaseController {
+class SystemController extends AdminBaseController
+{
 
-	public function about()
-	{
-		return View::make('about');
-	}
+    public function about()
+    {
+        return View::make('about');
+    }
 }
