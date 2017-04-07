@@ -11,14 +11,14 @@
 |
 */
 
-ClassLoader::addDirectories(array(
+ClassLoader::addDirectories([
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/commands',
+    app_path().'/controllers',
+    app_path().'/models',
+    app_path().'/database/seeds',
 
-));
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +46,8 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
 });
 
 /*
@@ -62,9 +61,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -83,14 +81,14 @@ require app_path().'/filters.php';
 /**
  * Register not found function to handle 404.
  */
-App::missing(function(){
-	Cache::flush();
-	$config = Theme::first();
-	$themes = Config::get('themes');
+App::missing(function () {
+    Cache::flush();
+    $config = Theme::first();
+    $themes = Config::get('themes');
 
-	$admin_theme = $themes[$config->admin_theme];
-	View::share('admin_theme', $admin_theme);
-	return Response::view('admin.404', [], 404)
-						// ->with('admin_theme', $admin_theme)
-						;
+    $admin_theme = $themes[$config->admin_theme];
+    View::share('admin_theme', $admin_theme);
+    return Response::view('admin.404', [], 404)
+                        // ->with('admin_theme', $admin_theme)
+                        ;
 });
