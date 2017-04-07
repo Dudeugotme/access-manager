@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class PolicySchema extends BaseModel
 {
     protected $table = 'policy_schemas';
@@ -8,41 +11,41 @@ class PolicySchema extends BaseModel
 
     public function plan()
     {
-        return $this->morphMany('Plan', 'policy');
+        return $this->morphMany('App\Models\Plan', 'policy');
     }
 
     public function monday()
     {
-        return $this->belongsTo('SchemaTemplate', 'mo');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'mo');
     }
 
     public function tuesday()
     {
-        return $this->belongsTo('SchemaTemplate', 'tu');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'tu');
     }
 
     public function wednesday()
     {
-        return $this->belongsTo('SchemaTemplate', 'we');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'we');
     }
 
     public function thursday()
     {
-        return $this->belongsTo('SchemaTemplate', 'th');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'th');
     }
 
     public function friday()
     {
-        return $this->belongsTo('SchemaTemplate', 'fr');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'fr');
     }
 
     public function saturday()
     {
-        return $this->belongsTo('SchemaTemplate', 'sa');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'sa');
     }
     
     public function sunday()
     {
-        return $this->belongsTo('SchemaTemplate', 'su');
+        return $this->belongsTo('App\Models\SchemaTemplate', 'su');
     }
 }

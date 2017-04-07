@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\prepaid;
+
+
 class VoucherPolicySchema extends BaseModel
 {
 
@@ -9,42 +12,42 @@ class VoucherPolicySchema extends BaseModel
 
     public function voucher()
     {
-        return $this->morphMany('Voucher', 'policy');
+        return $this->morphMany('App\Models\Voucher', 'policy');
     }
 
     public function monday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'mo');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'mo');
     }
 
     public function tuesday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'tu');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'tu');
     }
 
     public function wednesday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'we');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'we');
     }
 
     public function thursday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'th');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'th');
     }
 
     public function friday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'fr');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'fr');
     }
 
     public function saturday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'sa');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'sa');
     }
 
     public function sunday()
     {
-        return $this->belongsTo('VoucherPolicySchemaTemplate', 'su');
+        return $this->belongsTo('App\Models\VoucherPolicySchemaTemplate', 'su');
     }
 }
 

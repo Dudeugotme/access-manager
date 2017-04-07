@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Libraries;
+
 /**
  * standalone class for Encryption
  *

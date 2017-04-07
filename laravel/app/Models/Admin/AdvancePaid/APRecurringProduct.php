@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+use Illuminate\Support\Facades\DB;
+
+
 class APRecurringProduct extends BaseModel
 {
 

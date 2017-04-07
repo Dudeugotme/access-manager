@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+
 class APInvoice extends BaseModel
 {
 
@@ -17,22 +23,22 @@ class APInvoice extends BaseModel
 
     public function account()
     {
-        return $this->belongsTo('Subscriber', 'user_id');
+        return $this->belongsTo('App\Models\Subscriber', 'user_id');
     }
 
     public function plans()
     {
-        return $this->hasMany('APInvoicePlan', 'invoice_id');
+        return $this->hasMany('App\Models\APInvoicePlan', 'invoice_id');
     }
 
     public function recurringProducts()
     {
-        return $this->hasMany('APInvoiceRecurringProduct', 'invoice_id');
+        return $this->hasMany('App\Models\APInvoiceRecurringProduct', 'invoice_id');
     }
 
     public function nonRecurringProducts()
     {
-        return $this->hasMany('APInvoiceNonRecurringProduct', 'invoice_id');
+        return $this->hasMany('App\Models\APInvoiceNonRecurringProduct', 'invoice_id');
     }
 
     public function billPeriod()

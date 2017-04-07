@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+
 class APInvoiceNonRecurringProduct extends BaseModel
 {
 

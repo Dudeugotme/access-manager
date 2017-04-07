@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Models\Admin\Subnet;
+
+use Illuminate\Support\Facades\DB;
+
+
 class Subnet extends BaseModel
 {
 

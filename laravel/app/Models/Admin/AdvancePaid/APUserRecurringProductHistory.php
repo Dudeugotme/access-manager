@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+
 class APUserRecurringProductHistory extends BaseModel
 {
 

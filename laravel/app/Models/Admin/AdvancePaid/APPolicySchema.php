@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+
 class APPolicySchema extends BaseModel
 {
 
@@ -9,42 +12,42 @@ class APPolicySchema extends BaseModel
 
     public function plan()
     {
-        return $this->morphMany('APActivePlan', 'policy');
+        return $this->morphMany('App\Models\APActivePlan', 'policy');
     }
 
     public function monday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'mo');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'mo');
     }
 
     public function tuesday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'tu');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'tu');
     }
 
     public function wednesday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'we');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'we');
     }
 
     public function thursday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'th');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'th');
     }
 
     public function friday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'fr');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'fr');
     }
 
     public function saturday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'sa');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'sa');
     }
 
     public function sunday()
     {
-        return $this->belongsTo('APPolicySchemaTemplate', 'su');
+        return $this->belongsTo('App\Models\APPolicySchemaTemplate', 'su');
     }
 }
 

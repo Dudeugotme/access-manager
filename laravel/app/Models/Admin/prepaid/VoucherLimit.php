@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\prepaid;
+
+
 class VoucherLimit extends BaseModel
 {
 

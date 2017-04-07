@@ -1,5 +1,13 @@
 <?php
 
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Admin\EmailTemplate;
+use App\Models\Admin\VoucherTemplate;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 class TemplatesController extends AdminBaseController
 {
 

@@ -1,5 +1,14 @@
 <?php
 
+namespace App\Http\Controllers\User;
+
+use App\Models\Admin\Subscriber;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 class UserController extends UserBaseController
 {
 

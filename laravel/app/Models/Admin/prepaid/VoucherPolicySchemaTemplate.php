@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\prepaid;
+
+
 class VoucherPolicySchemaTemplate extends BaseModel
 {
 

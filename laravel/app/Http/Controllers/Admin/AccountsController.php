@@ -1,5 +1,30 @@
 <?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Libraries\PDFInvoice;
+use App\Models\Admin\AdvancePaid\APActivePlan;
+use App\Models\Admin\AdvancePaid\APInvoice;
+use App\Models\Admin\AdvancePaid\APNonRecurringProduct;
+use App\Models\Admin\AdvancePaid\APRecurringProduct;
+use App\Models\Admin\AdvancePaid\APTransaction;
+use App\Models\Admin\AdvancePaid\APUserSetting;
+use App\Models\Admin\Billing\BillingCycle;
+use App\Models\Admin\Organisation;
+use App\Models\Admin\Plan;
+use App\Models\Admin\Recharge;
+use App\Models\Admin\Subnet\SubnetIP;
+use App\Models\Admin\Subnet\UserRoute;
+use App\Models\Admin\Subscriber;
+use App\Models\Admin\Voucher;
+use App\Models\RadAcct;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class AccountsController extends AdminBaseController
 {

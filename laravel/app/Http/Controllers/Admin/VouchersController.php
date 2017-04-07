@@ -1,5 +1,21 @@
 <?php
 
+namespace App\Http\Controllers\Admin;
+
+use App\Libraries\TemplateParser;
+use App\Models\Admin\Plan;
+use App\Models\Admin\Recharge;
+use App\Models\Admin\Subscriber;
+use App\Models\Admin\Voucher;
+use App\Models\Admin\VoucherTemplate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Form;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
+
 class VouchersController extends AdminBaseController
 {
 

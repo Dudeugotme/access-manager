@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+
 class APInvoicePlan extends BaseModel
 {
 
@@ -9,7 +12,7 @@ class APInvoicePlan extends BaseModel
 
     // public function invoice()
     // {
-    // 	return $this->belongsTo('APInvoice','invoice_id');
+    // 	return $this->belongsTo('App\Models\APInvoice','invoice_id');
     // }
     public function period()
     {

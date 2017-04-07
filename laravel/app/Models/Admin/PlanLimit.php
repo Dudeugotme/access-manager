@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class PlanLimit extends BaseModel
 {
     protected $table = 'plan_limits';
@@ -9,6 +12,6 @@ class PlanLimit extends BaseModel
 
     // public function plan()
     // {
-    // 	return $this->belongsTo('Plan','plan_id');
+    // 	return $this->belongsTo('App\Models\Plan','plan_id');
     // }
 }

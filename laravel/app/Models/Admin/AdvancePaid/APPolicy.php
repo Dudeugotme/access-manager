@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+
 class APPolicy extends BaseModel
 {
     
@@ -9,6 +12,6 @@ class APPolicy extends BaseModel
 
     public function plan()
     {
-        return $this->morphMany('APActivePlan', 'policy');
+        return $this->morphMany('App\Models\APActivePlan', 'policy');
     }
 }

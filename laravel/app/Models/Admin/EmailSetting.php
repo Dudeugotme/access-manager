@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class EmailSetting extends BaseModel
 {
     protected $table = 'email_settings';

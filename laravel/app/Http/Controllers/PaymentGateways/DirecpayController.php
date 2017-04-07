@@ -1,7 +1,19 @@
 <?php
-use RAHULMKHJ\PaymentGateways\Direcpay\Direcpay as DP;
+
+namespace App\Http\Controllers\PaymentGateways;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\PaymentGateways\DirecpayTransaction;
+use App\Models\Admin\Plan;
+use App\Models\Admin\prepaid\Refillcoupons;
+use App\Models\Admin\Recharge;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use RAHULMKHJ\PaymentGateways\Direcpay\Direcpay as DP;
+
+
 
 class DirecpayController extends Controller {
 

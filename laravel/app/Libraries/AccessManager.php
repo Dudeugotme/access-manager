@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Libraries;
+
+use Carbon\Carbon;
+
+
 class AccessManager
 {
 

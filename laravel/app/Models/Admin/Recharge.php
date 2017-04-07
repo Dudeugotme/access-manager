@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Models\Admin;
+
+use App\Libraries\AccessManager;
+use Illuminate\Support\Facades\DB;
+use Krucas\Notification\Facades\Notification;
+
+
 class Recharge extends BaseModel
 {
 
@@ -10,7 +17,7 @@ class Recharge extends BaseModel
 
     public function account()
     {
-        return $this->belongsTo('Subscriber', 'user_id');
+        return $this->belongsTo('App\Models\Subscriber', 'user_id');
     }
 
     public static function viaAdmin($input)

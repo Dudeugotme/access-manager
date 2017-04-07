@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class Plan extends BaseModel
 {
     protected $table = 'service_plans';
@@ -8,7 +11,7 @@ class Plan extends BaseModel
 
     public function limit()
     {
-        return $this->hasOne('PlanLimit', 'plan_id');
+        return $this->hasOne('App\Models\PlanLimit', 'plan_id');
     }
 
     public function policy()
@@ -25,6 +28,6 @@ class Plan extends BaseModel
 
     // public function schema()
     // {
-    // 	return $this->hasOne('PolicySchema','schema_id');
+    // 	return $this->hasOne('App\Models\PolicySchema','schema_id');
     // }
 }

@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class PaypalSettings extends BaseModel
 {
     protected $table = 'paypal_settings';

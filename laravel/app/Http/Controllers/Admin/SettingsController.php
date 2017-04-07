@@ -1,5 +1,19 @@
 <?php
 
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Admin\AdvancePaid\APSetting;
+use App\Models\Admin\EmailSetting;
+use App\Models\Admin\EmailTemplate;
+use App\Models\Admin\GeneralSettings;
+use App\Models\Admin\PaymentGateways\DirecpaySetting;
+use App\Models\Admin\PaypalSettings;
+use App\Models\Admin\SmtpSettings;
+use App\Models\Admin\Theme;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 class SettingsController extends AdminBaseController
 {
 

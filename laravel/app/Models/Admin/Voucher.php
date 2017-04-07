@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Models\Admin;
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+
 class Voucher extends BaseModel
 {
     protected $table = 'prepaid_vouchers';
@@ -9,7 +15,7 @@ class Voucher extends BaseModel
     
     public function limits()
     {
-        return $this->belongsTo('VoucherLimit', 'limit_id');
+        return $this->belongsTo('App\Models\VoucherLimit', 'limit_id');
     }
 
     public function policy()

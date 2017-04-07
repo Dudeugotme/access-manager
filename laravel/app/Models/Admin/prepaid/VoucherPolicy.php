@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin\prepaid;
+
+
 class VoucherPolicy extends BaseModel
 {
 
@@ -10,6 +13,6 @@ class VoucherPolicy extends BaseModel
 
     public function voucher()
     {
-        return $this->morphMany('Voucher', 'policy');
+        return $this->morphMany('App\Models\Voucher', 'policy');
     }
 }

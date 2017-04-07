@@ -1,5 +1,15 @@
 <?php
 
+namespace App\Http\Controllers\User;
+
+use App\Models\Admin\Freebalance;
+use App\Models\Admin\prepaid\Refillcoupons;
+use App\Models\Admin\Subscriber;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 class FreeUserController extends UserBaseController
 {
 

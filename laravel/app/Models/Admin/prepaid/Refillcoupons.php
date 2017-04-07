@@ -1,6 +1,15 @@
 <?php
+
+namespace App\Models\Admin\prepaid;
+
 use AccessManager\Radius\Account\Account as RadiusAccount;
 use AccessManager\Radius\UserAccount as RadiusUserAccount;
+use App\Libraries\AccessManager;
+use App\Models\Admin\Freebalance;
+use App\Models\Admin\Recharge;
+use App\Models\Admin\Subscriber;
+use Illuminate\Support\Facades\DB;
+
 
 class Refillcoupons extends BaseModel
 {

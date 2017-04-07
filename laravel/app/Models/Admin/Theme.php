@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class Theme extends BaseModel
 {
     protected $table = 'themes';

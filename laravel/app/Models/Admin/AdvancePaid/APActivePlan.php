@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Models\Admin\AdvancePaid;
+
+use App\Models\Admin\Plan;
+use App\Models\Admin\Policy;
+use Illuminate\Support\Facades\DB;
+
+
 class APActivePlan extends BaseModel
 {
     
@@ -12,7 +19,7 @@ class APActivePlan extends BaseModel
 
     public function limit()
     {
-        return $this->belongsTo('APLimit', 'limit_id');
+        return $this->belongsTo('App\Models\APLimit', 'limit_id');
     }
 
     public function policy()

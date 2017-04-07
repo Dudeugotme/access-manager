@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class Policy extends BaseModel
 {
     protected $table = 'bw_policies';
@@ -9,6 +12,6 @@ class Policy extends BaseModel
 
     public function plan()
     {
-        return $this->morphMany('Plan', 'policy');
+        return $this->morphMany('App\Models\Plan', 'policy');
     }
 }

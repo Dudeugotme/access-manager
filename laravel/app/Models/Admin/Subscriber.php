@@ -1,5 +1,10 @@
 <?php
+
+namespace App\Models\Admin;
+
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Process;
+
 
 class Subscriber extends BaseModel
 {
@@ -11,17 +16,17 @@ class Subscriber extends BaseModel
 
     public function recharge()
     {
-        return $this->hasOne('Recharge', 'user_id');
+        return $this->hasOne('App\Models\Recharge', 'user_id');
     }
 
     public function rechargeHistory()
     {
-        return $this->hasMany('Voucher', 'user_id');
+        return $this->hasMany('App\Models\Voucher', 'user_id');
     }
 
     public function sessionHistory()
     {
-        return $this->hasMany('RadAcct', 'username', 'uname');
+        return $this->hasMany('App\Models\RadAcct', 'username', 'uname');
     }
 
     public static function getActiveSessionPlans($sessions)

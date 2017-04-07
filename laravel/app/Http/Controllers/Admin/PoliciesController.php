@@ -1,5 +1,13 @@
 <?php
 
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Admin\Policy;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
+
 class PoliciesController extends AdminBaseController
 {
     

@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models\Admin;
+
+
 class Organisation extends BaseModel
 {
 

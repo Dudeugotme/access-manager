@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Libraries;
+
 /**
 * Simple TemplateParser Class
 *

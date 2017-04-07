@@ -1,5 +1,11 @@
 <?php
+
+namespace App\Models\Admin\PaymentGateways;
+
+use App\Models\OnlinePayment;
+use Illuminate\Support\Facades\DB;
 use RAHULMKHJ\PaymentGateways\Direcpay\DirecpayResponse;
+
 
 class DirecpayTransaction extends BaseModel
 {
@@ -10,7 +16,7 @@ class DirecpayTransaction extends BaseModel
 
     public function transaction()
     {
-        return $this->morphMany('OnlinePayment', 'gw');
+        return $this->morphMany('App\Models\OnlinePayment', 'gw');
     }
 
     public static function initiate($user_id, array $other_details)

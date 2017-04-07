@@ -1,5 +1,14 @@
 <?php
 
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\PaymentGateways\DirecpayController;
+use App\Models\OnlinePayment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+
+
 class OnlineRechargeController extends UserBaseController
 {
 

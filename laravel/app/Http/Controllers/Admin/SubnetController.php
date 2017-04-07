@@ -1,5 +1,16 @@
 <?php
 
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Admin\Subnet\Subnet;
+use App\Models\Admin\Subnet\SubnetIP;
+use App\Models\Admin\Subnet\UserRoute;
+use App\Models\Admin\Subscriber;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
+
 class SubnetController extends AdminBaseController
 {
 
