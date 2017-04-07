@@ -21,7 +21,7 @@ class TemplateParser
      */
     function initData($data)
     {
-        $this->data = array();
+        $this->data = [];
         $this->data = $data;
     }
     
@@ -33,7 +33,7 @@ class TemplateParser
     function parseTemplateFile($templateFile)
     {
         $searchPattern          = "/\{([a-zA-Z0-9_]+)\}/i"; // macro delimiter "{" and "}"
-        $replacementFunction    = array(&$this, 'parseMatchedText');  //Method callbacks are performed this way
+        $replacementFunction    = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
         $fileData               = file_get_contents($templateFile);
         $parsedTemplate         = preg_replace_callback($searchPattern, $replacementFunction, $fileData);
        
@@ -48,7 +48,7 @@ class TemplateParser
     function parseTemplateData($templateData)
     {
         $searchPattern          = "/\{([a-zA-Z0-9_]+)\}/i"; //macro delimiter "{" and "}"
-        $replacementFunction    = array(&$this, 'parseMatchedText');  //Method callbacks are performed this way
+        $replacementFunction    = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
         $parsedTemplate         = preg_replace_callback($searchPattern, $replacementFunction, $templateData);
        
         return $parsedTemplate;
