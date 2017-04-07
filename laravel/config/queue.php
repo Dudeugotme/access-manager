@@ -11,11 +11,12 @@ return [
 	| API, giving you convenient access to each back-end using the same
 	| syntax for each one. Here you may set the default queue driver.
 	|
-	| Supported: "sync", "beanstalkd", "sqs", "iron"
+	| Supported: "null", "sync", "database", "beanstalkd",
+	|            "sqs", "iron", "redis"
 	|
 	*/
 
-    'default' => 'sync',
+    'default' => env('QUEUE_DRIVER', 'sync'),
 
     /*
 	|--------------------------------------------------------------------------
@@ -32,6 +33,13 @@ return [
 
         'sync' => [
             'driver' => 'sync',
+        ],
+
+        'database' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'default',
+            'expire' => 60,
         ],
 
         'beanstalkd' => [
@@ -55,11 +63,13 @@ return [
             'token'   => 'your-token',
             'project' => 'your-project-id',
             'queue'   => 'your-queue-name',
+            'encrypt' => true,
         ],
 
         'redis' => [
             'driver' => 'redis',
             'queue'  => 'default',
+            'expire' => 60,
         ],
 
     ],
@@ -76,9 +86,7 @@ return [
 	*/
 
     'failed' => [
-
         'database' => 'mysql', 'table' => 'failed_jobs',
-
     ],
 
 ];
