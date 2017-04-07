@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\AdvancePaid;
 
-
 class APInvoicePlan extends BaseModel
 {
 

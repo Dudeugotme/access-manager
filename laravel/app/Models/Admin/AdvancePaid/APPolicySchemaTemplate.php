@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\AdvancePaid;
 
-
 class APPolicySchemaTemplate extends BaseModel
 {
 

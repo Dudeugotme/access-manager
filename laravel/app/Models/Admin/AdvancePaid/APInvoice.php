@@ -5,7 +5,6 @@ namespace App\Models\Admin\AdvancePaid;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-
 class APInvoice extends BaseModel
 {
 

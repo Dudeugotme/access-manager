@@ -13,7 +13,6 @@ use App\Models\Admin\Theme;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
-
 class SettingsController extends AdminBaseController
 {
 

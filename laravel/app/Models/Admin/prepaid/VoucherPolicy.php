@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\prepaid;
 
-
 class VoucherPolicy extends BaseModel
 {
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Models\Admin\Subscriber;
 use Illuminate\Support\Facades\Auth;
 
-
 class AdvanceUserController extends UserBaseController
 {
 

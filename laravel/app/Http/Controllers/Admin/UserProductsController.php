@@ -7,7 +7,6 @@ use App\Models\Admin\AdvancePaid\APRecurringProduct;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
-
 class UserProductsController extends AdminBaseController
 {
 

@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\Billing;
 
-
 class BillingCycle extends BaseModel
 {
     protected $table = 'billing_cycles';

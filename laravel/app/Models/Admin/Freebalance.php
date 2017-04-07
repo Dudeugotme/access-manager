@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class Freebalance extends BaseModel
 {
 

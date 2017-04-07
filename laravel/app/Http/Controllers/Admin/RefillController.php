@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
-
 class RefillController extends AdminBaseController
 {
 

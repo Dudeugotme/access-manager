@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class Plan extends BaseModel
 {
     protected $table = 'service_plans';

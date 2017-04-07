@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\AdvancePaid;
 
-
 class APLimit extends BaseModel
 {
 

@@ -6,7 +6,6 @@ use App\Libraries\AccessManager;
 use Illuminate\Support\Facades\DB;
 use Krucas\Notification\Facades\Notification;
 
-
 class Recharge extends BaseModel
 {
 

@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\PaymentGateways;
 
-
 class DirecpaySetting extends BaseModel
 {
 

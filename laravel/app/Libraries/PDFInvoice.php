@@ -4,7 +4,6 @@ namespace App\Libraries;
 
 use \fpdf\FPDF;
 
-
 class PDFInvoice extends FPDF
 {
 

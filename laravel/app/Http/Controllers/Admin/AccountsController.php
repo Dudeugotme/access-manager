@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
-
 class AccountsController extends AdminBaseController
 {
 

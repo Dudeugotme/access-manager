@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class FRINTERNET extends BaseModel
 {
 

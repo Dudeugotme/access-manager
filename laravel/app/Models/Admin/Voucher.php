@@ -5,7 +5,6 @@ namespace App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-
 class Voucher extends BaseModel
 {
     protected $table = 'prepaid_vouchers';

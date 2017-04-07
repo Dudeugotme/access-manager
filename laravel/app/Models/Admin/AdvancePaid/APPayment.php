@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\AdvancePaid;
 
-
 class APPayment extends BaseModel
 {
 

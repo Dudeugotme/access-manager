@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class PlanLimit extends BaseModel
 {
     protected $table = 'plan_limits';

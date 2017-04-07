@@ -6,7 +6,6 @@ use App\Models\Admin\Plan;
 use App\Models\Admin\Policy;
 use Illuminate\Support\Facades\DB;
 
-
 class APActivePlan extends BaseModel
 {
     

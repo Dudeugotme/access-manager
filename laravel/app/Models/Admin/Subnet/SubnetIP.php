@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\Subnet;
 
-
 class SubnetIP extends BaseModel
 {
 

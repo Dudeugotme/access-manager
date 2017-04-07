@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class SchemaTemplate extends BaseModel
 {
     protected $table = 'policy_schema_templates';

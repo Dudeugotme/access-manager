@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class Policy extends BaseModel
 {
     protected $table = 'bw_policies';

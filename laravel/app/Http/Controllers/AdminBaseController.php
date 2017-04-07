@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Krucas\Notification\Facades\Notification;
 
-
 class AdminBaseController extends Controller
 {
     

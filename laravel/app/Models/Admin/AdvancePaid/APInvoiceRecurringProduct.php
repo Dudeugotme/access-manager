@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin\AdvancePaid;
 
-
 class APInvoiceRecurringProduct extends BaseModel
 {
 

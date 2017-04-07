@@ -6,7 +6,6 @@ use App\Models\OnlinePayment;
 use Illuminate\Support\Facades\DB;
 use RAHULMKHJ\PaymentGateways\Direcpay\DirecpayResponse;
 
-
 class DirecpayTransaction extends BaseModel
 {
 

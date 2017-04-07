@@ -5,7 +5,6 @@ namespace App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Process;
 
-
 class Subscriber extends BaseModel
 {
 

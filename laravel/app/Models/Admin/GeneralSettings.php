@@ -2,7 +2,6 @@
 
 namespace App\Models\Admin;
 
-
 class GeneralSettings extends BaseModel
 {
     protected $table = 'general_settings';
