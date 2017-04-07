@@ -1,7 +1,9 @@
 <?php
 use RAHULMKHJ\PaymentGateways\Direcpay\Direcpay as DP;
 
-class DirecpayController extends BaseController {
+use App\Http\Controllers\Controller;
+
+class DirecpayController extends Controller {
 
 	private $postData;
 

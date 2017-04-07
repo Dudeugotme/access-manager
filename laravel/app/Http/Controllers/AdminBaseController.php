@@ -1,6 +1,6 @@
 <?php
 
-class AdminBaseController extends BaseController
+class AdminBaseController extends Controller
 {
     
     protected function flash($result)

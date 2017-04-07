@@ -1,6 +1,6 @@
 <?php
 
-class UserBaseController extends BaseController
+class UserBaseController extends Controller
 {
     
     // public function __construct()
