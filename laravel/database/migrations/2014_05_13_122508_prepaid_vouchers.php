@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class PrepaidVouchers extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,43 +13,41 @@ class PrepaidVouchers extends Migration
     public function up()
     {
         Schema::create('prepaid_vouchers', function (Blueprint $t) {
-
             $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->integer('user_id')->unsigned();
             $t->bigInteger('pin')->unsigned();
-            $t->enum('method', ['pin','online','admin'])->nullable();
+            $t->enum('method', ['pin', 'online', 'admin'])->nullable();
             $t->date('expires_on');
             $t->timestamps();
             $t->string('plan_name');
             $t->tinyInteger('plan_type');
             $t->integer('limit_id')->unsigned()->nullable();
-            $t->enum('policy_type', ['Policy','PolicySchema']);
+            $t->enum('policy_type', ['Policy', 'PolicySchema']);
             $t->integer('policy_id')->unsigned();
             $t->integer('sim_sessions')->unsigned();
             $t->integer('interim_updates')->unsigned();
             $t->float('price');
             $t->integer('validity')->unsigned();
-            $t->enum('validity_unit', ['Days','Months']);
+            $t->enum('validity_unit', ['Days', 'Months']);
         });
 
-
         Schema::create('voucher_limits', function (Blueprint $t) {
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
-            $t->enum('limit_type', [0,1,2]);
+            $t->enum('limit_type', [0, 1, 2]);
             $t->integer('time_limit')->unsigned()->nullable();
-            $t->enum('time_unit', ['Mins','Hrs'])->nullable();
+            $t->enum('time_unit', ['Mins', 'Hrs'])->nullable();
             $t->integer('data_limit')->unsigned()->nullable();
-            $t->enum('data_unit', ['MB','GB'])->nullable();
+            $t->enum('data_unit', ['MB', 'GB'])->nullable();
             $t->boolean('aq_access')->nullable();
             $t->string('aq_policy')->nullable();
         });
 
         Schema::create('voucher_bw_policies', function (Blueprint $t) {
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->string('bw_policy');
@@ -75,7 +72,7 @@ class PrepaidVouchers extends Migration
         });
 
         Schema::create('voucher_policy_schemas', function (Blueprint $t) {
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->string('name');
@@ -89,7 +86,6 @@ class PrepaidVouchers extends Migration
         });
 
         Schema::create('user_recharges', function (Blueprint $t) {
-
             $t->engine = 'InnoDB';
 
             $t->increments('id');

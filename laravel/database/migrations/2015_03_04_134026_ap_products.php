@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApProducts extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -20,7 +19,7 @@ class ApProducts extends Migration
             $t->integer('user_id')->unsigned();
             $t->string('name');
             $t->integer('billing_cycle')->unsigned();
-            $t->enum('billing_unit', ['Days','Months']);
+            $t->enum('billing_unit', ['Days', 'Months']);
             $t->timestamp('assigned_on')->nullable();
             $t->timestamp('last_billed_on');
             $t->timestamp('billed_till');
@@ -32,7 +31,7 @@ class ApProducts extends Migration
 
         Schema::create('ap_user_non_recurring_products', function (Blueprint $t) {
             $t->engine = 'InnoDB';
- 
+
             $t->increments('id');
             $t->integer('user_id')->unsigned();
             $t->string('name');

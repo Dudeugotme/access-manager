@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApTransactions extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -18,7 +17,7 @@ class ApTransactions extends Migration
 
             $t->increments('id');
             $t->integer('user_id')->unsigned();
-            $t->enum('type', ['cr','dr']);
+            $t->enum('type', ['cr', 'dr']);
             $t->float('amount');
             $t->string('description');
             $t->timestamps();

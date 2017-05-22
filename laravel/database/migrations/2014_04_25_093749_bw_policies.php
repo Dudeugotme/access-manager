@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class BwPolicies extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,22 +13,21 @@ class BwPolicies extends Migration
     public function up()
     {
         Schema::create('bw_policies', function (Blueprint $t) {
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->string('name');
             $t->integer('max_down')->unsigned();
-            $t->enum('max_down_unit', ['Kbps','Mbps']);
+            $t->enum('max_down_unit', ['Kbps', 'Mbps']);
             $t->integer('min_down')->unsigned();
-            $t->enum('min_down_unit', ['Kbps','Mbps']);
+            $t->enum('min_down_unit', ['Kbps', 'Mbps']);
             $t->integer('max_up')->unsigned();
-            $t->enum('max_up_unit', ['Kbps','Mbps']);
+            $t->enum('max_up_unit', ['Kbps', 'Mbps']);
             $t->integer('min_up')->unsigned();
-            $t->enum('min_up_unit', ['Kbps','Mbps']);
+            $t->enum('min_up_unit', ['Kbps', 'Mbps']);
             // $t->timestamps();
             // $t->softDeletes();
         });
-
 
         Schema::create('policy_schema_templates', function (Blueprint $t) {
             $t->engine = 'InnoDB';
@@ -52,7 +50,7 @@ class BwPolicies extends Migration
         });
 
         Schema::create('policy_schemas', function (Blueprint $t) {
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->string('name');

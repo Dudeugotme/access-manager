@@ -15,7 +15,6 @@ App::before(function ($request) {
     //
 });
 
-
 App::after(function ($request, $response) {
     //
 });
@@ -32,38 +31,38 @@ App::after(function ($request, $response) {
 */
 
 Route::filter('isAdmin', function () {
-    if (Auth::guest() || ( Auth::check() && ! Auth::user()->is_admin )) {
-            return Redirect::guest('admin/login');
+    if (Auth::guest() || (Auth::check() && !Auth::user()->is_admin)) {
+        return Redirect::guest('admin/login');
     }
 });
 
 Route::filter('isUser', function () {
-    if (Auth::guest() || ( Auth::check() && Auth::user()->is_admin )) {
-            return Redirect::guest('login');
+    if (Auth::guest() || (Auth::check() && Auth::user()->is_admin)) {
+        return Redirect::guest('login');
     }
 });
 
 Route::filter('isPrepaidUser', function () {
-    if (Auth::guest() || ( Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != PREPAID_PLAN )) {
-            return Redirect::guest('login');
+    if (Auth::guest() || (Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != PREPAID_PLAN)) {
+        return Redirect::guest('login');
     }
 });
 
 Route::filter('isFreeUser', function () {
-    if (Auth::guest() || ( Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != FREE_PLAN )) {
-            return Redirect::guest('login');
+    if (Auth::guest() || (Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != FREE_PLAN)) {
+        return Redirect::guest('login');
     }
 });
 
 Route::filter('isAdvanceUser', function () {
-    if (Auth::guest() || ( Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != ADVANCEPAID_PLAN )) {
-            return Redirect::guest('login');
+    if (Auth::guest() || (Auth::check() && Auth::user()->is_admin && Auth::user()->plan_type != ADVANCEPAID_PLAN)) {
+        return Redirect::guest('login');
     }
 });
 
 Route::filter('isRechargeable', function () {
-    if (Auth::guest() || ( Auth::check() && (Auth::user()->is_admin || Auth::user()->plan_type == ADVANCEPAID_PLAN) )) {
-            return Redirect::guest('login');
+    if (Auth::guest() || (Auth::check() && (Auth::user()->is_admin || Auth::user()->plan_type == ADVANCEPAID_PLAN))) {
+        return Redirect::guest('login');
     }
 });
 
@@ -72,8 +71,6 @@ Route::filter('auth', function () {
         return Redirect::guest('login');
     }
 });
-
-
 
 Route::filter('auth.basic', function () {
     return Auth::basic();
@@ -109,6 +106,6 @@ Route::filter('guest', function () {
 
 Route::filter('csrf', function () {
     if (Session::token() != Input::get('_token')) {
-        throw new Illuminate\Session\TokenMismatchException;
+        throw new Illuminate\Session\TokenMismatchException();
     }
 });

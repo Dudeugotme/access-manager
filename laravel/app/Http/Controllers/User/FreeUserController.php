@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class FreeUserController extends UserBaseController
 {
-
     const HOME = 'frinternet.dashboard';
 
     public function dashboard()
@@ -34,9 +33,11 @@ class FreeUserController extends UserBaseController
             $pin = Input::get('pin', null);
             Refillcoupons::viaPin($pin, Auth::id());
             $this->notifySuccess('Refill Successful.');
+
             return Redirect::route(self::HOME);
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::back();
         }
     }
@@ -47,6 +48,7 @@ class FreeUserController extends UserBaseController
                                     ->sessionHistory()
                                     ->orderby('acctstarttime', 'desc')
                                     ->paginate(10);
+
         return view('user.frinternet.session_history')
                     ->with('sess_history', $sess_history);
     }

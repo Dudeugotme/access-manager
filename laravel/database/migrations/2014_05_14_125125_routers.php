@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Routers extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,8 +13,7 @@ class Routers extends Migration
     public function up()
     {
         Schema::create('nas', function (Blueprint $t) {
-
-            $t->engine = "InnoDB";
+            $t->engine = 'InnoDB';
 
             $t->increments('id');
             $t->string('nasname', 128);

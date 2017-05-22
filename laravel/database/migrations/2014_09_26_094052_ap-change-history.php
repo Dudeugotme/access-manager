@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApChangeHistory extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -24,9 +23,9 @@ class ApChangeHistory extends Migration
             $t->tinyInteger('plan_type');
             $t->tinyInteger('limit_type')->nullable();
             $t->integer('time_limit')->unsigned()->nullable();
-            $t->enum('time_unit', ['Mins','Hrs'])->nullable();
+            $t->enum('time_unit', ['Mins', 'Hrs'])->nullable();
             $t->integer('data_limit')->unsigned()->nullable();
-            $t->enum('data_unit', ['MB','GB'])->nullable();
+            $t->enum('data_unit', ['MB', 'GB'])->nullable();
             $t->boolean('aq_access')->nullable();
             $t->string('aq_policy')->nullable();
             $t->float('price');

@@ -1,8 +1,8 @@
 @extends('admin.header_footer')
 @section('admin_container')
 <?php
-foreach($errors->all() as $error):
-  echo $error . "<br />";
+foreach ($errors->all() as $error):
+  echo $error.'<br />';
   endforeach;
 
   $hideWhenAllowed = 'hidden';
@@ -12,14 +12,13 @@ foreach($errors->all() as $error):
   $hideSecPolicy = 'hidden';
   $hidePolicyLabel = 'hidden';
 
-  if( isset($template) ) {
-
-    $hideWhenAllowed = ($template->access == 0 ) ? 'hidden' : NULL;
-    $hideWhenNotAllowed = ($template->access == 1 ) ? 'hidden' : NULL;
-    $hideWhenPartial = ($template->access == 2 ) ? 'hidden' : NULL;
-    $hidePolicyLabel = ($template->access == 2 && ($template->pr_allowed || $template->sec_allowed) ) ? NULL : 'hidden';
-    $hidePrAllowed = ($template->access  && $template->pr_allowed ) ? NULL : 'hidden';
-    $hideSecAllowed = ($template->access && $template->sec_allowed ) ? NULL : 'hidden';
+  if (isset($template)) {
+      $hideWhenAllowed = ($template->access == 0) ? 'hidden' : null;
+      $hideWhenNotAllowed = ($template->access == 1) ? 'hidden' : null;
+      $hideWhenPartial = ($template->access == 2) ? 'hidden' : null;
+      $hidePolicyLabel = ($template->access == 2 && ($template->pr_allowed || $template->sec_allowed)) ? null : 'hidden';
+      $hidePrAllowed = ($template->access && $template->pr_allowed) ? null : 'hidden';
+      $hideSecAllowed = ($template->access && $template->sec_allowed) ? null : 'hidden';
   }
 ?>
 

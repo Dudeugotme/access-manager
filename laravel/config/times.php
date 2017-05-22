@@ -6,7 +6,7 @@ $temp = [];
 
 while (true) {
     $v = $d->format('Hi');
-    
+
     $temp[$v] = $d->format('H:i');
 
     if ($v == 2355) {
@@ -15,4 +15,5 @@ while (true) {
 
     $d->add($i);
 }
+
 return $temp;

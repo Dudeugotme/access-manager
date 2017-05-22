@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class RefillController extends AdminBaseController
 {
-
     const HOME = 'refill.index';
 
     public function getIndex()
@@ -31,8 +30,9 @@ class RefillController extends AdminBaseController
             $count = count($pins);
             $this->notifySuccess("Generated $count Voucher(s).");
         } else {
-            $this->notifyError("Voucher Generation Failed.");
+            $this->notifyError('Voucher Generation Failed.');
         }
+
         return Redirect::route(self::HOME);
     }
 
@@ -45,6 +45,7 @@ class RefillController extends AdminBaseController
                         })
                         ->orderby('uname')
                         ->lists('uname', 'id');
+
         return view('admin.refill_coupons.recharge')
                         ->with('accounts', $accounts);
     }
@@ -59,9 +60,11 @@ class RefillController extends AdminBaseController
             }
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::back();
         }
-            return Redirect::back();
+
+        return Redirect::back();
     }
 
     private static function _generatePin()
@@ -71,14 +74,16 @@ class RefillController extends AdminBaseController
             $number = mt_rand(1111111, 99999999999);
             $exists = Voucher::where('pin', '=', $number)->count();
         } while ($exists);
+
         return $number;
     }
 
     private static function _makeExpiry($number, $unit)
     {
         $val = Carbon::now();
-        $add = "add".$unit;
-        $val->$add( $number );
+        $add = 'add'.$unit;
+        $val->$add($number);
+
         return $val->toDateTimeString();
     }
 }

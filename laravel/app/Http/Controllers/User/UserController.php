@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends UserBaseController
 {
-
     const HOME = 'user.panel';
-    
+
     public function getIndex()
     {
         return view('user.dashboard')
@@ -33,6 +32,7 @@ class UserController extends UserBaseController
                 $plan_type = 'advancepaid';
                 break;
         }
+
         return view('user.prepaid.change_password', ['plan_type'=>$plan_type]);
     }
 
@@ -43,14 +43,16 @@ class UserController extends UserBaseController
 
         $user = Subscriber::findOrFail($user_id);
         if ($user->clear_pword != $current) {
-            $this->notifyError("Incorrect current password.");
+            $this->notifyError('Incorrect current password.');
+
             return Redirect::back();
         }
 
         $password = Input::get('password', null);
         $confirm = Input::get('confirm_password', null);
         if ($password != $confirm) {
-            $this->notifyError("New password & confirm password do not match.");
+            $this->notifyError('New password & confirm password do not match.');
+
             return Redirect::back();
         }
 
@@ -58,10 +60,11 @@ class UserController extends UserBaseController
         $user->pword = Hash::make($password);
 
         if ($user->save()) {
-            $this->notifySuccess("Password Updated.");
+            $this->notifySuccess('Password Updated.');
         } else {
-            $this->notifyError("Password Updation Failed.");
+            $this->notifyError('Password Updation Failed.');
         }
+
         return Redirect::back();
     }
 }

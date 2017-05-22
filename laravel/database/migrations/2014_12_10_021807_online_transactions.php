@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class OnlineTransactions extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,7 +14,7 @@ class OnlineTransactions extends Migration
     {
         Schema::create('online_transactions', function (Blueprint $t) {
             $t->engine = 'InnoDB';
-            
+
             $t->increments('id');
             $t->integer('user_id');
             $t->string('gw_type');

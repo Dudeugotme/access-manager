@@ -5,8 +5,8 @@ namespace App\Models\Admin;
 class Plan extends BaseModel
 {
     protected $table = 'service_plans';
-    protected $fillable = ['name','plan_type','policy_type','policy_id','validity',
-                            'validity_unit','sim_sessions','interim_updates','price'];
+    protected $fillable = ['name', 'plan_type', 'policy_type', 'policy_id', 'validity',
+                            'validity_unit', 'sim_sessions', 'interim_updates', 'price', ];
 
     public function limit()
     {

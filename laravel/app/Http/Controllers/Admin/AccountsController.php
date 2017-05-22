@@ -27,7 +27,6 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class AccountsController extends AdminBaseController
 {
-
     const HOME = 'subscriber.index';
 
     public function getActive()
@@ -52,7 +51,7 @@ class AccountsController extends AdminBaseController
             $q->where('u.uname', 'LIKE', "$alphabet%");
         }
         $sessions = $q->paginate(10);
-        
+
         $plans = Subscriber::getActiveSessionPlans($sessions);
 
         return view('admin.accounts.dashboard')
@@ -75,6 +74,7 @@ class AccountsController extends AdminBaseController
                 $session->save();
             }
         }
+
         return Redirect::back();
     }
 
@@ -82,6 +82,7 @@ class AccountsController extends AdminBaseController
     {
         $invoice = APInvoice::where(['invoice_number'=>$number])->firstOrFail();
         $pdf = new PDFInvoice($invoice);
+
         return $pdf->render();
     }
 
@@ -89,6 +90,7 @@ class AccountsController extends AdminBaseController
     {
         $invoice = APInvoice::find($id);
         $pdf = new PDFInvoice($invoice);
+
         return $pdf->render();
     }
 
@@ -99,9 +101,11 @@ class AccountsController extends AdminBaseController
             Subscriber::destroySession($session_id);
         } catch (ProcessFailedException $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::back();
         }
-        $this->notifySuccess("Session Disconnected.");
+        $this->notifySuccess('Session Disconnected.');
+
         return Redirect::back();
     }
 
@@ -111,9 +115,10 @@ class AccountsController extends AdminBaseController
                                 ->where('is_admin', 0)
                                 ->orderby('uname');
         $alphabet = Input::get('alphabet', null);
-        if (! is_null($alphabet)) {
+        if (!is_null($alphabet)) {
             $q->where('uname', 'LIKE', "$alphabet%");
         }
+
         return view('admin.accounts.index')
                             ->with('accounts', $q->paginate(10));
     }
@@ -124,8 +129,8 @@ class AccountsController extends AdminBaseController
         $q = Subscriber::with('Recharge')
                             ->where('uname', 'LIKE', "%$keyword%")
                             ->orderby('uname');
-                            
-        return view("admin.accounts.search-result")
+
+        return view('admin.accounts.search-result')
                         ->with('accounts', $q->paginate(10));
     }
 
@@ -138,10 +143,10 @@ class AccountsController extends AdminBaseController
     {
         try {
             $input = Input::all();
-        
+
             $rules = config('validations.accounts');
             $rules['uname'][] = 'unique:user_accounts';
-            
+
             $v = Validator::make($input, $rules);
             $v->setAttributeNames(config('attributes.accounts'));
             if ($v->fails()) {
@@ -153,13 +158,15 @@ class AccountsController extends AdminBaseController
             $input['clear_pword'] = $input['pword'];
             $input['pword'] = Hash::make($input['pword']);
             $input['plan_type'] = PREPAID_PLAN;
-            
+
             $account = Subscriber::create($input);
 
             $this->notifySuccess("New Subscriber added successfully: <b>{$input['uname']}</b>");
+
             return $this->getProfile($account->id);
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route(self::HOME);
         }
     }
@@ -168,6 +175,7 @@ class AccountsController extends AdminBaseController
     {
         try {
             $account = Subscriber::findOrFail($id);
+
             return view('admin.accounts.add-edit')
                                     ->with('account', $account);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -179,7 +187,7 @@ class AccountsController extends AdminBaseController
     {
         $input = Input::all();
         $rules = config('validations.accounts');
-        $rules['uname'][] = 'unique:user_accounts,uname,' . $input['id'];
+        $rules['uname'][] = 'unique:user_accounts,uname,'.$input['id'];
 
         $v = Validator::make($input, $rules);
         $v->setAttributeNames(config('attributes.accounts'));
@@ -189,46 +197,51 @@ class AccountsController extends AdminBaseController
                             ->withErrors($v);
         }
         try {
-            if (! Input::has('id')) {
-                throw new Exception("Required parameter missing: ID");
+            if (!Input::has('id')) {
+                throw new Exception('Required parameter missing: ID');
             }
 
             $account = Subscriber::find($input['id']);
-            if (! $account) {
+            if (!$account) {
                 throw new Exception("No such user with id:{$input['id']}");
             }
             $account->fill($input);
-            if (! $account->save()) {
-                throw new Exception("Failed to update account.");
+            if (!$account->save()) {
+                throw new Exception('Failed to update account.');
             }
             if ($account->status == DEACTIVE) {
                 Subscriber::destroyAllSessions($account);
             }
-            $this->notifySuccess("Account successfully updated.");
+            $this->notifySuccess('Account successfully updated.');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route(self::HOME);
         }
+
         return Redirect::route(self::HOME);
     }
 
     public function postDelete($id)
     {
-        $this->notifyError("Operation Not Permitted.");
+        $this->notifyError('Operation Not Permitted.');
+
         return Redirect::back();
         //////////////////////////////////////////////////////
         try {
             DB::transaction(function () use ($id) {
-                if (! Subscriber::destroy($id) ||
-                    ( Recharge::where('user_id', $id)->count() && ! Recharge::where('user_id', $id)->delete() )
+                if (!Subscriber::destroy($id) ||
+                    (Recharge::where('user_id', $id)->count() && !Recharge::where('user_id', $id)->delete())
                 ) {
-                    throw new Exception("Account could not be deleted, please try again.");
+                    throw new Exception('Account could not be deleted, please try again.');
                 }
             });
-            $this->notifySuccess("Account Successfully deleted.");
+            $this->notifySuccess('Account Successfully deleted.');
+
             return Redirect::route(self::HOME);
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route(self::HOME);
         }
     }
@@ -237,7 +250,7 @@ class AccountsController extends AdminBaseController
     {
         try {
             $profile = Subscriber::with('Recharge')->findOrFail($id);
-            
+
             $sess_history = $profile->sessionHistory()
                                     ->orderby('acctstarttime', 'DESC')
                                     ->paginate(5);
@@ -255,7 +268,8 @@ class AccountsController extends AdminBaseController
         $profile = Subscriber::findOrFail($user_id);
         $plans = Plan::lists('name', 'id')
                     ->orderby('name');
-        return view("admin.accounts.assign-plan")
+
+        return view('admin.accounts.assign-plan')
                     ->with('profile', $profile)
                     ->with('plans', $plans);
     }
@@ -267,12 +281,14 @@ class AccountsController extends AdminBaseController
             $plan_id = Input::get('plan_id', 0);
             $price = Input::get('price', null);
             APActivePlan::AssignPlan($user_id, $plan_id, $price);
-            $this->notifySuccess("Plan Assigned.");
+            $this->notifySuccess('Plan Assigned.');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
-            return Redirect::route("subscriber.services", $user_id);
+
+            return Redirect::route('subscriber.services', $user_id);
         }
-        return Redirect::route("subscriber.services", $user_id);
+
+        return Redirect::route('subscriber.services', $user_id);
     }
 
     public function getActiveServices($user_id)
@@ -287,7 +303,8 @@ class AccountsController extends AdminBaseController
                 $rc_history = Voucher::where('user_id', $user_id)
                             ->leftJoin('voucher_limits as l', 'l.id', '=', 'limit_id')
                             ->paginate(5);
-                return view("admin.accounts.services")
+
+                return view('admin.accounts.services')
                     ->with('profile', $profile)
                     ->with('rc_history', $rc_history)
                     ->with('plan', $plan)
@@ -305,7 +322,7 @@ class AccountsController extends AdminBaseController
                     ->with('framedRoute', $framedRoute)
                     ->with('rproducts', $rproducts)
                     ->with('nrproducts', $nrproducts);
-            
+
             break;
         }
     }
@@ -317,18 +334,19 @@ class AccountsController extends AdminBaseController
                                 ->orderby('created_at', 'DESC')
                                 ->paginate(10);
 
-        $view = view('admin.accounts.ap-transactions', ['txns'=>$txns,'profile'=>$profile]);
+        $view = view('admin.accounts.ap-transactions', ['txns'=>$txns, 'profile'=>$profile]);
 
         $ap_settings = APUserSetting::where('user_id', $user_id)->first();
         if ($ap_settings != null) {
             $view->with('ap_settings', $ap_settings);
         }
-            return $view;
+
+        return $view;
     }
 
     public function postAddTransaction()
     {
-        $txn = new APTransaction;
+        $txn = new APTransaction();
 
         $txn->fill(Input::all());
         if ($txn->save()) {
@@ -336,18 +354,20 @@ class AccountsController extends AdminBaseController
         } else {
             $this->notifyError('Transaction Failed.');
         }
+
         return Redirect::back();
     }
 
     public function postAPSettings()
     {
-        $settings = APUserSetting::firstOrNew(['user_id' => Input::get('user_id', 0) ]);
+        $settings = APUserSetting::firstOrNew(['user_id' => Input::get('user_id', 0)]);
         $settings->fill(Input::all());
         if ($settings->save()) {
             $this->notifySuccess('Settings Updated.');
         } else {
             $this->notifyError('Settings updation failed.');
         }
+
         return Redirect::back();
     }
 
@@ -356,16 +376,17 @@ class AccountsController extends AdminBaseController
         $pword = Input::get('npword');
         $id = Input::get('id');
 
-        $affectedRows =     Subscriber::where('id', $id)
+        $affectedRows = Subscriber::where('id', $id)
                     ->update([
-                            'pword'         =>  Hash::make($pword),
-                        'clear_pword'   =>  $pword,
+                            'pword'         => Hash::make($pword),
+                        'clear_pword'       => $pword,
                         ]);
         if ($affectedRows) {
-            $this->notifySuccess("Password Changed.");
+            $this->notifySuccess('Password Changed.');
         } else {
-            $this->notifyError("Failed to change password.");
+            $this->notifyError('Failed to change password.');
         }
+
         return Redirect::back();
     }
 
@@ -373,7 +394,8 @@ class AccountsController extends AdminBaseController
     {
         $profile = Subscriber::findOrFail($user_id);
         $orgs = Organisation::lists('name', 'id');
-        return view("admin.accounts.change-service-type")
+
+        return view('admin.accounts.change-service-type')
                     ->with('profile', $profile)
                     ->with('orgs', $orgs);
     }
@@ -384,25 +406,25 @@ class AccountsController extends AdminBaseController
             // pr(Input::all());
             $user_id = Input::get('user_id');
             $user = Subscriber::findOrFail($user_id);
-            $disconnect = new stdClass;
+            $disconnect = new stdClass();
             $disconnect->set = false;
             DB::transaction(function () use ($user, $disconnect) {
                 $plan_type = Input::get('plan_type');
                 if ($user->plan_type != $plan_type) {
                     $disconnect->set = true;
                 }
-                
+
                 $user->plan_type = $plan_type;
-                if (! $user->save()) {
+                if (!$user->save()) {
                     throw new Exception('Failed to change service type.');
                 }
                 if ($user->plan_type == ADVANCEPAID_PLAN) {
                     $billing = BillingCycle::firstOrNew(['user_id'=>$user->id]);
                     $input = Input::all();
-                    $input['expiration'] = date("Y-m-d H:i:s", strtotime($input['expiration']));
+                    $input['expiration'] = date('Y-m-d H:i:s', strtotime($input['expiration']));
                     $billing->fill($input);
-                    if (! $billing->save()) {
-                        throw new Exception("Failed to save billing cycle details.");
+                    if (!$billing->save()) {
+                        throw new Exception('Failed to save billing cycle details.');
                     }
                     // pr($billing->toArray());
                 }
@@ -413,11 +435,13 @@ class AccountsController extends AdminBaseController
             if ($disconnect->set) {
                 Subscriber::destroyAllSessions($user);
             }
-            $this->notifySuccess("Service Type Updated.");
+            $this->notifySuccess('Service Type Updated.');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route('subscriber.profile', $user_id);
         }
+
         return Redirect::route('subscriber.profile', $user_id);
     }
 

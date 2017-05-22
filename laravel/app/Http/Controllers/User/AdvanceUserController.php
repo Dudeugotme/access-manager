@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AdvanceUserController extends UserBaseController
 {
-
     const HOME = 'advancepaid.dashboard';
 
     public function dashboard()
     {
         $subscriber = Subscriber::find(Auth::id());
         $plan = Subscriber::getActiveServices($subscriber);
+
         return view('user.advancepaid.dashboard')
                     ->with('profile', Auth::user())
                     ->with('plan', $plan);
@@ -25,6 +25,7 @@ class AdvanceUserController extends UserBaseController
                                     ->sessionHistory()
                                     ->orderby('acctstarttime', 'desc')
                                     ->paginate(10);
+
         return view('user.advancepaid.session_history')
                     ->with('sess_history', $sess_history);
     }

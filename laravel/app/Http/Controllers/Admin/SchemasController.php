@@ -11,16 +11,17 @@ use Illuminate\Support\Facades\Validator;
 
 class SchemasController extends AdminBaseController
 {
-
     public function getIndex()
     {
         $t = PolicySchema::paginate(10);
+
         return view('admin.schemas.index', ['schemas'=>$t]);
     }
 
     public function getAdd()
     {
         $t = SchemaTemplate::lists('name', 'id');
+
         return view('admin.schemas.add-edit', ['templates'=>$t]);
     }
 
@@ -37,6 +38,7 @@ class SchemasController extends AdminBaseController
         }
 
         $this->flash(PolicySchema::create($input));
+
         return Redirect::route('schema.index');
     }
 
@@ -45,6 +47,7 @@ class SchemasController extends AdminBaseController
         try {
             $schema = PolicySchema::findOrFail($id);
             $t = SchemaTemplate::lists('name', 'id');
+
             return view('admin.schemas.add-edit', ['templates'=>$t])->with('schema', $schema);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -56,7 +59,7 @@ class SchemasController extends AdminBaseController
         try {
             $input = Input::all();
             $rules = config('validations.policy_schemas');
-            $rules['name'][] = 'unique:policy_schemas,name,' . $input['id'];
+            $rules['name'][] = 'unique:policy_schemas,name,'.$input['id'];
 
             $v = Validator::make($input, $rules);
             if ($v->fails()) {
@@ -67,6 +70,7 @@ class SchemasController extends AdminBaseController
             $schema->fill($input);
 
             $this->flash($schema->save());
+
             return Redirect::route('schema.index');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -76,12 +80,14 @@ class SchemasController extends AdminBaseController
     public function postDelete($id)
     {
         $this->flash(PolicySchema::destroy($id));
+
         return Redirect::route('schema.index');
     }
 
     public function getTemplateIndex()
     {
         $temps = SchemaTemplate::paginate(10);
+
         return view('admin.schematemplates.index', ['templates'=>$temps]);
     }
 
@@ -89,25 +95,27 @@ class SchemasController extends AdminBaseController
     {
         $times = config('times', null);
         $policies = Policy::lists('name', 'id');
-        return view('admin.schematemplates.add-edit', ['times'=>$times,'policies'=>$policies]);
+
+        return view('admin.schematemplates.add-edit', ['times'=>$times, 'policies'=>$policies]);
     }
 
     public function postAddTemplate()
     {
         $rules = config('validations.schema_templates');
         $input = Input::all();
-        
+
         $v = Validator::make($input, $rules);
-        
+
         if ($v->fails()) {
-            $this->notifyError("Form Validatoin Failed, Please verify input data.");
+            $this->notifyError('Form Validatoin Failed, Please verify input data.');
+
             return Redirect::back()->withErrors($v)->withInput();
         }
-        $template = new SchemaTemplate;
+        $template = new SchemaTemplate();
 
         $template = $this->parseTemplate($template, $input);
         $this->flash($template->save());
-        
+
         return Redirect::route('schematemplate.index');
     }
 
@@ -118,7 +126,8 @@ class SchemasController extends AdminBaseController
 
             $times = config('times', null);
             $policies = Policy::lists('name', 'id');
-            return view('admin.schematemplates.add-edit', ['template'=>$template,'times'=>$times,'policies'=>$policies]);
+
+            return view('admin.schematemplates.add-edit', ['template'=>$template, 'times'=>$times, 'policies'=>$policies]);
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
         }
@@ -143,6 +152,7 @@ class SchemasController extends AdminBaseController
     {
         try {
             $this->flash(SchemaTemplate::destroy($id));
+
             return Redirect::route('schematemplate.index');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -169,7 +179,7 @@ class SchemasController extends AdminBaseController
                     $template->pr_policy = $input['pr_policy'];
                     $template->pr_accountable = $input['pr_accountable'];
                 }
-                
+
                 $template->sec_allowed = $input['sec_allowed'];
                 if ($template->sec_allowed) {
                     $template->sec_policy = $input['sec_policy'];

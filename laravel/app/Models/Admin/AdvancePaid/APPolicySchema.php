@@ -4,9 +4,8 @@ namespace App\Models\Admin\AdvancePaid;
 
 class APPolicySchema extends BaseModel
 {
-
     protected $table = 'ap_policy_schemas';
-    protected $fillable = ['name','mo','tu','we','th','fr','sa','su'];
+    protected $fillable = ['name', 'mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
     public $timestamps = false;
 
     public function plan()

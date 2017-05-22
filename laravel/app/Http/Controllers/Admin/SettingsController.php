@@ -15,19 +15,17 @@ use Illuminate\Support\Facades\Redirect;
 
 class SettingsController extends AdminBaseController
 {
-
     public function getGeneral()
     {
         $general = GeneralSettings::first();
-        
-        
+
         return view('admin.settings.general.general')
                         ->with('general', $general);
     }
 
     public function postGeneral()
     {
-        if (! Input::has('id')) {
+        if (!Input::has('id')) {
             return Redirect::route('setting.general')
                             ->with('error', 'Required parameter(s) missing.');
         }
@@ -36,6 +34,7 @@ class SettingsController extends AdminBaseController
             $setting = GeneralSettings::find($input['id']);
             $setting->fill($input);
             $this->flash($setting->save());
+
             return Redirect::route('setting.general');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -46,6 +45,7 @@ class SettingsController extends AdminBaseController
     {
         $themes = config('themes');
         $theme = Theme::first();
+
         return view('admin.settings.general.theme')
                         ->with('themes', $themes)
                         ->with('theme', $theme);
@@ -53,7 +53,7 @@ class SettingsController extends AdminBaseController
 
     public function postThemes()
     {
-        if (! Input::has('id')) {
+        if (!Input::has('id')) {
             return Redirect::route('setting.themes.form')
                             ->with('error', 'Required parameter(s) missing.');
         }
@@ -62,6 +62,7 @@ class SettingsController extends AdminBaseController
             $setting = Theme::find($input['id']);
             $setting->fill($input);
             $this->flash($setting->save());
+
             return Redirect::route('setting.themes.form');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -72,6 +73,7 @@ class SettingsController extends AdminBaseController
     {
         $email = EmailSetting::first();
         $tpls = EmailTemplate::lists('name', 'id');
+
         return view('admin.settings.email.notifications')
                     ->with('email', $email)
                     ->with('tpls', $tpls);
@@ -84,13 +86,14 @@ class SettingsController extends AdminBaseController
     public function getSmtp()
     {
         $smtp = SmtpSettings::first();
+
         return view('admin.settings.email.smtp')
                         ->with('smtp', $smtp);
     }
 
     public function postSmtp()
     {
-        if (! Input::has('id')) {
+        if (!Input::has('id')) {
             return Redirect::route('setting.smtp')
                             ->with('error', 'Required parameter(s) missing.');
         }
@@ -99,6 +102,7 @@ class SettingsController extends AdminBaseController
             $setting = SmtpSettings::find($input['id']);
             $setting->fill($input);
             $this->flash($setting->save());
+
             return Redirect::route('setting.smtp');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -109,6 +113,7 @@ class SettingsController extends AdminBaseController
     {
         $currencies = config('paypal_currencies');
         $pp = PaypalSettings::first();
+
         return view('admin.settings.payment_gateway.paypal')
                         ->with('paypal', $pp)
                         ->with('currencies', $currencies);
@@ -116,7 +121,7 @@ class SettingsController extends AdminBaseController
 
     public function postPaypal()
     {
-        if (! Input::has('id')) {
+        if (!Input::has('id')) {
             return Redirect::route('setting.paypal')
                             ->with('error', 'Required parameter(s) missing.');
         }
@@ -125,6 +130,7 @@ class SettingsController extends AdminBaseController
             $setting = PaypalSettings::find($input['id']);
             $setting->fill($input);
             $this->flash($setting->save());
+
             return Redirect::route('setting.paypal');
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             abort(404);
@@ -134,6 +140,7 @@ class SettingsController extends AdminBaseController
     public function getDirecpay()
     {
         $direcpay = DirecpaySetting::first();
+
         return view('admin.settings.payment_gateway.direcpay')
                     ->with('direcpay', $direcpay);
     }
@@ -144,16 +151,18 @@ class SettingsController extends AdminBaseController
         $settings = DirecpaySetting::find($input['id']);
         $settings->fill($input);
         if ($settings->save()) {
-            $this->notifySuccess("Settings Updated.");
+            $this->notifySuccess('Settings Updated.');
         } else {
-            $this->notifyError("Settings could not be updated.");
+            $this->notifyError('Settings could not be updated.');
         }
+
         return Redirect::back();
     }
 
     public function getAdvancepaid()
     {
         $ap = APSetting::first();
+
         return view('admin.settings.ap_settings', ['ap'=>$ap]);
     }
 
@@ -166,6 +175,7 @@ class SettingsController extends AdminBaseController
         } else {
             $this->notifyError('Failed to save Settings.');
         }
+
         return Redirect::back();
     }
 }

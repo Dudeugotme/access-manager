@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApResetCron extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -15,7 +14,7 @@ class ApResetCron extends Migration
     {
         Schema::table('ap_active_plans', function (Blueprint $t) {
             $t->integer('validity')->unsigned();
-            $t->enum('validity_unit', ['Days','Months']);
+            $t->enum('validity_unit', ['Days', 'Months']);
             $t->timestamp('last_reset_on');
         });
 
@@ -32,7 +31,7 @@ class ApResetCron extends Migration
     public function down()
     {
         Schema::table('ap_active_plans', function (Blueprint $t) {
-            $t->dropColumn(['validity','validity_unit','last_reset_on']);
+            $t->dropColumn(['validity', 'validity_unit', 'last_reset_on']);
         });
         Schema::table('ap_change_history', function (Blueprint $t) {
             $t->dropColumn('tax_rate');

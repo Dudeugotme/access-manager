@@ -15,20 +15,18 @@ use RAHULMKHJ\PaymentGateways\Direcpay\Direcpay as DP;
 
 class DirecpayController extends Controller
 {
-
     private $postData;
 
     public function processDirecpay($postData)
     {
-
         $this->postData = $postData;
         try {
             $details = $this->_makeDetails();
-            
+
             $order_id = DirecpayTransaction::initiate(Auth::id(), $details);
             $user = Auth::user();
 
-            $dp = new DP;
+            $dp = new DP();
             $settings = DB::table('direcpay_settings')->first();
             if ($settings->sandbox == ENABLED) {
                 $dp->enableSandbox();
@@ -36,20 +34,20 @@ class DirecpayController extends Controller
                 $dp->setMerchant($settings->mid, $settings->enc_key);
             }
             $dp->setRequestParameters([
-                            'amount'    =>      $details['amount'],
-                           'orderNo'    =>      $order_id,
-                        'successUrl'    =>      $details['successUrl'],
-                        'failureUrl'    =>      $details['failureUrl'],
+                            'amount'    => $details['amount'],
+                           'orderNo'    => $order_id,
+                        'successUrl'    => $details['successUrl'],
+                        'failureUrl'    => $details['failureUrl'],
                 ]);
             $dp->setBillingDetails([
-                        'name'      =>      $user->fname . " " . $user->lname,
-                        'address'   =>      $user->address,
-                        'city'      =>      'Solan',
-                        'state'         =>      'Himachal Pradesh',
-                        'pinCode'   =>      173205,
-                        'country'   =>      'IN',
-                        'mobileNo'  =>      $user->contact,
-                        'emailId'   =>      $user->email,
+                        'name'          => $user->fname.' '.$user->lname,
+                        'address'       => $user->address,
+                        'city'          => 'Solan',
+                        'state'         => 'Himachal Pradesh',
+                        'pinCode'       => 173205,
+                        'country'       => 'IN',
+                        'mobileNo'      => $user->contact,
+                        'emailId'       => $user->email,
                 ]);
             $dp->setOtherDetails($this->postData);
 
@@ -58,6 +56,7 @@ class DirecpayController extends Controller
             $dp->generateForm();
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::back();
         }
     }
@@ -73,27 +72,29 @@ class DirecpayController extends Controller
                 $details = $this->_makeRefillDetails();
                 break;
         }
+
         return array_merge($details, $this->_makeReturnUrl());
     }
 
     private function _makeRechargeDetails()
     {
         $plan = Plan::find($this->postData['plan_id']);
-            return [
-                    'type'      =>      'recharge',
-               'plan_name'      =>      $plan->name,
-                 'plan_id'      =>      $plan->id,
-                 'amount'       =>      $plan->price,
+
+        return [
+                    'type'      => 'recharge',
+               'plan_name'      => $plan->name,
+                 'plan_id'      => $plan->id,
+                 'amount'       => $plan->price,
             ];
     }
 
     private function _makeRefillDetails()
     {
         return [
-                  'type'    =>  'refill',
-                 'value'    =>  $this->postData['data_limit'],
-                  'unit'    =>  $this->postData['data_unit'],
-                'amount'    =>  $this->postData['data_limit']*50,
+                  'type'    => 'refill',
+                 'value'    => $this->postData['data_limit'],
+                  'unit'    => $this->postData['data_unit'],
+                'amount'    => $this->postData['data_limit'] * 50,
             ];
     }
 
@@ -102,14 +103,14 @@ class DirecpayController extends Controller
         switch (Auth::user()->plan_type) {
             case PREPAID_PLAN:
                 return [
-                    'successUrl'    =>  route('direcpay.prepaid.response'),
-                    'failureUrl'    =>  route('direcpay.prepaid.response'),
+                    'successUrl'    => route('direcpay.prepaid.response'),
+                    'failureUrl'    => route('direcpay.prepaid.response'),
                 ];
             break;
             case FREE_PLAN:
                 return [
-                    'successUrl'    =>  route('direcpay.frinternet.response'),
-                    'failureUrl'    =>  route('direcpay.frinternet.response'),
+                    'successUrl'    => route('direcpay.frinternet.response'),
+                    'failureUrl'    => route('direcpay.frinternet.response'),
                 ];
             break;
         }
@@ -121,7 +122,7 @@ class DirecpayController extends Controller
         DirecpayTransaction::updateResponse($response);
         if ($response->txnSucceed()) :
             $details = $response->getDetails();
-            switch ($details['type']) {
+        switch ($details['type']) {
                 case 'recharge':
                     Recharge::online(Auth::id(), $details['plan_id']);
                     $this->notifySuccess('Account Recharged.');
@@ -132,15 +133,16 @@ class DirecpayController extends Controller
                         $this->notifySuccess('Quota Refilled.');
                     } catch (Exception $e) {
                         $this->notifyError($e->getMessage());
+
                         return Redirect::route('prepaid.dashboard');
                     }
-            
+
                     break;
-            }
-        else :
+            } else :
                 $this->notifyError('Transaction Failed.');
-endif;
-            return Redirect::route('prepaid.dashboard');
+        endif;
+
+        return Redirect::route('prepaid.dashboard');
     }
 
     public function frinternetResponse()
@@ -151,13 +153,14 @@ endif;
             $details = $response->getDetails();
             if ($response->txnSucceed()) :
                 Refillcoupons::refillOnline(Auth::id(), $details);
-                $this->notifySuccess('Account Refilled.');
-            else :
+            $this->notifySuccess('Account Refilled.'); else :
                 $this->notifyError('Account Refill Failed.');
             endif;
+
             return Redirect::route('frinternet.dashboard');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route('frinternet.dashboard');
         }
     }

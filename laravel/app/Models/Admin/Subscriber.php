@@ -7,11 +7,10 @@ use Symfony\Component\Process\Process;
 
 class Subscriber extends BaseModel
 {
-
     protected $table = 'user_accounts';
-    protected $fillable = ['uname','clear_pword','pword','plan_type',
-                            'fname','lname','contact','plan_type',
-                            'email','address','status',];
+    protected $fillable = ['uname', 'clear_pword', 'pword', 'plan_type',
+                            'fname', 'lname', 'contact', 'plan_type',
+                            'email', 'address', 'status', ];
 
     public function recharge()
     {
@@ -31,7 +30,7 @@ class Subscriber extends BaseModel
     public static function getActiveSessionPlans($sessions)
     {
         $plans = [];
-        if (! is_null($sessions)) {
+        if (!is_null($sessions)) {
             foreach ($sessions as $user) {
                 switch ($user->plan_type) {
                     case FREE_PLAN:
@@ -48,7 +47,7 @@ class Subscriber extends BaseModel
                                     ->first();
                         break;
                     case ADVANCEPAID_PLAN:
-                        $plan = DB::table("ap_active_plans as p")
+                        $plan = DB::table('ap_active_plans as p')
                                 ->join('billing_cycles as b', 'b.user_id', '=', 'p.user_id')
                                 ->where('b.user_id', $user->id)
                                 ->select('b.expiration', 'p.plan_name')
@@ -58,13 +57,14 @@ class Subscriber extends BaseModel
                 $plans[$user->session_id] = $plan;
             }
         }
+
         return $plans;
     }
 
     public static function updateFreePlan($user_id)
     {
         $free_balance = Freebalance::where('user_id', $user_id)->first();
-        if (! is_null($free_balance)) {
+        if (!is_null($free_balance)) {
             return;
         }
 
@@ -90,23 +90,23 @@ class Subscriber extends BaseModel
         )
                                 ->first();
         $new_balance = [
-            'last_reset_on' => date('Y-m-d H:i:s'),
-            'expiration'    => makeExpiry($free_plan->validity, $free_plan->validity_unit, 'd M Y H:i'),
-            'bw_policy'         =>  mikrotikRateLimit(Policy::find($free_plan->policy_id)->toArray()),
-            'plan_type'         =>  $free_plan->plan_type,
-            'limit_type'    =>  $free_plan->limit_type,
-            'time_limit'    =>  $free_plan->time_limit,
-            'time_unit'         =>  $free_plan->time_unit,
-            'data_limit'    =>  $free_plan->data_limit,
-            'data_unit'         =>  $free_plan->data_unit,
-            'aq_access'         =>  $free_plan->aq_access,
-            'sim_sessions'  =>  $free_plan->sim_sessions,
-            'interim_updates'   =>  $free_plan->interim_updates,
-            'reset_every'   =>  $free_plan->reset_every,
-            'reset_unit'    =>  $free_plan->reset_unit,
-            'aq_invocked'   =>  0,
-            'time_balance'  =>  null,
-            'data_balance'  =>  null,
+            'last_reset_on'     => date('Y-m-d H:i:s'),
+            'expiration'        => makeExpiry($free_plan->validity, $free_plan->validity_unit, 'd M Y H:i'),
+            'bw_policy'         => mikrotikRateLimit(Policy::find($free_plan->policy_id)->toArray()),
+            'plan_type'         => $free_plan->plan_type,
+            'limit_type'        => $free_plan->limit_type,
+            'time_limit'        => $free_plan->time_limit,
+            'time_unit'         => $free_plan->time_unit,
+            'data_limit'        => $free_plan->data_limit,
+            'data_unit'         => $free_plan->data_unit,
+            'aq_access'         => $free_plan->aq_access,
+            'sim_sessions'      => $free_plan->sim_sessions,
+            'interim_updates'   => $free_plan->interim_updates,
+            'reset_every'       => $free_plan->reset_every,
+            'reset_unit'        => $free_plan->reset_unit,
+            'aq_invocked'       => 0,
+            'time_balance'      => null,
+            'data_balance'      => null,
         ];
         if ($free_plan->plan_type == LIMITED) {
             if ($free_plan->aq_access) {
@@ -197,7 +197,7 @@ class Subscriber extends BaseModel
                         ->select('a.framedipaddress', 'a.nasipaddress', 'n.secret')
                         ->orderby('a.acctstarttime')
                         ->get();
-        if (! is_null($sessions)) {
+        if (!is_null($sessions)) {
             foreach ($sessions as $session) {
                 $exec = "echo \" User-Name={$user->uname}, Framed-IP-Address={$session->framedipaddress} \" ".
                                              "| radclient {$session->nasipaddress}:3799 disconnect {$session->secret}";
