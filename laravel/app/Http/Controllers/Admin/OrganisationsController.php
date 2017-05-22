@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class OrganisationsController extends AdminBaseController
 {
-
     const HOME = 'org.index';
 
     public function getIndex()
@@ -32,19 +31,21 @@ class OrganisationsController extends AdminBaseController
         } else {
             $this->notifyError('Organisation Faled to Add.');
         }
+
         return Redirect::route(self::HOME);
     }
 
     public function getEdit($id)
     {
         $org = Organisation::findOrFail($id);
+
         return view('admin.orgs.add-edit', ['org'=>$org]);
     }
 
     public function postEdit()
     {
-        $input  = Input::all();
-        $org    = Organisation::findOrFail($input['id']);
+        $input = Input::all();
+        $org = Organisation::findOrFail($input['id']);
 
         $org->fill($input);
         if ($org->save()) {
@@ -52,6 +53,7 @@ class OrganisationsController extends AdminBaseController
         } else {
             $this->notifyError('Organisation Details Updation Failed.');
         }
+
         return Redirect::route(self::HOME);
     }
 
@@ -62,6 +64,7 @@ class OrganisationsController extends AdminBaseController
         } else {
             $this->notifyError('Organisation Deletion Failed.');
         }
+
         return Redirect::route(self::HOME);
     }
 }

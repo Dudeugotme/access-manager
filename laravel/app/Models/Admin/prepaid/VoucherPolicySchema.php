@@ -4,9 +4,8 @@ namespace App\Models\Admin\prepaid;
 
 class VoucherPolicySchema extends BaseModel
 {
-
     protected $table = 'voucher_policy_schemas';
-    protected $fillable = ['name','mo','tu','we','th','fr','sa','su'];
+    protected $fillable = ['name', 'mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
     public $timestamps = false;
 
     public function voucher()

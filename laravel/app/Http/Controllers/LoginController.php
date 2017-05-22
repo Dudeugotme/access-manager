@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends AdminBaseController
 {
-
     public function getIndex()
     {
         return view('user.login');
@@ -24,8 +23,8 @@ class LoginController extends AdminBaseController
         if (Auth::attempt([
                     'uname'         =>      Input::get('uname'),
                     'password'  =>      Input::get('pword'),
-                    'is_admin'  =>      0
-            ]) ) {
+                    'is_admin'  =>      0,
+            ])) {
             $plan_type = Auth::user()->plan_type;
             switch ($plan_type) {
                 case PREPAID_PLAN:
@@ -39,7 +38,8 @@ class LoginController extends AdminBaseController
                 break;
             }
         } else {
-            Session::flash('error', "Invalid Credentials");
+            Session::flash('error', 'Invalid Credentials');
+
             return Redirect::back()->withInput();
         }
     }
@@ -54,12 +54,13 @@ class LoginController extends AdminBaseController
         if (Auth::attempt([
                    'uname'  =>  Input::get('uname'),
                 'password'  =>  Input::get('pword'),
-                'is_admin'  =>  1
-            ]) ) {
+                'is_admin'  =>  1,
+            ])) {
             return Redirect::intended('admin-panel');
         }
 
-        Session::flash('error', "Invalid Username/Password");
+        Session::flash('error', 'Invalid Username/Password');
+
         return Redirect::back()->withInput();
     }
 
@@ -67,10 +68,12 @@ class LoginController extends AdminBaseController
     {
         $settings = GeneralSettings::first();
 
-        if (! $settings->self_signup) {
-            $this->notifyError("Self Signup Not Allowed.");
+        if (!$settings->self_signup) {
+            $this->notifyError('Self Signup Not Allowed.');
+
             return Redirect::route('user-panel');
         }
+
         return view('user.self-registration');
     }
 
@@ -97,14 +100,13 @@ class LoginController extends AdminBaseController
         if ($v->fails()) {
             return Redirect::back()
                             ->withInput()
-                            ->withErrors($v)
-                            ;
+                            ->withErrors($v);
         }
 
-        $input['plan_type']     = PREPAID_PLAN;
-        $input['clear_pword']   = $input['pword'];
-        $input['pword']             = Hash::make($input['pword']);
-        $input['is_admin']      = 0;
+        $input['plan_type'] = PREPAID_PLAN;
+        $input['clear_pword'] = $input['pword'];
+        $input['pword'] = Hash::make($input['pword']);
+        $input['is_admin'] = 0;
 
         if (Subscriber::create($input)) {
             Session::flash('success', 'succeed');
@@ -127,6 +129,7 @@ class LoginController extends AdminBaseController
         Session::flash('macesc', Input::get('mac-esc', null));
 
         $error = Input::get('error', null);
+
         return view('login-template')
                     ->with('error', $error);
     }
@@ -135,17 +138,17 @@ class LoginController extends AdminBaseController
     {
         $data = [];
 
-        $data['mac']                = Session::get('mac');
-        $data['ip']                 = Session::get('ip');
-        $data['linklogin']          = Session::get('linklogin');
-        $data['linkorig']           = Session::get('linkorig');
-        $data['chapid']             = Session::get('chapid');
-        $data['chapchallenge']      = Session::get('chapchallenge');
-        $data['linkloginonly']      = Session::get('linkloginonly');
-        $data['linkorigesc']        = Session::get('linkorigesc');
-        $data['macesc']             = Session::get('macesc');
-        $data['username']           = Input::get('username');
-        $data['password']           = Input::get('password');
+        $data['mac'] = Session::get('mac');
+        $data['ip'] = Session::get('ip');
+        $data['linklogin'] = Session::get('linklogin');
+        $data['linkorig'] = Session::get('linkorig');
+        $data['chapid'] = Session::get('chapid');
+        $data['chapchallenge'] = Session::get('chapchallenge');
+        $data['linkloginonly'] = Session::get('linkloginonly');
+        $data['linkorigesc'] = Session::get('linkorigesc');
+        $data['macesc'] = Session::get('macesc');
+        $data['username'] = Input::get('username');
+        $data['password'] = Input::get('password');
 
         //Do All Authorization stuff here.
 

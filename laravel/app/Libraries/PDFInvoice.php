@@ -2,11 +2,10 @@
 
 namespace App\Libraries;
 
-use \fpdf\FPDF;
+use fpdf\FPDF;
 
 class PDFInvoice extends FPDF
 {
-
     private $invoice;
     // private $pdf;
 
@@ -40,6 +39,7 @@ class PDFInvoice extends FPDF
     public function render()
     {
         $this->_makeInvoice();
+
         return $this->output();
     }
 
@@ -58,7 +58,7 @@ class PDFInvoice extends FPDF
     {
         $this->SetFont('Times', 'B', 14);
         $this->SetXY(10, 40);
-        $this->Cell(50, 5, $this->invoice->account->fname . ' ' . $this->invoice->account->lname);
+        $this->Cell(50, 5, $this->invoice->account->fname.' '.$this->invoice->account->lname);
         $this->Ln();
     }
 
@@ -87,16 +87,16 @@ class PDFInvoice extends FPDF
         $this->SetXY(125, 50);
         $this->Cell(30, 5, 'Bill Date');
         $this->SetFont('Times', '', 11);
-        $this->Cell(50, 5, ': ' . date('d M y', strtotime($this->invoice->generated_on)));
+        $this->Cell(50, 5, ': '.date('d M y', strtotime($this->invoice->generated_on)));
         $this->SetFont('Times', 'B', 11);
         $this->SetXY(125, 55);
         $this->Cell(30, 5, 'Bill Period');
         $this->SetFont('Times', '', 11);
-        $this->Cell(50, 5, ': ' . $this->invoice->billPeriod());
+        $this->Cell(50, 5, ': '.$this->invoice->billPeriod());
         $this->SetFont('Times', 'B', 11);
         $this->SetXY(125, 60);
         $this->Cell(30, 5, 'Due Date');
-        $this->Cell(50, 5, ': ' . $this->invoice->dueDate());
+        $this->Cell(50, 5, ': '.$this->invoice->dueDate());
     }
 
     private function _accountSummary()
@@ -116,10 +116,9 @@ class PDFInvoice extends FPDF
         $this->MultiCell(26.7, 4, "This Month's charges", 0, 'C');
         $this->SetXY(115, 80);
         $this->Cell(23, 4, 'Adjustment', 0, 0, 'C');
-        
+
         // $this->Cell(4,5,'',0,0,'C');
-        
-        
+
         $this->MultiCell(29, 5, 'Payable by Due Date', 0, 'C');
         $this->SetXY(172, 80);
         $this->MultiCell(23.7, 5, 'Payable after Due Date', 0, 'C');
@@ -143,7 +142,7 @@ class PDFInvoice extends FPDF
     {
         $this->Ln(15);
         $this->SetFont('Times', 'B', 11);
-        $this->Cell(100, 7, "Active Service Plan: " . $this->invoice->activeServicePlan(), 1, 0, 'L');
+        $this->Cell(100, 7, 'Active Service Plan: '.$this->invoice->activeServicePlan(), 1, 0, 'L');
     }
 
     private function _thisMonthCharges()
@@ -156,12 +155,11 @@ class PDFInvoice extends FPDF
         $this->SetFont('Times', '', 9);
         $this->Cell(107, 5, 'Amount in INR', 0, 0, 'R');
         $this->Ln(4);
-        
-        
+
         $this->_broadbandTotalCharges();
         $this->_totalDiscounts();
         $this->_broadbandTotalTax();
-        
+
         $this->_broadbandCharges();
 
         if (count($this->invoice->recurringProducts)) {
@@ -175,7 +173,7 @@ class PDFInvoice extends FPDF
             $this->_nonRecurringProductTotalTax();
             $this->_nonRecurringProductsCharges();
         }
-        
+
         // $this->SetXY(98,140);
         $this->_total();
     }
@@ -187,10 +185,10 @@ class PDFInvoice extends FPDF
         $this->Cell(90, 5, 'Kindly make payment in favor of:');
         $this->SetFont('Arial', '', 9);
         $this->SetXY(130, 128);
-        $this->Cell(90, 5, "Esto Internet Private Limited");
+        $this->Cell(90, 5, 'Esto Internet Private Limited');
         $this->SetXY(130, 133);
         $this->SetFont('Arial', 'B', 9);
-        $this->Cell(90, 5, "Bank Details:");
+        $this->Cell(90, 5, 'Bank Details:');
 
         $this->SetXY(129, 132);
         $this->SetFont('Arial', '', 9);
@@ -209,26 +207,25 @@ class PDFInvoice extends FPDF
     {
         foreach ($this->invoice->plans as $plan) :
             $this->SetFont('Times', '', 9.5);
-            $this->Cell(90, 6, "{$plan->plan_name} @ {$plan->rate}/Month", 0, 0, 'L');
-            $this->Ln(4);
-            $this->SetFont('Times', '', 8);
-            $this->Cell(75, 6, $plan->period(), 0, 0, 'L');
-            $this->Cell(10, 5, $plan->amount, 0, 0, 'R');
-            $this->Ln(4);
-            if ($plan->adjustment != 0.00) :
-                $this->Cell(75, 6, "Discount/Adjustment");
-                $this->Cell(10, 6, (0 - $plan->adjustment), 0, 0, 'R');
-                $this->Ln(4);
-            endif;
-            $this->Cell(65, 6, "Service Tax @ $plan->tax_rate");
-            $this->Cell(10, 6, $plan->tax, 0, 0, 'R');
-            $this->Ln();
+        $this->Cell(90, 6, "{$plan->plan_name} @ {$plan->rate}/Month", 0, 0, 'L');
+        $this->Ln(4);
+        $this->SetFont('Times', '', 8);
+        $this->Cell(75, 6, $plan->period(), 0, 0, 'L');
+        $this->Cell(10, 5, $plan->amount, 0, 0, 'R');
+        $this->Ln(4);
+        if ($plan->adjustment != 0.00) :
+                $this->Cell(75, 6, 'Discount/Adjustment');
+        $this->Cell(10, 6, (0 - $plan->adjustment), 0, 0, 'R');
+        $this->Ln(4);
+        endif;
+        $this->Cell(65, 6, "Service Tax @ $plan->tax_rate");
+        $this->Cell(10, 6, $plan->tax, 0, 0, 'R');
+        $this->Ln();
         endforeach;
     }
 
     private function _broadbandTotalTax()
     {
-        
         $this->SetFont('Times', 'B', 10);
         $this->Cell(90, 3.8, 'Service Tax', 0, 0, 'L');
         $this->Cell(14, 8, $this->invoice->plansTax(), '', 0, 'R');
@@ -240,9 +237,9 @@ class PDFInvoice extends FPDF
         $discount = $this->invoice->discount();
         if ($discount != 0.00 || $discount != 0) :
             $this->SetFont('Times', 'B', 10);
-            $this->Cell(90, 3.8, 'Discounts/Adjustments', 0, 0, 'L');
-            $this->Cell(14, 8, $discount, '', 0, 'R');
-            $this->Ln(4);
+        $this->Cell(90, 3.8, 'Discounts/Adjustments', 0, 0, 'L');
+        $this->Cell(14, 8, $discount, '', 0, 'R');
+        $this->Ln(4);
         endif;
     }
 
@@ -253,7 +250,6 @@ class PDFInvoice extends FPDF
         $this->Cell(14, 8, $this->invoice->recurringProductsAmount(), '', 0, 'R');
         $this->Ln(4);
     }
-
 
     private function _recurringProductsTotalTaxes()
     {
@@ -267,17 +263,18 @@ class PDFInvoice extends FPDF
     {
         foreach ($this->invoice->recurringProducts as $product) :
             $this->SetFont('Times', '', 9.5);
-            $this->Cell(90, 6, "{$product->name} @ {$product->rate}/Month", 0, 0, 'L');
-            $this->Ln(4);
-            $this->SetFont('Times', '', 8);
-            $this->Cell(75, 6, $product->period(), 0, 0, 'L');
-            $this->Cell(10, 5, $product->amount, 0, 0, 'R');
-            $this->Ln(4);
-            $this->Cell(65, 6, "Service Tax @ {$product->tax_rate}");
-            $this->Cell(10, 6, $product->tax, 0, 0, 'R');
-            $this->Ln();
+        $this->Cell(90, 6, "{$product->name} @ {$product->rate}/Month", 0, 0, 'L');
+        $this->Ln(4);
+        $this->SetFont('Times', '', 8);
+        $this->Cell(75, 6, $product->period(), 0, 0, 'L');
+        $this->Cell(10, 5, $product->amount, 0, 0, 'R');
+        $this->Ln(4);
+        $this->Cell(65, 6, "Service Tax @ {$product->tax_rate}");
+        $this->Cell(10, 6, $product->tax, 0, 0, 'R');
+        $this->Ln();
         endforeach;
     }
+
     private function _nonRecurringProductsTotalCharges()
     {
         $this->SetFont('Times', 'B', 10);
@@ -285,7 +282,6 @@ class PDFInvoice extends FPDF
         $this->Cell(14, 8, $this->invoice->nonRecurringProductsAmount(), 0, 'R');
         $this->Ln(4);
     }
-
 
     private function _nonRecurringProductTotalTax()
     {
@@ -299,14 +295,14 @@ class PDFInvoice extends FPDF
     {
         foreach ($this->invoice->nonRecurringProducts as $product) :
             $this->SetFont('Times', '', 9);
-            $this->Cell(75, 6, $product->name, 0, 0, 'L');
-            $this->Cell(10, 6, $product->amount, 0, 0, 'R');
-            $this->Ln();
-            if ($product->tax != 0 || $product->tax != 0.00) :
+        $this->Cell(75, 6, $product->name, 0, 0, 'L');
+        $this->Cell(10, 6, $product->amount, 0, 0, 'R');
+        $this->Ln();
+        if ($product->tax != 0 || $product->tax != 0.00) :
                 $this->Cell(65, 6, "Service Tax @ {$product->tax_rate}");
-                $this->Cell(10, 8, $product->tax, 0, 0, 'R');
-                $this->Ln();
-            endif;
+        $this->Cell(10, 8, $product->tax, 0, 0, 'R');
+        $this->Ln();
+        endif;
         endforeach;
     }
 

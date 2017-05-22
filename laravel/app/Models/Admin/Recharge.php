@@ -8,10 +8,9 @@ use Krucas\Notification\Facades\Notification;
 
 class Recharge extends BaseModel
 {
-
     protected $table = 'user_recharges';
-    protected $fillable = ['user_id','voucher_id','recharged_on','aq_invocked',
-                            'time_limit','data_limit','expiration','sim_sessions','aq_access'];
+    protected $fillable = ['user_id', 'voucher_id', 'recharged_on', 'aq_invocked',
+                            'time_limit', 'data_limit', 'expiration', 'sim_sessions', 'aq_access', ];
     public $timestamps = false;
 
     public function account()
@@ -21,32 +20,32 @@ class Recharge extends BaseModel
 
     public static function viaAdmin($input)
     {
-              $temp['plan_id'] = $input['plan_id'];
-                $temp['count'] = 1;
-             $temp['validity'] = 1;
+        $temp['plan_id'] = $input['plan_id'];
+        $temp['count'] = 1;
+        $temp['validity'] = 1;
         $temp['validity_unit'] = 'days';
-              $temp['user_id'] = $input['user_id'];
+        $temp['user_id'] = $input['user_id'];
 
-            DB::transaction(function () use ($temp) {
-                if (! $pins = Voucher::generate($temp)) {
-                    throw new Exception("Voucher Generation Failed.");
-                }
-                if (! self::now(current($pins), $temp['user_id'], 'admin')) {
-                    throw new Exception("Failed to recharge account.");
-                }
-            });
+        DB::transaction(function () use ($temp) {
+            if (!$pins = Voucher::generate($temp)) {
+                throw new Exception('Voucher Generation Failed.');
+            }
+            if (!self::now(current($pins), $temp['user_id'], 'admin')) {
+                throw new Exception('Failed to recharge account.');
+            }
+        });
     }
 
     public static function viaPin($pin, $uid)
     {
-            $voucher = Voucher::where('pin', $pin)->first();
-            
-        if ($voucher->user_id != null || ! $voucher->user_id) {
+        $voucher = Voucher::where('pin', $pin)->first();
+
+        if ($voucher->user_id != null || !$voucher->user_id) {
             throw new Exception('Invalid/Used PIN');
         }
-            DB::transaction(function () use ($pin, $uid) {
-                self::now($pin, $uid);
-            });
+        DB::transaction(function () use ($pin, $uid) {
+            self::now($pin, $uid);
+        });
     }
 
     public static function now($pin, $uid, $method = 'pin')
@@ -74,30 +73,31 @@ class Recharge extends BaseModel
             }
         }
 
-        $recharge = Recharge::firstOrNew(['user_id'=>$uid]);
-            $recharge->fill($rc);
-        if (! $recharge->save()) {
+        $recharge = self::firstOrNew(['user_id'=>$uid]);
+        $recharge->fill($rc);
+        if (!$recharge->save()) {
             return false;
         }
-            $voucher->fill(['user_id'=>$uid,'method'=>$method]);
-        if (! $voucher->save()) {
+        $voucher->fill(['user_id'=>$uid, 'method'=>$method]);
+        if (!$voucher->save()) {
             return false;
         }
 
-            return true;
+        return true;
     }
 
     public static function online($user_id, $plan_id)
     {
         $input = [
-                    'plan_id'       =>      $plan_id,
-                    'validity'      =>      1,
-                    'validity_unit'     =>      'Day',
-                    'count'             =>      1,
+                    'plan_id'           => $plan_id,
+                    'validity'          => 1,
+                    'validity_unit'     => 'Day',
+                    'count'             => 1,
         ];
         try {
             DB::transaction(function () use ($input, $user_id) {
                 $pins = Voucher::generate($input);
+
                 return self::now(current($pins), $user_id, 'online');
             });
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {

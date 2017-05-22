@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApPolicySchemaTemplates extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,7 +13,6 @@ class ApPolicySchemaTemplates extends Migration
     public function up()
     {
         Schema::create('ap_policy_schema_templates', function (Blueprint $t) {
-
             $t->engine = 'InnoDB';
 
             $t->increments('id');

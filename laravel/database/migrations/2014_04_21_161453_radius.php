@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Radius extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -62,7 +61,7 @@ class Radius extends Migration
                 ->nullable();
             $t->string('xascendsessionsvrkey', 10)
                 ->nullable();
-                
+
             $t->unique('acctuniqueid');
             $t->index('username');
             $t->index('framedipaddress');
@@ -75,7 +74,7 @@ class Radius extends Migration
 
         Schema::create('radcheck', function (Blueprint $t) {
             $t->engine = 'InnoDB';
-            
+
             $t->increments('id')->unsigned();
             $t->string('username', 64)
                 ->default("''");
@@ -90,7 +89,7 @@ class Radius extends Migration
 
         Schema::create('radgroupcheck', function (Blueprint $t) {
             $t->engine = 'InnoDB';
-            
+
             $t->increments('id')->unsigned();
             $t->string('groupname', 64)
                 ->default("''");

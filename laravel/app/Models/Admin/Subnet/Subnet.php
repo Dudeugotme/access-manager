@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\DB;
 
 class Subnet extends BaseModel
 {
-
     protected $table = 'ip_subnets';
     protected $fillable = ['subnet'];
     public $timestamps = false;
@@ -17,19 +16,19 @@ class Subnet extends BaseModel
         DB::transaction(function () use ($cidr) {
             $subnet = new self(['subnet'=>$cidr]);
 
-            if (! $subnet->save()) {
-                throw new Exception("Failed to create subnet.");
+            if (!$subnet->save()) {
+                throw new Exception('Failed to create subnet.');
             }
 
             $network = IPTools\Network::parse($cidr);
             foreach ($network as $ip) {
                 $range[] = [
-                             'subnet_id'        =>  $subnet->id,
-                                    'ip'        =>  ip2long((string)$ip),
+                             'subnet_id'        => $subnet->id,
+                                    'ip'        => ip2long((string) $ip),
                 ];
             }
-            if (! SubnetIP::insert($range)) {
-                throw new Exception("Failed to insert IP range.");
+            if (!SubnetIP::insert($range)) {
+                throw new Exception('Failed to insert IP range.');
             }
         });
     }
@@ -45,13 +44,13 @@ class Subnet extends BaseModel
                 throw new Exception("<b>CANNOT DELETE</b>. $count accounts have IPs from this subnet.");
             }
 
-            if (! $subnet->delete()) {
-                throw new Exception("Failed to delete subnet");
+            if (!$subnet->delete()) {
+                throw new Exception('Failed to delete subnet');
             }
 
             $q = SubnetIP::where('subnet_id', $subnet->id);
-            if ($q->count() > 0 && ! $q->delete()) {
-                throw new Exception("Failed to delete associated IP range.");
+            if ($q->count() > 0 && !$q->delete()) {
+                throw new Exception('Failed to delete associated IP range.');
             }
         });
     }
@@ -63,8 +62,8 @@ class Subnet extends BaseModel
             SubnetIP::where('user_id', $user_id)->update(['user_id'=>null]);
             $framed_ip->user_id = $user_id;
             $framed_ip->assigned_on = date('Y-m-d H:i:s');
-            if (! $framed_ip->save()) {
-                throw new Exception("Could not assign IP.");
+            if (!$framed_ip->save()) {
+                throw new Exception('Could not assign IP.');
             }
         });
     }

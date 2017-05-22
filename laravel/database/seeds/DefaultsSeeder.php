@@ -2,7 +2,6 @@
 
 class DefaultsSeeder extends Seeder
 {
-
     public function run()
     {
         $this->_seedSubscribers();
@@ -14,26 +13,26 @@ class DefaultsSeeder extends Seeder
     {
         $accounts = [
             [
-                     'uname'    =>      'admin',
-                     'pword'    =>      Hash::make('123456'),
-                 'plan_type'    =>      1,
-               'clear_pword'    =>      '123456',
-                     'fname'    =>      'Admin',
-                    'status'    =>      1,
-                  'is_admin'    =>      1,
-                'created_at'    =>      date('Y-m-d H:i:s'),
-                'updated_at'    =>      date('Y-m-d H:i:s'),
+                     'uname'    => 'admin',
+                     'pword'    => Hash::make('123456'),
+                 'plan_type'    => 1,
+               'clear_pword'    => '123456',
+                     'fname'    => 'Admin',
+                    'status'    => 1,
+                  'is_admin'    => 1,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s'),
             ],
             [
-                     'uname'    =>      'demo',
-               'clear_pword'    =>      '123456',
-                     'pword'    =>      Hash::make('123456'),
-                 'plan_type'    =>      1,
-                     'fname'    =>      'Demo',
-                    'status'    =>      1,
-                  'is_admin'    =>      0,
-                'created_at'    =>      date('Y-m-d H:i:s'),
-                'updated_at'    =>      date('Y-m-d H:i:s'),
+                     'uname'    => 'demo',
+               'clear_pword'    => '123456',
+                     'pword'    => Hash::make('123456'),
+                 'plan_type'    => 1,
+                     'fname'    => 'Demo',
+                    'status'    => 1,
+                  'is_admin'    => 0,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s'),
             ],
         ];
         Subscriber::truncate();
@@ -43,23 +42,23 @@ class DefaultsSeeder extends Seeder
     private function _seedSettings()
     {
         GeneralSettings::truncate();
-           SmtpSettings::truncate();
-         PaypalSettings::truncate();
+        SmtpSettings::truncate();
+        PaypalSettings::truncate();
 
         GeneralSettings::insert([
-                'idle_timeout'      =>      0,
-                'self_signup'       =>      0,
+                'idle_timeout'      => 0,
+                'self_signup'       => 0,
             ]);
         SmtpSettings::insert([
-                'status'        =>      0,
+                'status'        => 0,
             ]);
         PaypalSettings::insert([
-                'status'        =>      0,
-                'sandbox'       =>      0,
+                'status'        => 0,
+                'sandbox'       => 0,
             ]);
         DirecpaySetting::insert([
-                'status'        =>      0,
-                'sandbox'       =>      0,
+                'status'        => 0,
+                'sandbox'       => 0,
             ]);
     }
 
@@ -67,8 +66,8 @@ class DefaultsSeeder extends Seeder
     {
         Theme::truncate();
         Theme::insert([
-                    'admin_theme'   =>      12,
-                    'user_theme'    =>      10,
+                    'admin_theme'   => 12,
+                    'user_theme'    => 10,
             ]);
     }
 }

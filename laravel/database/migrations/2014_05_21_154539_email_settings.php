@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class EmailSettings extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -27,7 +26,6 @@ class EmailSettings extends Migration
         });
 
         Schema::create('email_settings', function (Blueprint $t) {
-            
             $t->engine = 'InnoDB';
 
             $t->increments('id');

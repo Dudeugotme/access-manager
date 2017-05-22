@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 class Voucher extends BaseModel
 {
     protected $table = 'prepaid_vouchers';
-    protected $fillable = ['user_id','pin','method','expires_on','created_at','plan_name',
-                            'plan_type','limit_id','policy_type','policy_id','sim_sessions',
-                            'interim_updates','price','validity','validity_unit'];
-    
+    protected $fillable = ['user_id', 'pin', 'method', 'expires_on', 'created_at', 'plan_name',
+                            'plan_type', 'limit_id', 'policy_type', 'policy_id', 'sim_sessions',
+                            'interim_updates', 'price', 'validity', 'validity_unit', ];
+
     public function limits()
     {
         return $this->belongsTo('App\Models\VoucherLimit', 'limit_id');
@@ -69,16 +69,16 @@ class Voucher extends BaseModel
         $res = [];
         $plan = Plan::findOrFail($input['plan_id']);
 
-             $voucher['expires_on'] = self::_makeExpiry($input['validity'], $input['validity_unit']);
-             $voucher['created_at'] = time();
-              $voucher['plan_name'] = $plan->name;
-              $voucher['plan_type'] = $plan->plan_type;
-           $voucher['sim_sessions'] = $plan->sim_sessions;
+        $voucher['expires_on'] = self::_makeExpiry($input['validity'], $input['validity_unit']);
+        $voucher['created_at'] = time();
+        $voucher['plan_name'] = $plan->name;
+        $voucher['plan_type'] = $plan->plan_type;
+        $voucher['sim_sessions'] = $plan->sim_sessions;
         $voucher['interim_updates'] = $plan->interim_updates;
-                  $voucher['price'] = $plan->price;
-               $voucher['validity'] = $plan->validity;
-          $voucher['validity_unit'] = $plan->validity_unit;
-            $voucher['policy_type']     = $plan->policy_type;
+        $voucher['price'] = $plan->price;
+        $voucher['validity'] = $plan->validity;
+        $voucher['validity_unit'] = $plan->validity_unit;
+        $voucher['policy_type'] = $plan->policy_type;
 
         if ($plan->plan_type == 1) { //if limited
             $limit = $plan->limit->toArray();
@@ -101,18 +101,18 @@ class Voucher extends BaseModel
             $days = [
                     'mo'    => 'monday',
                     'tu'    => 'tuesday',
-                    'we'    =>  'wednesday',
-                    'th'    =>  'thursday',
-                    'fr'    =>  'friday',
-                    'sa'    =>  'saturday',
-                    'su'    =>  'sunday',
+                    'we'    => 'wednesday',
+                    'th'    => 'thursday',
+                    'fr'    => 'friday',
+                    'sa'    => 'saturday',
+                    'su'    => 'sunday',
                     ];
 
             foreach ($days as $d => $day) {
                 $tpl = $plan->policy->$day->toArray();
                 $type = ['bw_policy', 'pr_policy', 'sec_policy'];
                 foreach ($type as $t) {
-                    if (! is_null($tpl[$t])) {
+                    if (!is_null($tpl[$t])) {
                         $policy = Policy::find($tpl[$t])->toArray();
                         $tpl[$t] = mikrotikRateLimit($policy);
                     }
@@ -125,23 +125,25 @@ class Voucher extends BaseModel
         $voucher['policy_id'] = $policy->id;
 
         for ($i = 0; $i < $input['count']; $i++) {
-                   $voucher['pin'] = self::generatePin();
+            $voucher['pin'] = self::generatePin();
             $voucher['expires_on'] = self::_makeExpiry($input['validity'], $input['validity_unit']);
-            
-            $v = new Voucher($voucher);
 
-            if (! $v->save()) {
+            $v = new self($voucher);
+
+            if (!$v->save()) {
                 return false;
             }
             $res[] = $v->pin;
         }
+
         return $res;
     }
 
     /**
      * Generates a new unique number to be used as recharge PIN.
      * Checks uniqueness among existing recharge PINs.
-     * @return integer returns a new unique PIN.
+     *
+     * @return int returns a new unique PIN.
      */
     private static function generatePin()
     {
@@ -151,6 +153,7 @@ class Voucher extends BaseModel
             $number = mt_rand(1111111, 99999999999);
             $exists = self::where('pin', '=', $number)->count();
         } while ($exists);
+
         return $number;
     }
 
@@ -162,8 +165,9 @@ class Voucher extends BaseModel
     private static function _makeExpiry($number, $unit)
     {
         $val = Carbon::now();
-        $add = "add".$unit;
-        $val->$add( $number );
+        $add = 'add'.$unit;
+        $val->$add($number);
+
         return $val->toDateString();
     }
 }

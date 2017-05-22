@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApInvoices extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -42,7 +41,7 @@ class ApInvoices extends Migration
         });
 
         Schema::table('billing_cycles', function (Blueprint $t) {
-            $t->enum('bill_duration_type', ['1','2']);
+            $t->enum('bill_duration_type', ['1', '2']);
             $t->timestamp('billed_till')->nullable()->default(null);
             $t->timestamp('last_billed_on')->nullable();
             $t->dropColumn(['last_billied_on']);
@@ -60,7 +59,7 @@ class ApInvoices extends Migration
         Schema::dropIfExists('ap_invoice_plans');
         Schema::table('billing_cycles', function (Blueprint $t) {
             $t->timestamp('last_billied_on')->nullable();
-            $t->dropColumn(['bill_duration_type','billed_till','last_billed_on']);
+            $t->dropColumn(['bill_duration_type', 'billed_till', 'last_billed_on']);
         });
     }
 }

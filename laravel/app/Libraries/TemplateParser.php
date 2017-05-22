@@ -3,66 +3,73 @@
 namespace App\Libraries;
 
 /**
-* Simple TemplateParser Class
-*
-* @author  :  MA Razzaque Rupom <rupom_315@yahoo.com>, <rupom.bd@gmail.com>
-*             Moderator, phpResource (http://groups.yahoo.com/group/phpresource/)
-*             URL: http://www.rupom.info
-* @version :  1.0
-* Purpose  :  Parsing Simple Template File and Data that Contains Macros
-*/
-
+ * Simple TemplateParser Class.
+ *
+ * @author  :  MA Razzaque Rupom <rupom_315@yahoo.com>, <rupom.bd@gmail.com>
+ *             Moderator, phpResource (http://groups.yahoo.com/group/phpresource/)
+ *             URL: http://www.rupom.info
+ *
+ * @version :  1.0
+ * Purpose  :  Parsing Simple Template File and Data that Contains Macros
+ */
 class TemplateParser
 {
+    public $data;
 
-     var $data;
-      
-     /**
-     * Initializes "macro=>value" array
-     * @param Array "macro=>value" array
+    /**
+     * Initializes "macro=>value" array.
+     *
+     * @param array "macro=>value" array
+     *
      * @return none
      */
-    function initData($data)
+    public function initData($data)
     {
         $this->data = [];
         $this->data = $data;
     }
-    
-   /**
-     * Parses template file
+
+    /**
+     * Parses template file.
+     *
      * @param template filename
+     *
      * @return parsed template
      */
-    function parseTemplateFile($templateFile)
+    public function parseTemplateFile($templateFile)
     {
-        $searchPattern          = "/\{([a-zA-Z0-9_]+)\}/i"; // macro delimiter "{" and "}"
-        $replacementFunction    = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
-        $fileData               = file_get_contents($templateFile);
-        $parsedTemplate         = preg_replace_callback($searchPattern, $replacementFunction, $fileData);
-       
+        $searchPattern = "/\{([a-zA-Z0-9_]+)\}/i"; // macro delimiter "{" and "}"
+        $replacementFunction = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
+        $fileData = file_get_contents($templateFile);
+        $parsedTemplate = preg_replace_callback($searchPattern, $replacementFunction, $fileData);
+
         return $parsedTemplate;
     }
-  
-   /**
-     * Parses template data
+
+    /**
+     * Parses template data.
+     *
      * @param template data
+     *
      * @return parsed data
      */
-    function parseTemplateData($templateData)
+    public function parseTemplateData($templateData)
     {
-        $searchPattern          = "/\{([a-zA-Z0-9_]+)\}/i"; //macro delimiter "{" and "}"
-        $replacementFunction    = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
-        $parsedTemplate         = preg_replace_callback($searchPattern, $replacementFunction, $templateData);
-       
+        $searchPattern = "/\{([a-zA-Z0-9_]+)\}/i"; //macro delimiter "{" and "}"
+        $replacementFunction = [&$this, 'parseMatchedText'];  //Method callbacks are performed this way
+        $parsedTemplate = preg_replace_callback($searchPattern, $replacementFunction, $templateData);
+
         return $parsedTemplate;
     }
-    
-   /**
-   * Callback function that returns value of a matching macro
-   * @param Array $matches
-   * @return String value of matching macro
-   */
-    function parseMatchedText($matches)
+
+    /**
+     * Callback function that returns value of a matching macro.
+     *
+     * @param array $matches
+     *
+     * @return string value of matching macro
+     */
+    public function parseMatchedText($matches)
     {
         return $this->data[$matches[1]];
     }

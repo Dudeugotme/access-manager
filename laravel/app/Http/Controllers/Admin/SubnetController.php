@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class SubnetController extends AdminBaseController
 {
-
     const HOME = 'subnet.index';
 
     public function getIndex()
     {
-
-        return view("admin.subnet.index")
+        return view('admin.subnet.index')
                     ->with('subnets', Subnet::paginate(10));
     }
 
@@ -35,14 +33,16 @@ class SubnetController extends AdminBaseController
             $this->notifySuccess("New Subnet added: <b>{$input['subnet']}</b>");
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route(self::HOME);
         }
-            return Redirect::route(self::HOME);
+
+        return Redirect::route(self::HOME);
     }
 
     public function getEditSubnet($id)
     {
-        echo "SUBNET Cannot be edited.";
+        echo 'SUBNET Cannot be edited.';
     }
 
     public function postEditSubnet()
@@ -53,11 +53,13 @@ class SubnetController extends AdminBaseController
     {
         try {
             Subnet::remove($id);
-            $this->notifySuccess("Subnet Deleted.");
+            $this->notifySuccess('Subnet Deleted.');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route(self::HOME);
         }
+
         return Redirect::route(self::HOME);
     }
 
@@ -78,25 +80,29 @@ class SubnetController extends AdminBaseController
             $user_id = Input::get('user_id', 0);
             $ip_id = Input::get('framed_ip', 0);
             Subnet::AssignIP($user_id, $ip_id);
-            $this->notifySuccess("IP Assigned.");
+            $this->notifySuccess('IP Assigned.');
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::route('subscriber.services', $user_id);
         }
+
         return Redirect::route('subscriber.services', $user_id);
     }
 
     public function getDeleteIp($ip_id)
     {
         SubnetIP::where('id', $ip_id)->update(['user_id'=>null]);
-        $this->notifySuccess("Static IP de-assigned.");
+        $this->notifySuccess('Static IP de-assigned.');
+
         return Redirect::back();
     }
 
     public function getAssignRoute($user_id)
     {
         $user = Subscriber::findOrFail($user_id);
-        return view("admin.subnet.assign-route")
+
+        return view('admin.subnet.assign-route')
                     ->with('profile', $user);
     }
 
@@ -107,10 +113,11 @@ class SubnetController extends AdminBaseController
         $route = UserRoute::firstOrNew(['user_id'=>$user_id]);
         $route->subnet = $subnet;
         if ($route->save()) {
-            $this->notifySuccess("Route assigned successfully.");
+            $this->notifySuccess('Route assigned successfully.');
         } else {
-            $this->notifyError("Failed to assign route.");
+            $this->notifyError('Failed to assign route.');
         }
+
         return Redirect::route('subscriber.services', $user_id);
     }
 
@@ -119,18 +126,19 @@ class SubnetController extends AdminBaseController
         if (UserRoute::destroy($route_id)) {
             $this->notifySuccess('Route Deleted.');
         } else {
-            $this->notifyError("Failed to delete route.");
+            $this->notifyError('Failed to delete route.');
         }
+
         return Redirect::back();
     }
 
     public function getUsedIPs($subnet_id)
     {
-        $ips = DB::table("ip_subnets as s")
-                    ->join("subnet_ips as i", 's.id', '=', 'i.subnet_id')
+        $ips = DB::table('ip_subnets as s')
+                    ->join('subnet_ips as i', 's.id', '=', 'i.subnet_id')
                     ->leftJoin('user_accounts as u', 'u.id', '=', 'i.user_id')
                     ->where('s.id', $subnet_id)
-                    ->select("u.uname", 'i.ip')
+                    ->select('u.uname', 'i.ip')
                     ->paginate(100);
 
         return view('admin.subnet.subnet-usage')

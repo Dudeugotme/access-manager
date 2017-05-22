@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class RefillCoupons extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -21,10 +20,10 @@ class RefillCoupons extends Migration
             $t->bigInteger('pin')->unsigned();
             $t->boolean('have_data');
             $t->integer('data_limit')->unsigned()->nullable();
-            $t->enum('data_unit', ['MB','GB'])->nullable();
+            $t->enum('data_unit', ['MB', 'GB'])->nullable();
             $t->boolean('have_time');
             $t->integer('time_limit')->unsigned()->nullable();
-            $t->enum('time_unit', ['Mins','Hrs'])->nullable();
+            $t->enum('time_unit', ['Mins', 'Hrs'])->nullable();
             $t->timestamp('expires_on');
             $t->timestamps();
         });

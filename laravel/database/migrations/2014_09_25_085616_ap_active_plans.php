@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class ApActivePlans extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -22,7 +21,7 @@ class ApActivePlans extends Migration
             $t->string('plan_name');
             $t->tinyInteger('plan_type');
             $t->integer('limit_id')->unsigned()->nullable();
-            $t->enum('policy_type', ['Policy','PolicySchema']);
+            $t->enum('policy_type', ['Policy', 'PolicySchema']);
             $t->integer('policy_id')->unsigned();
             $t->integer('sim_sessions')->unsigned();
             $t->integer('interim_updates')->unsigned();

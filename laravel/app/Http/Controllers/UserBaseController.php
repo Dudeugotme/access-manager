@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 class UserBaseController extends Controller
 {
-    
     // public function __construct()
     // {
     // 	$settings = DB::table('general_settings')->first();

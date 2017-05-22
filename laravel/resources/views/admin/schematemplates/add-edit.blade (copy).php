@@ -1,8 +1,8 @@
 @extends('admin.header_footer')
 @section('admin_container')
 <?php
-foreach($errors->all() as $error):
-  echo $error . "<br />";
+foreach ($errors->all() as $error):
+  echo $error.'<br />';
   endforeach;
 ?>
 

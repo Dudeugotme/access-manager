@@ -5,7 +5,7 @@ namespace App\Models\Admin;
 class PolicySchema extends BaseModel
 {
     protected $table = 'policy_schemas';
-    protected $fillable = ['name','mo','tu','we','th','fr','sa','su'];
+    protected $fillable = ['name', 'mo', 'tu', 'we', 'th', 'fr', 'sa', 'su'];
     public $timestamps = false;
 
     public function plan()
@@ -42,7 +42,7 @@ class PolicySchema extends BaseModel
     {
         return $this->belongsTo('App\Models\SchemaTemplate', 'sa');
     }
-    
+
     public function sunday()
     {
         return $this->belongsTo('App\Models\SchemaTemplate', 'su');

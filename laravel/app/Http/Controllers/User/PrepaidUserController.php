@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class PrepaidUserController extends UserBaseController
 {
-
     const HOME = 'prepaid.dashboard';
 
     public function dashboard()
@@ -28,6 +27,7 @@ class PrepaidUserController extends UserBaseController
     public function getRecharge()
     {
         $plans = Plan::with('limit')->paginate(10);
+
         return view('user.prepaid.recharge')
                     ->with('plans', $plans);
     }
@@ -39,10 +39,10 @@ class PrepaidUserController extends UserBaseController
             $pin = Input::get('pin', null);
 
             if ($voucher_type == null) {
-                throw new Exception("Select Voucher Type.");
+                throw new Exception('Select Voucher Type.');
             }
             if ($pin == null) {
-                throw new Exception("Please enter a valid PIN");
+                throw new Exception('Please enter a valid PIN');
             }
 
             switch ($voucher_type) {
@@ -55,9 +55,11 @@ class PrepaidUserController extends UserBaseController
                     $this->notifySuccess('Refill Applied.');
                     break;
             }
+
             return Redirect::route(self::HOME);
         } catch (Exception $e) {
             $this->notifyError($e->getMessage());
+
             return Redirect::back();
         }
     }
@@ -85,6 +87,7 @@ class PrepaidUserController extends UserBaseController
                                     ->sessionHistory()
                                     ->orderby('acctstarttime', 'desc')
                                     ->paginate(10);
+
         return view('user.prepaid.session_history')
                     ->with('sess_history', $sess_history);
     }

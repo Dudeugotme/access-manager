@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class BillingCycles extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -19,7 +18,7 @@ class BillingCycles extends Migration
             $t->increments('id');
             $t->integer('user_id')->unsigned();
             $t->integer('billing_cycle')->unsigned();
-            $t->enum('billing_unit', ['Months','Years']);
+            $t->enum('billing_unit', ['Months', 'Years']);
             $t->timestamp('last_billied_on')->nullable();
             $t->integer('bill_date')->unsigned();
             $t->timestamp('expiration');

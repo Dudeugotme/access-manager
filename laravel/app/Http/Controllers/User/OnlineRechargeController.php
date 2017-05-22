@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class OnlineRechargeController extends UserBaseController
 {
-
-
     public function selectPaymentGateway()
     {
         $data = Input::all();
@@ -21,8 +19,7 @@ class OnlineRechargeController extends UserBaseController
 
         return view('user.select_pg')
                     ->with('activeGateways', $activeGateways)
-                    ->with('planType', $planType)
-                    ;
+                    ->with('planType', $planType);
     }
 
     public function initiateOnlineRecharge()
@@ -32,7 +29,8 @@ class OnlineRechargeController extends UserBaseController
 
         switch ($gw) {
             case 'DIRECPAY':
-                $dp = new DirecpayController;
+                $dp = new DirecpayController();
+
                 return $dp->processDirecpay($post_data);
             break;
         }
